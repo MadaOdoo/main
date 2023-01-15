@@ -8,7 +8,7 @@
     'author': "Alfonso Gonzalez",
     'website': "https://ntropy.tech",
     'category': 'Customizations',
-    'version': '15.0.0.0.8',
+    'version': '15.0.0.0.1',
     'license': "AGPL-3",
     'sequence': "-90",
     'depends': [

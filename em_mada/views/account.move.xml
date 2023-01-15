@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
             <xpath expr="//page[@id='other_tab']" position="after">
-                                <field name="source_order_id" options="{'no_create': True}" />
+                <field name="source_order_id" options="{'no_create': True}" />
             </xpath>
         </field>
 </record>
