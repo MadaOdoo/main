@@ -8,18 +8,20 @@
     'author': "Alfonso Gonzalez",
     'website': "https://ntropy.tech",
     'category': 'Customizations',
-    'version': '15.0.0.0.1',
+    'version': '15.0.0.0.8',
     'license': "AGPL-3",
     'sequence': "-90",
     'depends': [
-        'base',
+        'base'
     ],
+
     'data': [
         # Security
+        #'security/ir.model.access.csv',
         # Wizard
         # Views
+        'views/account.move.xml',
         # Data Sample
-
     ],
     'images': [],
     'demo': [],
