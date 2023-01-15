@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="eml_account_move_inherit_form" model="ir.ui.view">
+    <record id="em_mada_account_move_inherit_form" model="ir.ui.view">
         <field name="name">account.move.form.inherit</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
