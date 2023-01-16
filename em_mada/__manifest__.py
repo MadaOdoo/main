@@ -12,7 +12,7 @@
     'license': "AGPL-3",
     'sequence': "-90",
     'depends': [
-        'base'
+        'sale'
     ],
     'data': [
         # Security
