@@ -17,7 +17,7 @@
 
     'data': [
         # Security
-        #'security/ir.model.access.csv',
+        # 'security/ir.model.access.csv',
         # Wizard
         # Views
         'views/account.move.xml',
