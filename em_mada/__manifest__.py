@@ -6,7 +6,7 @@
 
     'description': """MADA - Extension Module""",
     'author': "Alfonso Gonzalez",
-    'website': "https://ntropy.tech",
+    'website': "https://ntropy.tech/odoo",
     'category': 'Customizations',
     'version': '15.0.0.0.1',
     'license': "AGPL-3",
@@ -14,7 +14,6 @@
     'depends': [
         'base'
     ],
-
     'data': [
         # Security
         # Wizard
