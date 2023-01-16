@@ -12,7 +12,8 @@
     'license': "AGPL-3",
     'sequence': "-90",
     'depends': [
-        'sale'
+        'sale_management',
+        'account_accountant'
     ],
     'data': [
         # Security
