@@ -17,10 +17,9 @@
 
     'data': [
         # Security
-        # 'security/ir.model.access.csv',
         # Wizard
         # Views
-        'views/account.move.xml',
+        'views/account.move.xml'
         # Data Sample
     ],
     'images': [],
