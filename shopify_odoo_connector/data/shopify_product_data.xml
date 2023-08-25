@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="product_category_shopify_shipping_cost" model="product.category">
+            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="name">Shopify Shipping</field>
+        </record>
+        <record id="product_category_shopify_refund_cost" model="product.category">
+            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="name">Shopify Refund</field>
+        </record>
+        <record id="product_category_shopify_order_discount" model="product.category">
+            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="name">Shopify Order Discount</field>
+        </record>
+        <record id="product_shopify_order_discount" model="product.product">
+            <field name="name">Shopify Order Discount</field>
+            <field name="detailed_type">service</field>
+            <field name="categ_id" ref="product_category_shopify_order_discount"/>
+            <field name="sale_ok" eval="True"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="list_price">1</field>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="company_id" eval="[]"/>
+        </record>
+        <record id="product_shopify_shipping_cost" model="product.product">
+            <field name="name">SHOPIFY SHIPPING</field>
+            <field name="detailed_type">service</field>
+            <field name="categ_id" ref="product_category_shopify_shipping_cost"/>
+            <field name="sale_ok" eval="True"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="list_price">1</field>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="company_id" eval="[]"/>
+        </record>
+        <record id="product_shopify_refund_cost" model="product.product">
+            <field name="name">Order Adjustment (REFUND)</field>
+            <field name="detailed_type">service</field>
+            <field name="categ_id" ref="product_category_shopify_refund_cost"/>
+            <field name="sale_ok" eval="True"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="list_price">1</field>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="company_id" eval="[]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_shopify_connector,shopify.configuration,model_shopify_configuration,base.group_user,1,1,1,1
+access_product_wizard,product.wizard,model_product_wizard,base.group_user,1,1,1,1
+access_order_wizard,order.wizard,model_order_wizard,base.group_user,1,1,1,1
+access_customer_wizard,customer.wizard,model_customer_wizard,base.group_user,1,1,1,1
+access_inventory_wizard,inventory.wizard,model_inventory_wizard,base.group_user,1,1,1,1
+access_shopify_payment_user,shopify.payment.wizard,model_shopify_payment,base.group_user,1,1,1,1
+access_log_message_user,log.message.manager,model_log_message,base.group_user,1,0,0,0
+access_collections,collections,model_collections,base.group_user,1,1,1,1
+access_shopify_sync,shopify_sync,model_shopify_sync,base.group_user,1,1,1,1
+access_gift_cards,gift_cards,model_gift_cards,base.group_user,1,1,1,1

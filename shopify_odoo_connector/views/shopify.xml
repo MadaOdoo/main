@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="tree_view_shopify">
+            <field name="name">Shopify Configuration List</field>
+            <field name="model">shopify.configuration</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="shop_name"/>
+                    <field name="version"/>
+                    <field name="last_synced"/>
+                    <field name="state"/>
+                    <button type="object" name="sync_shopify_all"
+                            class="oe_highlight" string="Sync All"
+                            attrs="{'invisible': [('state', '=', 'new')]}"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="form_view_shopify">
+            <field name="name">Shopify Configuration Form</field>
+            <field name="model">shopify.configuration</field>
+            <field name="arch" type="xml">
+                <form string="Shopify Configuration Form">
+                    <header>
+                        <button type="object" name="sync_shopify"
+                                class="oe_highlight" string="Connect"
+                                attrs="{'invisible': [('state', '=', 'sync')]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="shopify_customers" type="object"
+                                    class="oe_stat_button" icon="fa-user">
+                                <field name="customer_count" widget="statinfo"
+                                       string="Customers"/>
+                            </button>
+                            <button name="shopify_products" type="object"
+                                    class="oe_stat_button" icon="fa-star">
+                                <field name="product_count" widget="statinfo"
+                                       string="Products"/>
+                            </button>
+                            <button name="shopify_orders" type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-pencil-square-o">
+                                <field name="order_count" widget="statinfo"
+                                       string="Orders"/>
+                            </button>
+                            <button name="shopify_gift_cards" type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-ticket">
+                                <field name="gift_card_count"
+                                       widget="statinfo"
+                                       string="Gift Cards"/>
+                            </button>
+                            <button name="shopify_collections" type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-list-alt">
+                                <field name="collection_count"
+                                       widget="statinfo"
+                                       string="Collections"/>
+                            </button>
+                            <button name="shopify_log_message" type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-pencil-square-o">
+                                <field name="log_message_count"
+                                       widget="statinfo"
+                                       string="Logs"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"
+                                       placeholder="Instance Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="active" invisible="1"/>
+                            <field name="con_endpoint"/>
+                            <field name="consumer_key" password="True"/>
+                            <field name="consumer_secret" password="True"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="shop_name"
+                                       placeholder="eg:- store_name.myshopify.com"/>
+                                <field name="version"/>
+                                <field name="product_last_synced" invisible="1"/>
+                                <field name="customer_last_synced" invisible="1"/>
+                                <field name="order_last_synced" invisible="1"/>
+                                <field name="company_id"/>
+                                <field name="warehouse_id"
+                                       domain="[('company_id', 'in', [False, company_id])]"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Import">
+                                <group>
+                                    <field name="import_product"
+                                           widget="boolean_toggle"/>
+                                </group>
+                                <group>
+                                    <field name="import_customer"
+                                           widget="boolean_toggle"/>
+                                </group>
+                                <group>
+                                    <field name="import_order"
+                                           widget="boolean_toggle"/>
+                                </group>
+                            </page>
+                            <page string="Webhooks">
+                                <button type="object" name="configure_webhook" class="btn-primary" string="Configure All Webhook" invisible="0"/>
+                                <group>
+                                    <group>
+                                        <label for="webhook_product"/>
+                                        <div class="o_row" name="webhook">
+                                            <field name="webhook_product"
+                                                   placeholder="Domain name"/>
+                                            <span>/products</span>
+                                        </div>
+                                        <label for="webhook_customer"/>
+                                        <div class="o_row" name="webhook">
+                                            <field name="webhook_customer"
+                                                   placeholder="Domain name"/>
+                                            <span>/customers</span>
+                                        </div>
+
+                                    </group>
+                                    <group>
+                                        <label for="webhook_draft_order_create"/>
+                                        <div class="o_row" name="webhook">
+                                            <field name="webhook_draft_order_create"
+                                                   placeholder="Domain name"/>
+                                            <span>/draft_orders</span>
+                                        </div>
+                                        <label for="webhook_order_create"/>
+                                        <div class="o_row" name="webhook">
+                                            <field name="webhook_order_create"
+                                                   placeholder="Domain name"/>
+                                            <span>/create_order</span>
+                                        </div>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="kanban_view_shopify">
+            <field name="name">Shopify Configuration Kanban</field>
+            <field name="model">shopify.configuration</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_small_column">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click oe_kanban_content d-flex flex-column">
+                                <div class="oe_kanban_content">
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong>
+                                                <field name="name"/>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <div class="text-muted">
+                                        <field name="version"/>
+                                        <field name="state" invisible="1"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <span>
+                                            <br/>
+                                        </span>
+                                        <button type="object"
+                                                name="sync_shopify_all"
+                                                class="oe_highlight"
+                                                attrs="{'invisible': [('state', '=', 'new')]}"
+                                                style="width: 70px; height: 30px; border-radius: 5px; background-color: #71639e; color: white;">
+                                            Sync All
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <span title="Customers">
+                                                <field name="customer_count"/>
+                                                Customers
+                                            </span>
+                                        </div>
+                                        <div class="row">
+                                            <span title="Products">
+                                                <field name="product_count"/>
+                                                Products
+                                            </span>
+                                        </div>
+                                        <div class="row">
+                                            <span title="Sale Orders">
+                                                <field name="order_count"/>
+                                                Sale Orders
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window"
+                id="action_shopify_configuration">
+            <field name="name">Shopify</field>
+            <field name="res_model">shopify.configuration</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+        <record model="ir.actions.client"
+                id="action_open_shopify_instance_dashboard_main">
+            <field name="name">Main Dashboard</field>
+            <field name="tag">shopify_dashboard</field>
+            <field name="target">current</field>
+        </record>
+        <menuitem name="Shopify" id="shopify_menu_root"/>
+        <menuitem name="Dashboard" id="menu_shopify_dashboard_main"
+                  parent="shopify_menu_root"
+                  sequence="0"
+                  action="action_open_shopify_instance_dashboard_main"/>
+
+        <menuitem name="Configuration" id="shopify_configuration_menu"
+                  parent="shopify_menu_root"/>
+        <menuitem name="Shopify Instance" id="menu_shopify_instance"
+                  parent="shopify_configuration_menu"
+                  action="action_shopify_configuration"/>
+    </data>
+</odoo>
