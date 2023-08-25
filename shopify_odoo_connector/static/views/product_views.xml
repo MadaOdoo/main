@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_template_inherit_shopify" model="ir.ui.view">
+        <field name="name">product.template.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button type="object" name="sync_shopify_product"
+                            class="oe_highlight" string="Sync "
+                            attrs="{'invisible': [('shopify_instance_id', '=', False)]}"/>
+                </header>
+            </xpath>
+            <xpath expr="//page[@name='sales']" position="after">
+                <page string="Shopify" name="shopify">
+                    <group>
+                        <group>
+                            <field name="shopify_instance_id" />
+                            <field name="shopify_product_id" invisible="1"/>
+                            <field name="collections_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="gift_card" invisible="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="shopify_sync_ids" nolabel="1" readonly="1">
+                            <tree>
+                                <field name="instance_id"/>
+                                <field name="shopify_product_id"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="product_product_normal_form_view_inherit_shopify_odoo_connector"
+            model="ir.ui.view">
+        <field name="name">
+            product.product.normal.form.view.inherit.shopify.odoo.connector
+        </field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='shopify_product_id']" position="after">
+                <field name="shopify_variant_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_shopify_products" model="ir.actions.act_window">
+        <field name="name">Shopify Products</field>
+        <field name="res_model">product.template</field>
+        <field name="domain">[('shopify_sync_ids', '!=', False)]
+        </field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="view_id" ref="product.product_template_tree_view"/>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No Products found
+            </p>
+        </field>
+    </record>
+
+    <record id="action_shopify_products_variants" model="ir.actions.act_window">
+        <field name="name">Shopify Products Variants</field>
+        <field name="res_model">product.product</field>
+        <field name="domain">[('shopify_sync_ids', '!=', False)]
+        </field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="view_id" ref="product.product_product_tree_view"/>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No Products Variant found
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Products" id="shopify_products"
+              parent="shopify_odoo_connector.shopify_menu_root"
+              sequence="2"/>
+    <menuitem name="Products" id="shopify_products_temp"
+              parent="shopify_odoo_connector.shopify_products" sequence="1"
+              action="action_shopify_products" />
+    <menuitem name="Product Variants" id="shopify_products_prod"
+              parent="shopify_odoo_connector.shopify_products" sequence="2"
+              action="action_shopify_products_variants" />
+</odoo>
