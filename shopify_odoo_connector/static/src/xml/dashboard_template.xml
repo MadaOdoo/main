@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--Template for shopify dashboard-->
+<template id="template" xml:space="preserve">
+    <t t-name="ShopifyDashboard">
+        <div class="accounts-dashboard-wrap">
+            <div class="o_dashboards col-xs-12 col-sm-12 col-lg-12 col-md-12"
+                 style="background-color: #F1F7F7;">
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div style="width: 100%; height: 60px;"/>
+                        <div class="row" id="all_details"
+                             style="margin-top: 0px; display: flex; justify-content: space-around;">
+                            <div class="col-xl-3 col-lg-6"
+                                 style="margin-bottom: 30px; border-radius: 15px; background-color: #b87333;">
+                                <div class="card l-bg-cherry"
+                                     id="ttl_customers">
+                                    <div class="card-statistic-3 p-4" style="cursor: pointer;">
+                                        <h2 class="text-right">
+                                            <i class="fa fa-users"/>
+                                        </h2>
+                                        <div class="mb-4">
+                                            <h5 class="card-title mb-0">Total Customers</h5>
+                                        </div>
+                                        <div class="row align-items-center mb-2 d-flex">
+                                            <div class="col-8">
+                                                <h2 class="d-flex align-items-center mb-0"
+                                                    id="total_customers">
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6"
+                                 style="margin-bottom: 30px; border-radius: 15px; background-color: silver;">
+                                <div class="card l-bg-cherry"
+                                     id="ttl_products">
+                                    <div class="card-statistic-3 p-4" style="cursor: pointer;">
+                                        <h2 class="text-right">
+                                            <img style="width: 22px; height: 22px;" src="https://cdn-icons-png.flaticon.com/512/3114/3114633.png"/>
+                                        </h2>
+                                        <div class="mb-4">
+                                            <h5 class="card-title mb-0">Total Products</h5>
+                                        </div>
+                                        <div class="row align-items-center mb-2 d-flex">
+                                            <div class="col-8">
+                                                <h2 class="d-flex align-items-center mb-0"
+                                                    id="total_products">
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6"
+                                 style="margin-bottom: 30px; border-radius: 15px; background-color: gold;">
+                                <div class="card l-bg-cherry" id="ttl_orders">
+                                    <div class="card-statistic-3 p-4" style="cursor: pointer;">
+                                        <h2 class="text-right">
+                                            <i class="fa fa-shopping-cart" />
+                                        </h2>
+                                        <div class="mb-4">
+                                            <h5 class="card-title mb-0">Total Orders</h5>
+                                        </div>
+                                        <div class="row align-items-center mb-2 d-flex">
+                                            <div class="col-8">
+                                                <h2 class="d-flex align-items-center mb-0"
+                                                    id="total_orders">
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid" style="">
+                        <div class="row" id="dashboard"
+                             style="margin-top: 60px; display: flex; justify-content: space-evenly;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</template>

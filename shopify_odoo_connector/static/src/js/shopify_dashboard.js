@@ -1,5 +1,5 @@
-odoo.define('ShopifyDashboard.ShopifyDashboard', function(require) {
-    'use strict';
+/** @odoo-module **/
+
     var AbstractAction = require('web.AbstractAction');
     var ajax = require('web.ajax');
     var core = require('web.core');
@@ -19,6 +19,7 @@ odoo.define('ShopifyDashboard.ShopifyDashboard', function(require) {
             'click #ttl_orders': 'view_orders',
         },
      start: function() {
+//     get total numer of order, customer and product
      rpc.query({
             route: '/total_dashboard',
             params: {},
@@ -29,6 +30,7 @@ odoo.define('ShopifyDashboard.ShopifyDashboard', function(require) {
           document.getElementById("total_orders").innerHTML = rec['order'];
      })
      });
+//     draw graph for synced data
      rpc.query({
             route: '/dashboard',
             params: {},
@@ -54,16 +56,14 @@ odoo.define('ShopifyDashboard.ShopifyDashboard', function(require) {
                     bold: true
                 }
               };
-
                 $("#dashboard").append("<div class='col' style='border: 2px  black; background-color: white; border-radius: 15px; max-width: 410px; width: 410px; height: 370px; margin-left: 0px; margin-bottom: 50px;'><div id="+ rec['id']+" style='border: 0px solid black; border-radius: 15px; width: 380px; height: 300px; margin-top: 0px;'/><div class='buttons' style=' display: flex; justify-content: space-around;'><button class='customer' value="+ rec['id'] +" style='border: 1px #b87333; background-color: #b87333; color: solid black; border-radius: 10px; width: 100px; height: 50px;'>Customers ("+rec['customer']+")</button><button class='product' value="+ rec['id'] +" style='border: 1px silver; background-color: silver; color: solid black; border-radius: 10px; width: 100px; height: 50px;'>Products ("+rec['product']+")</button><button class='order' value="+ rec['id'] +" style='border: 1px gold; background-color: gold; color: solid black; border-radius: 10px; width: 100px; height: 50px;'>Orders ("+rec['order']+")</button></div></div>")
                 var chart = new google.visualization.ColumnChart(document.getElementById(rec['id']));
-
                 chart.draw(data, options);
-
               }
           })
      })
       },
+//      action for view customer
       view_customer: function(e) {
                 var target = $(e.target);
                 var value = target.val();
@@ -78,6 +78,7 @@ odoo.define('ShopifyDashboard.ShopifyDashboard', function(require) {
                     target: 'current',
                 })
       },
+//      action for view products
       view_product: function(e) {
                 var target = $(e.target);
                 var value = target.val();
@@ -92,6 +93,7 @@ odoo.define('ShopifyDashboard.ShopifyDashboard', function(require) {
                     target: 'current',
                 })
       },
+//      action for view orders
       view_order: function(e) {
                 var target = $(e.target);
                 var value = target.val();
@@ -106,7 +108,7 @@ odoo.define('ShopifyDashboard.ShopifyDashboard', function(require) {
                     target: 'current',
                 })
       },
-
+//      view total customers
       view_customers: function(e) {
                 this.do_action({
                     name: "Total Customers",
@@ -118,6 +120,7 @@ odoo.define('ShopifyDashboard.ShopifyDashboard', function(require) {
                     target: 'current',
                 })
       },
+//      view total products
       view_products: function(e) {
                 this.do_action({
                     name: "Total Products",
@@ -129,6 +132,7 @@ odoo.define('ShopifyDashboard.ShopifyDashboard', function(require) {
                     target: 'current',
                 })
       },
+//      view total orders
       view_orders: function(e) {
                 this.do_action({
                     name: "Total Orders",
@@ -140,7 +144,5 @@ odoo.define('ShopifyDashboard.ShopifyDashboard', function(require) {
                     target: 'current',
                 })
       },
-
     });
     core.action_registry.add('shopify_dashboard', ActionMenu);
-});
