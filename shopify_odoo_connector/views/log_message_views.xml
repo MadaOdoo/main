@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+<!--    form view for log message-->
     <record id="log_message_view_form" model="ir.ui.view">
         <field name="name">log.message.view.form</field>
         <field name="model">log.message</field>
@@ -24,6 +25,7 @@
             </form>
         </field>
     </record>
+<!--    tree view for log message-->
     <record id="log_message_view_tree" model="ir.ui.view">
         <field name="name">log.message.view.tree</field>
         <field name="model">log.message</field>
@@ -36,12 +38,14 @@
             </tree>
         </field>
     </record>
-    <record id="action_log_message_view_tree" model="ir.actions.act_window">
+<!--    action for log message-->
+    <record id="log_message_action" model="ir.actions.act_window">
         <field name="name">Log Message</field>
         <field name="res_model">log.message</field>
         <field name="view_mode">tree,form</field>
     </record>
-    <menuitem name="Log Message" id="menu_log_message"
-              parent="shopify_configuration_menu"
-              action="action_log_message_view_tree"/>
+<!--    menu for log message-->
+    <menuitem name="Log Messages" id="log_message_menu_action"
+              parent="shopify_configuration_menu_root"
+              action="log_message_action"/>
 </odoo>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    inherited form view of product.template-->
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">
+            product.template.form.view.inherit.shopify.odoo.connector
+        </field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button type="object" name="sync_shopify_product"
+                            class="oe_highlight" string="Sync "
+                            attrs="{'invisible': [('shopify_instance_id', '=', False)]}"/>
+                </header>
+            </xpath>
+            <xpath expr="//page[@name='sales']" position="after">
+                <page string="Shopify" name="shopify">
+                    <group>
+                        <group>
+                            <field name="shopify_instance_id"/>
+                            <field name="shopify_product_id" invisible="1"/>
+                            <field name="collection_ids"
+                                   widget="many2many_tags" invisible="1"/>
+                            <field name="gift_card" invisible="1"/>
+                        </group>
+                    </group>
+                    <field name="shopify_sync_ids" nolabel="1"
+                           readonly="1">
+                        <tree>
+                            <field name="instance_id"/>
+                            <field name="shopify_product_id"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <!--    action for product template-->
+    <record id="shopify_product_template_action" model="ir.actions.act_window">
+        <field name="name">Shopify Products</field>
+        <field name="res_model">product.template</field>
+        <field name="domain">[('shopify_sync_ids', '!=', False)]</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="view_id" ref="product.product_template_tree_view"/>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No Products found
+            </p>
+        </field>
+    </record>
+    <!--    menu for product template-->
+    <menuitem name="Products" id="shopify_product_template_menu_root"
+              parent="shopify_odoo_connector.shopify_odoo_connector_menu_root"
+              sequence="2"/>
+
+    <menuitem name="Products" id="shopify_product_template_menu_action"
+              parent="shopify_odoo_connector.shopify_product_template_menu_root"
+              sequence="1"
+              action="shopify_product_template_action"/>
+</odoo>

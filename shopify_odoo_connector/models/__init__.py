@@ -3,7 +3,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2021-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
+#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
 #    Author: Cybrosys Techno Solutions (Contact : odoo@cybrosys.com)
 #
 #    This program is under the terms of the Odoo Proprietary License v1.0
@@ -20,12 +20,13 @@
 #    USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 ################################################################################
-
-from . import shopify
-from . import product
-from . import sale_order
-from . import res_partner
+from . import collection
 from . import log_message
-from . import collections
-from . import pricelist
+from . import product_attribute
+from . import product_pricelist
+from . import product_product
+from . import product_template
+from . import res_partner
+from . import sale_order
+from . import shopify_configuration
 from . import shopify_sync

@@ -38,3 +38,13 @@
 #### Version 16.0.1.1.8
 #### UPDT
 - Feature update for Odoo 16 Shopify Odoo Connector
+
+#### 10.04.2023
+#### Version 16.0.1.1.9
+#### UPDT
+- Feature update for Odoo 16 Shopify Odoo Connector
+
+#### 06.06.2023
+#### Version 16.0.1.1.10
+#### UPDT
+- Feature update for Odoo 16 Shopify Odoo Connector

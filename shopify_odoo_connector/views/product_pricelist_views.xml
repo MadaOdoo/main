@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--    inherited form view of product.pricelist-->
+    <record id="product_pricelist_view" model="ir.ui.view">
+        <field name="name">product.pricelist.view.inherit.shopify.odoo.connector</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <field name="country_group_ids" position="after">
+                <field name="shopify_instance_id"/>
+            </field>
+        </field>
+    </record>
+<!--    action to view shopify product pricelist-->
+    <record id="shopify_product_pricelist_action" model="ir.actions.act_window">
+        <field name="name">Shopify Pricelist</field>
+        <field name="res_model">product.pricelist</field>
+        <field name="domain">[('shopify_instance_id', '!=', False)]</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No Pricelist found
+            </p>
+        </field>
+    </record>
+<!--    menu for product pricelist-->
+    <menuitem name="Pricelists"
+              id="shopify_product_pricelist_menu_action"
+              parent="shopify_odoo_connector.shopify_product_template_menu_root" sequence="3"
+              action="shopify_product_pricelist_action"/>
+</odoo>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="sale_order_view_form_shopify" model="ir.ui.view">
-        <field name="name">sale.order.form.inherit</field>
+<!--    inherited form view of sale.order-->
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">view.order.form.inherit.shopify.odoo.connector</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="priority">10</field>
@@ -17,7 +18,7 @@
                    position="after">
                 <page string="Shopify Info" name="shopify_details">
                     <group>
-                        <field name="shopify_instances_id"/>
+                        <field name="shopify_instance_id"/>
                     </group>
                     <group>
                         <field name="shopify_sync_ids" nolabel="1" readonly="1"
@@ -39,13 +40,11 @@
             </xpath>
         </field>
     </record>
-    <record id="action_shopify_orders" model="ir.actions.act_window">
+<!--    action for sale.order-->
+    <record id="shopify_sale_order_action" model="ir.actions.act_window">
         <field name="name">Shopify Orders</field>
         <field name="res_model">sale.order</field>
-        <field name="domain">[('shopify_sync_ids', '!=', False), ('state',
-            '!=',
-            'draft')]
-        </field>
+        <field name="domain">[('shopify_sync_ids', '!=', False), ('state', '!=', 'draft')]</field>
         <field name="view_mode">tree,form</field>
         <field name="target">current</field>
         <field name="view_id" ref="sale.view_order_tree"/>
@@ -56,12 +55,11 @@
             </p>
         </field>
     </record>
-    <record id="action_shopify_draft_orders" model="ir.actions.act_window">
+<!--    action for sale.order in draft-->
+    <record id="shopify_draft_sale_order_action" model="ir.actions.act_window">
         <field name="name">Shopify Draft Orders</field>
         <field name="res_model">sale.order</field>
-        <field name="domain">[('shopify_sync_ids', '!=', False), ('state', '=',
-            'draft')]
-        </field>
+        <field name="domain">[('shopify_sync_ids', '!=', False), ('state', '=', 'draft')]</field>
         <field name="view_mode">tree,form</field>
         <field name="target">current</field>
         <field name="view_id" ref="sale.view_order_tree"/>
@@ -72,37 +70,16 @@
             </p>
         </field>
     </record>
-    <record id="action_quotations_with_onboarding"
-            model="ir.actions.act_window">
-        <field name="name">Quotations</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">sale.order</field>
-        <field name="domain">[('shopify_sync_ids', '=', False)]</field>
-        <field name="view_id" ref="sale.view_quotation_tree_with_onboarding"/>
-        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity
-        </field>
-        <field name="search_view_id"
-               ref="sale.sale_order_view_search_inherit_quotation"/>
-        <field name="context">{'search_default_my_quotation': 1}</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create a new quotation, the first step of a new sale!
-            </p>
-            <p>
-                Once the quotation is confirmed by the customer, it becomes a
-                sales order.
-                <br/>
-                You will be able to create an invoice and collect the payment.
-            </p>
-        </field>
-    </record>
-    <menuitem name="Orders" id="shopify_orders"
-              parent="shopify_odoo_connector.shopify_menu_root"
+<!--    menu for sale.order-->
+    <menuitem name="Orders" id="shopify_sale_order_menu_root"
+              parent="shopify_odoo_connector.shopify_odoo_connector_menu_root"
               sequence="3"/>
-    <menuitem name="Draft Orders" id="shopify_draft_orders_menu"
-              parent="shopify_odoo_connector.shopify_orders" sequence="1"
-              action="action_shopify_draft_orders" groups="base.group_no_one"/>
-    <menuitem name="Orders" id="shopify_orders_menu"
-              parent="shopify_odoo_connector.shopify_orders" sequence="2"
-              action="action_shopify_orders"/>
+
+    <menuitem name="Draft Orders" id="shopify_draft_sale_order_menu_root"
+              parent="shopify_odoo_connector.shopify_sale_order_menu_root" sequence="1"
+              action="shopify_draft_sale_order_action"/>
+
+    <menuitem name="Orders" id="sale_order_menu_action_shopify"
+              parent="shopify_odoo_connector.shopify_sale_order_menu_root" sequence="2"
+              action="shopify_sale_order_action"/>
 </odoo>

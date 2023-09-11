@@ -3,7 +3,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2021-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
+#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
 #    Author: Cybrosys Techno Solutions (Contact : odoo@cybrosys.com)
 #
 #    This program is under the terms of the Odoo Proprietary License v1.0
@@ -20,18 +20,28 @@
 #    USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 ################################################################################
-
 from odoo import http
 from odoo.http import request
 
 
 class Dashboard(http.Controller):
-    """
-        method fetch data from shopify.configuration model then it return to js.
-        returns a dictionary with id,instance,order,customer & product details of shopify instance.
+    """Class for http controller.
+        Methods:
+            def dashboard(self, **kw):
+                method fetch data from shopify.configuration model then it
+                returns to js.
     """
     @http.route(['/dashboard'], type="json", auth="public")
     def dashboard(self, **kw):
+        """
+            method fetch data from shopify.configuration model then it return 
+            to js. 
+
+            kw(dict):empty dictionary
+
+            dict: returns a dictionary with id,instance,order,customer & 
+            product details of shopify instance.
+        """
         instances = request.env['shopify.configuration'].search([])
         values = []
         for instance in instances:
@@ -44,19 +54,35 @@ class Dashboard(http.Controller):
             })
         return values
 
-    class Dashboard(http.Controller):
-        @http.route(['/total_dashboard'], type="json", auth="public")
-        def total_dashboard(self, **kw):
-            values = []
-            customer = request.env['res.partner'].search_count(
-                [('shopify_sync_ids', '!=', False)])
-            product = request.env['product.template'].search_count(
-                [('shopify_sync_ids', '!=', False)])
-            order = request.env['sale.order'].search_count(
-                [('shopify_sync_ids', '!=', False)])
-            values.append({
-                'order': order,
-                'customer': customer,
-                'product': product,
-            })
-            return values
+
+class TotalDashboard(http.Controller):
+    """Class for http controller.
+        Methods:
+            def dashboard(self, **kw):
+                method to find count of total synced order, product and customer.
+                Then passes the values to dashboard.
+        """
+    @http.route(['/total_dashboard'], type="json", auth="public")
+    def total_dashboard(self, **kw):
+        """
+            method to find count of total synced order, product and customer.
+            Then passes the values to dashboard.
+
+            kw(dict):empty dictionary
+
+            dict: returns total count of orders, products and customers as
+            dictionary.
+        """
+        values = []
+        customer = request.env['res.partner'].search_count(
+            [('shopify_sync_ids', '!=', False)])
+        product = request.env['product.template'].search_count(
+            [('shopify_sync_ids', '!=', False)])
+        order = request.env['sale.order'].search_count(
+            [('shopify_sync_ids', '!=', False)])
+        values.append({
+            'order': order,
+            'customer': customer,
+            'product': product,
+        })
+        return values

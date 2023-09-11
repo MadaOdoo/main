@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    form view for product wizard-->
+    <record id="product_wizard_view_form" model="ir.ui.view">
+        <field name="name">product.wizard.view.form</field>
+        <field name="model">product.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Sync Products">
+                <group>
+                    <field name="import_products"/>
+                </group>
+                <group>
+                    <field name="shopify_instance_id"/>
+                </group>
+                <group>
+                    <field name="import_inventory" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="sync_products" string="Sync Products"
+                            class="btn-primary" type="object"/>
+                    <button string="Cancel" class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+<!--    action for product wizard-->
+    <record id="product_wizard_action" model="ir.actions.act_window">
+        <field name="name">Sync Products</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="product_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+<!--    menu for product wizard-->
+    <menuitem
+            id="product_wizard_menu_action"
+            action="product_wizard_action"
+            name="Sync Products"
+            parent="shopify_odoo_connector.shopify_product_template_menu_root"
+            sequence="4"/>
+</odoo>

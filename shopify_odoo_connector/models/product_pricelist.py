@@ -3,7 +3,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2021-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
+#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
 #    Author: Cybrosys Techno Solutions (Contact : odoo@cybrosys.com)
 #
 #    This program is under the terms of the Odoo Proprietary License v1.0
@@ -20,18 +20,13 @@
 #    USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 ################################################################################
-from . import controllers
-from . import models
-from . import wizard
-from odoo.exceptions import UserError
-from odoo import api, SUPERUSER_ID
+from odoo import fields, models
 
 
-def pre_init_hook(cr):
-    env = api.Environment(cr, SUPERUSER_ID, {})
-    queue_job = env['ir.model.data'].search(
-            [('module', '=', 'queue_job')])
-    queue_job_cron_jobrunner = env['ir.model.data'].search(
-            [('module', '=', 'queue_job_cron_jobrunner')])
-    if not queue_job_cron_jobrunner or not queue_job:
-        raise UserError("Please make sure you have added and installed Queue Job and Queue Job Cron Jobrunner in your system")
+class ProductPricelist(models.Model):
+    """Class for inherited model product.pricelist"""
+    _inherit = 'product.pricelist'
+
+    shopify_instance_id = fields.Many2one('shopify.configuration',
+                                          string="Shopify Instance",
+                                          help='field to store shopify id of product price list')

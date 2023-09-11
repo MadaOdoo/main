@@ -3,7 +3,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2021-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
+#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
 #    Author: Cybrosys Techno Solutions (Contact : odoo@cybrosys.com)
 #
 #    This program is under the terms of the Odoo Proprietary License v1.0
@@ -20,8 +20,7 @@
 #    USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 ################################################################################
+from . import inventory_wizard
 from . import product_wizard
 from . import res_partner_wizard
 from . import sale_order_wizard
-from . import inventory_wizard
-from . import gift_card_wizard

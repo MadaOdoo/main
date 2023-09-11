@@ -3,7 +3,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2021-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
+#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
 #    Author: Cybrosys Techno Solutions (Contact : odoo@cybrosys.com)
 #
 #    This program is under the terms of the Odoo Proprietary License v1.0
@@ -21,40 +21,49 @@
 #
 ################################################################################
 import re
-from odoo import models, fields
 import requests
+from odoo import fields, models
 
 
-class OrderWizard(models.TransientModel):
+class InventoryWizard(models.TransientModel):
+    """Class for transient model inventory.wizard.
+
+        Methods:
+            sync_inventory(self):
+                method to sync inventory from shopify to odoo.
+    """
     _name = 'inventory.wizard'
     _description = 'Inventory Wizard'
 
     import_inventory = fields.Selection(string='Import/Export',
                                         selection=[('shopify', 'To Shopify'),
                                                    ('odoo', 'From Shopify')],
-                                        required=True, default='odoo')
+                                        required=True, default='odoo',
+                                        help='Field to choose type of data exchange')
     shopify_instance_id = fields.Many2one('shopify.configuration',
                                           string="Shopify Instance",
-                                          required=True)
+                                          required=True,
+                                          help='Id of shopify instance')
 
     def sync_inventory(self):
+        """method to sync inventory from shopify to odoo"""
         shopify_instance = self.shopify_instance_id
         api_key = self.shopify_instance_id.con_endpoint
-        PASSWORD = self.shopify_instance_id.consumer_key
+        password = self.shopify_instance_id.consumer_key
         store_name = self.shopify_instance_id.shop_name
         version = self.shopify_instance_id.version
         warehouse = shopify_instance.warehouse_id
         if self.import_inventory == 'shopify':
-            order_url = "https://%s:%s@%s/admin/api/%s/inventory_items.json" % (
-                api_key, PASSWORD, store_name, version)
+            inventory_url = "https://%s:%s@%s/admin/api/%s/inventory_items.json" % (
+                api_key, password, store_name, version)
         else:
-            order_url = "https://%s:%s@%s/admin/api/%s/products.json" % (
-                api_key, PASSWORD, store_name, version)
+            inventory_url = "https://%s:%s@%s/admin/api/%s/products.json" % (
+                api_key, password, store_name, version)
             payload = []
             headers = {
                 'Content-Type': 'application/json'
             }
-            response = requests.request("GET", order_url,
+            response = requests.request("GET", inventory_url,
                                         headers=headers,
                                         data=payload)
             j = response.json()
@@ -76,7 +85,7 @@ class OrderWizard(models.TransientModel):
                                           inventory_link).group(1)
                     limit = re.search('limit=(.*)&', inventory_link).group(1)
                     inventory_link = "https://%s:%s@%s/admin/api/%s/products.json?limit=%s&page_info=%s" % (
-                        api_key, PASSWORD, store_name, version, limit,
+                        api_key, password, store_name, version, limit,
                         page_info)
                     response = requests.request('GET', inventory_link,
                                                 headers=headers, data=payload)

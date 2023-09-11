@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data noupdate="1">
+<!--        shopify business team-->
         <record id="sales_team_business_shopify" model="crm.team">
             <field name="name">Shopify Business</field>
             <field name="sequence">10</field>
             <field name="company_id" eval="False"/>
         </record>
+<!--        shopify customers team-->
         <record id="sales_team_customers_shopify" model="crm.team">
             <field name="name">Shopify Customers</field>
             <field name="sequence">12</field>

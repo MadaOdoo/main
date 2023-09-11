@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    form view for collection-->
+    <record id="collection_view_form" model="ir.ui.view">
+        <field name="name">collection.view.form</field>
+        <field name="model">collection</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="collection_products" type="object"
+                                class="oe_stat_button" icon="fa-star">
+                            <field name="collect_product_count"
+                                   widget="statinfo"
+                                   string="Products"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="shopify_instance_id"/>
+                        <field name="collection_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+<!--    tree view for collection-->
+    <record id="collection_view_tree" model="ir.ui.view">
+        <field name="name">collection.view.tree</field>
+        <field name="model">collection</field>
+        <field name="arch" type="xml">
+            <tree create="0" edit="0" delete="0">
+                <field name="name"/>
+                <field name="collection_id"/>
+                <field name="shopify_instance_id"/>
+                <button type="object" name="collection_update"
+                        class="btn-primary" string="Update Details"
+                        invisible="0"/>
+            </tree>
+        </field>
+    </record>
+<!--    action for collection-->
+    <record id="collection_action" model="ir.actions.act_window">
+        <field name="name">Collections</field>
+        <field name="res_model">collection</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+<!--    menu for shopify collection-->
+    <menuitem name="Collections" id="collection_menu_action"
+              parent="shopify_odoo_connector.shopify_configuration_menu_root"
+              action="collection_action"
+              sequence="10"/>
+</odoo>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+<!--    form view for inventory wizard-->
     <record id="inventory_wizard_view_form" model="ir.ui.view">
         <field name="name">inventory.wizard.view.form</field>
         <field name="model">inventory.wizard</field>
@@ -23,7 +24,8 @@
             </form>
         </field>
     </record>
-    <record id="inventory_wizard_view_form_action" model="ir.actions.act_window">
+<!--   action for inventory wizard -->
+    <record id="inventory_wizard_action" model="ir.actions.act_window">
         <field name="name">Sync Inventory</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">inventory.wizard</field>
@@ -31,10 +33,11 @@
         <field name="view_id" ref="inventory_wizard_view_form"/>
         <field name="target">new</field>
     </record>
+<!--    menu for inventory wizard-->
     <menuitem
-            id="menu_inventory_sync"
-            action="inventory_wizard_view_form_action"
+            id="inventory_wizard_menu_action"
+            action="inventory_wizard_action"
             name="Sync Inventory"
-            parent="shopify_odoo_connector.shopify_products"
+            parent="shopify_odoo_connector.shopify_product_template_menu_root"
             sequence="5"/>
 </odoo>

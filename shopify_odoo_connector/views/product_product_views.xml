@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--    inherited form view of product.product-->
+    <record id="product_normal_form_view" model="ir.ui.view">
+        <field name="name">product.normal.form.view.inherit.shopify.odoo.connector</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='shopify_product_id']" position="after">
+                <field name="shopify_variant_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+<!--    action to view shopify product variants-->
+     <record id="shopify_product_product_action" model="ir.actions.act_window">
+        <field name="name">Shopify Products Variants</field>
+        <field name="res_model">product.product</field>
+        <field name="domain">[('shopify_sync_ids', '!=', False)]</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="view_id" ref="product.product_product_tree_view"/>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No Products Variant found
+            </p>
+        </field>
+    </record>
+<!--    menu for shopify product variants-->
+    <menuitem name="Product Variants" id="shopify_product_product_menu_action"
+              parent="shopify_odoo_connector.shopify_product_template_menu_root"
+              sequence="2"
+              action="shopify_product_product_action" />
+</odoo>

@@ -3,7 +3,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2021-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
+#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
 #    Author: Cybrosys Techno Solutions (Contact : odoo@cybrosys.com)
 #
 #    This program is under the terms of the Odoo Proprietary License v1.0
@@ -20,21 +20,21 @@
 #    USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 ################################################################################
-
-import logging
-from odoo import models, fields
-
-_logger = logging.getLogger(__name__)
+from odoo import fields, models
 
 
 class LogMessage(models.Model):
+    """ Class for log messages """
     _name = 'log.message'
     _description = 'Log Message'
     _rec_name = 'log_date'
 
-    name = fields.Html('Message', required=True)
-    log_date = fields.Datetime('Log Date', default=fields.Datetime.now,
-                               required=True)
-    model = fields.Char('Model', requried=True)
+    name = fields.Html(string='Message', required=True,
+                       help='name of the log message')
+    log_date = fields.Datetime(string='Log Date', default=fields.Datetime.now,
+                               required=True, help='Date of log not added')
+    model = fields.Char('Model', required=True,
+                        help='The model name that related to the log message')
     shopify_instance_id = fields.Many2one('shopify.configuration',
-                                          'Shopify Instance', required=True)
+                                          string='Shopify Instance',
+                                          required=True)
