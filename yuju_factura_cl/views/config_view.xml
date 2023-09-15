@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="yuju_invoice_config_form_view">
+            <field name="name">yuju.invoice.config.form.view</field>
+            <field name="model">madkting.config</field>
+            <field name="inherit_id" ref="madkting.madkting_config_form_view"/>
+            <field name="arch" type="xml">
+                <field name="invoice_partner_vat" position="after">
+                    <field name="validate_cafs" />     
+                    <field name="cafs_document_type_id" />             
+                    <field name="validate_doctype_nit" />             
+                </field>
+            </field>
+        </record>
+    
+    </data>
+</odoo>
+

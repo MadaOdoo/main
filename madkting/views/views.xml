@@ -1,0 +1,541 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="madkting.madkting_webhook_tree_view">
+      <field name="name">madkting.webhook.tree.view</field>
+      <field name="model">madkting.webhook</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="Webhooks" >
+          <field name="hook_type"/>
+          <field name="url"/>
+          <field name="company_id"/>
+          <field name="active"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.madkting_webhook_form_view">
+      <field name="name">madkting.webhook.form.view</field>
+      <field name="model">madkting.webhook</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Webhooks" >
+          <group>
+            <group>
+              <field name="url"/>
+              <field name="company_id"/>
+            </group>
+            <group>
+              <field name="hook_type"/>
+              <field name="active"/>
+            </group>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="madkting.action_webhook_window" model="ir.actions.act_window">
+      <field name="name">Madkting Webhook</field>
+      <field name="res_model">madkting.webhook</field>
+      <field name="view_id"></field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[]</field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.madkting_config_tree_view">
+      <field name="name">madkting.config.tree.view</field>
+      <field name="model">madkting.config</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="Configuration" >
+          <field name="webhook_stock_enabled"/>
+          <field name="stock_source_multi"/>
+          <field name="company_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.madkting_config_form_view">
+      <field name="name">madkting.config.form.view</field>
+      <field name="model">madkting.config</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Configuration" >
+          <group>
+            <group>
+              <separator string="General"/>
+              <field name="company_id"/>
+              <field name="service_url"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="General">
+              <group>
+                <group>
+                  <field name="webhook_stock_enabled"/>
+                  <field name="stock_source_multi"/>
+                  <field name="stock_source_channels"/>
+                  <field name="stock_quant_available_quantity_enabled"/>
+                  <field name="log_enabled"/>
+                  <field name="product_custom_fields"/>
+                </group>
+                <group>
+                  <field name="validate_partner_exists"/>
+                  <field name="validate_barcode_exists"/>
+                  <field name="validate_sku_exists"/>
+                  <field name="validate_id_exists"/>  
+                  <field name="simple_description_enabled"/>
+                  <field name="product_shared_catalog_enabled" />
+                </group>
+              </group>
+            </page>
+            <page string="Ventas">
+              <group>
+                <group>                  
+                  <field name="orders_unconfirmed"/>
+                  <field name="orders_unconfirmed_by_stock"/>
+                  <field name="orders_unconfirmed_stock_src"/>
+                  <field name="orders_unconfirmed_by_ff_type"/>
+                  <field name="orders_unconfirmed_ff_types"/>
+                  <field name="validate_address_invoice"/>
+                  <field name="required_invoice_address_fields"/>
+                </group>
+                <group>
+                  <field name="shipping_webhook_enabled"/>
+                  <field name="update_order_name"/>
+                  <field name="update_order_name_pack"/>
+                  <field name="orders_force_cancel"/>
+                  <field name="orders_line_warehouse_enabled"/>
+                  <field name="order_remove_tax_default"/>
+                </group>
+              </group>
+            </page>
+            <page string="Facturas">
+              <group>
+                <group>                  
+                  <field name="invoice_webhook_enabled"/>
+                  <field name="invoice_doc_type" attrs="{'required' : [('invoice_webhook_enabled', '=', True)], 'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
+                  <field name="invoice_prefix_file" attrs="{'required' : [('invoice_webhook_enabled', '=', True)], 'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
+                  <field name="invoice_add_pdf_file" attrs="{'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
+                  <field name="invoice_prefix_pdf_file" attrs="{'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
+                  <field name="invoice_save_pdf_attachment" attrs="{'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
+                </group>
+                <group>
+                  <field name="invoice_country" attrs="{'required' : [('invoice_webhook_enabled', '=', True)], 'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
+                  <field name="invoice_currency" attrs="{'required' : [('invoice_webhook_enabled', '=', True)], 'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
+                  <field name="invoice_separator" attrs="{'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
+                  <field name="invoice_serie" attrs="{'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
+                  <field name="invoice_partner_vat" attrs="{'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
+                </group>
+              </group>
+            </page>
+            <page string="Dropship">
+              <group>
+                <group>                  
+                  <field name="dropship_enabled"/>
+                  <field name="dropship_picking_type" attrs="{'required' : [('dropship_enabled', '=', True)], 'invisible' : [('dropship_enabled', '=', False)]}"/>
+                  <field name="dropship_webhook_enabled" attrs="{'required' : [('dropship_enabled', '=', True)], 'invisible' : [('dropship_enabled', '=', False)]}"/>
+                  <field name="dropship_default_route_id" attrs="{'required' : [('dropship_enabled', '=', True)], 'invisible' : [('dropship_enabled', '=', False)]}"/>
+                  <field name="dropship_route_id" attrs="{'required' : [('dropship_enabled', '=', True)], 'invisible' : [('dropship_enabled', '=', False)]}"/>
+                  <field name="dropship_mto_route_id" attrs="{'required' : [('dropship_enabled', '=', True)], 'invisible' : [('dropship_enabled', '=', False)]}"/>
+                </group>
+                <group>
+                  
+                </group>
+              </group>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="madkting.action_config_window" model="ir.actions.act_window">
+      <field name="name">Madkting Config</field>
+      <field name="res_model">madkting.config</field>
+      <field name="view_id"></field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[]</field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.yuju_mapping">
+      <field name="name">yuju.mapping.tree.view</field>
+      <field name="model">yuju.mapping</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="Yuju Mapping">
+          <field name="id_shop_yuju"/>
+          <field name="company_id"/>          
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.yuju_mapping_form">
+      <field name="name">yuju.mapping.form.view</field>
+      <field name="model">yuju.mapping</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Yuju Mapping">
+          <group>
+            <group>
+              <field name="id_shop_yuju"/>
+              <field name="company_id"/>          
+            </group>
+            <group>
+            </group>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.yuju_mapping_product">
+      <field name="name">yuju.mapping.product.tree.view</field>
+      <field name="model">yuju.mapping.product</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="Yuju Mapping" >
+          <field name="product_id"/>          
+          <field name="id_product_yuju"/>          
+          <field name="id_shop_yuju"/>
+          <field name="state"/>
+          <field name="default_code"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.yuju_mapping_product_form">
+      <field name="name">yuju.mapping.product.form.view</field>
+      <field name="model">yuju.mapping.product</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Yuju Mapping" >
+          <group>
+            <group>
+              <field name="product_id"/>          
+              <field name="id_product_yuju"/>          
+              <field name="id_shop_yuju"/>
+            </group>
+            <group>
+              <field name="state"/>
+              <field name="default_code"/>
+            </group>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.yuju_mapping_model">
+      <field name="name">yuju.mapping.model.tree.view</field>
+      <field name="model">yuju.mapping.model</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="Yuju Mapping Model">
+          <field name="name"/>        
+          <field name="code"/>        
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.yuju_mapping_model_form">
+      <field name="name">yuju.mapping.model.form.view</field>
+      <field name="model">yuju.mapping.model</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Yuju Mapping model">
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="code"/>          
+            </group>
+            <group> 
+            </group>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.yuju_mapping_field">
+      <field name="name">yuju.mapping.field.tree.view</field>
+      <field name="model">yuju.mapping.field</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="Yuju Mapping Field">
+          <field name="name"/>
+          <field name="field"/>          
+          <field name="default_value"/>          
+          <field name="fieldtype"/>          
+          <field name="model"/>          
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.yuju_mapping_field_form">
+      <field name="name">yuju.mapping.field.form.view</field>
+      <field name="model">yuju.mapping.field</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Yuju Mapping Field">
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="field"/>          
+              <field name="default_value"/>          
+              <field name="company_id" />          
+            </group>
+            <group>
+              <field name="model"/>          
+              <field name="fieldtype"/>    
+              <field name="model_relation" attrs="{'invisible' : [('fieldtype', '!=', 'relation')]}"/>         
+            </group>
+          </group>
+          <notebook>
+            <page string="Valores">
+              <field name="field_values">
+                <tree editable="bottom">
+                  <field name="name" />
+                  <field name="value" />
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.yuju_mapping_field_value">
+      <field name="name">yuju.mapping.field.value.tree.view</field>
+      <field name="model">yuju.mapping.field.value</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="Yuju Mapping Field Value">
+          <field name="name"/>
+          <field name="value"/>          
+          <field name="field_id"/>          
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.yuju_mapping_field_value_form">
+      <field name="name">yuju.mapping.field.value.form.view</field>
+      <field name="model">yuju.mapping.field.value</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Yuju Mapping Field Value">
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="value"/>          
+            </group>
+            <group>
+              <field name="field_id"/>          
+            </group>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.yuju_mapping_custom">
+      <field name="name">yuju.mapping.custom.tree.view</field>
+      <field name="model">yuju.mapping.custom</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="Yuju Mapping Custom">
+          <field name="name"/>         
+          <field name="value"/>         
+          <field name="value_type"/>         
+          <field name="modelo"/>         
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="madkting.yuju_mapping_custom_form">
+      <field name="name">yuju.mapping.custom.form.view</field>
+      <field name="model">yuju.mapping.custom</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Yuju Mapping Custom">
+          <group>
+            <group>
+              <field name="name"/>        
+              <field name="value"/>  
+              <field name="company_id"/>  
+            </group>
+            <group>
+              <field name="modelo"/>
+              <field name="value_type"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Valores">
+              <field name="custom_values">
+                <tree editable="bottom">
+                  <field name="channel_id" />
+                  <field name="ff_type" />
+                  <field name="name" />
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="madkting.sale_list">
+      <field name="name">sale.order.tree</field>
+      <field name="model">sale.order</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="Yuju orders" create="false">
+          <field name="name"/>
+          <field name="channel"/>
+          <field name="channel_order_reference"/>
+          <field name="state"/>
+          <field name="invoice_status"/>
+          <field name="order_progress"/>
+          <field name="payment_status"/>
+        </tree>
+      </field>
+    </record>
+    
+    <!-- actions opening views on models -->
+    <record id="madkting.action_window" model="ir.actions.act_window">
+      <field name="name">Ventas Sincronizadas</field>
+      <field name="res_model">sale.order</field>
+      <field name="view_id"></field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('channel_order_id', '!=', False)]</field>
+    </record>
+
+    <record id="madkting.action_yuju_mapping" model="ir.actions.act_window">
+      <field name="name">Mapeo de tiendas</field>
+      <field name="res_model">yuju.mapping</field>
+      <field name="view_id"></field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="madkting.action_yuju_mapping_product" model="ir.actions.act_window">
+      <field name="name">Mapeo de productos</field>
+      <field name="res_model">yuju.mapping.product</field>
+      <field name="view_id"></field>
+      <field name="view_mode">tree,form</field>
+    </record> 
+
+    <record id="madkting.action_yuju_mapping_model" model="ir.actions.act_window">
+      <field name="name">Modelos Mapeados</field>
+      <field name="res_model">yuju.mapping.model</field>
+      <field name="view_id"></field>
+      <field name="view_mode">tree,form</field>
+    </record> 
+
+    <record id="madkting.action_yuju_mapping_field" model="ir.actions.act_window">
+      <field name="name">Mapeo de campos</field>
+      <field name="res_model">yuju.mapping.field</field>
+      <field name="view_id"></field>
+      <field name="view_mode">tree,form</field>
+    </record> 
+
+    <record id="madkting.action_yuju_mapping_field_value" model="ir.actions.act_window">
+      <field name="name">Valores de Campos mapeados</field>
+      <field name="res_model">yuju.mapping.field.value</field>
+      <field name="view_id"></field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="madkting.action_yuju_mapping_custom" model="ir.actions.act_window">
+      <field name="name">Campos Custom</field>
+      <field name="res_model">yuju.mapping.custom</field>
+      <field name="view_id"></field>
+      <field name="view_mode">tree,form</field>
+    </record> 
+    
+    <!-- Top menu item -->
+    <menuitem name="Yuju" id="madkting.menu_root"/>
+    <menuitem name="Ventas" id="madkting.menu_sale" parent="madkting.menu_root"/>
+    <menuitem name="Ventas Sincronizadas" id="madkting.menu_sale_list" parent="madkting.menu_sale" action="madkting.action_window"/>
+    <menuitem name="Config" id="madkting.menu_config" parent="madkting.menu_root" groups="base.group_no_one"/>
+    <menuitem name="Configuracion" id="madkting.menu_madkting_config" parent="madkting.menu_config" action="madkting.action_config_window"/>
+    <menuitem name="Mapeo tiendas" id="madkting.menu_mapping_list" parent="madkting.menu_config" action="madkting.action_yuju_mapping"/>
+    <menuitem name="Mapeo productos" id="madkting.menu_mapping_product_list" parent="madkting.menu_config" action="madkting.action_yuju_mapping_product"/>
+    <!-- <menuitem name="Mapping Models" id="madkting.menu_mapping_model_list" parent="madkting.menu_config" action="madkting.action_yuju_mapping_model"/> -->
+    <menuitem name="Mapeo campos" id="madkting.menu_mapping_field_list" parent="madkting.menu_config" action="madkting.action_yuju_mapping_field"/>
+    <menuitem name="Campos custom ventas" id="madkting.menu_mapping_custom_list" parent="madkting.menu_config" action="madkting.action_yuju_mapping_custom"/>
+    <!-- <menuitem name="Mapeo de campos" id="madkting.menu_mapping_field_value_list" parent="madkting.menu_config" action="madkting.action_yuju_mapping_field_value"/> -->
+    <menuitem name="Webhooks" id="madkting.menu_madkting_webhook" parent="madkting.menu_config" action="madkting.action_webhook_window"/>
+
+    <record id="view_order_form_inherit" model="ir.ui.view">
+      <field name="name">Sale Order Custom</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//notebook" position="inside">
+          <page string="Yuju">
+            <group>
+              <group>
+                <separator string="Order Info"/>
+                <field name="channel" attrs="{'readonly':[(1,'=',1)]}"/>
+                <field name="fulfillment" attrs="{'readonly':[(1,'=',1)]}"/>
+                <field name="channel_id" attrs="{'readonly':[(1,'=',1)]}" groups="madkting.madkting_api_group"/>
+                <field name="yuju_shop_id" attrs="{'readonly':[(1,'=',1)]}" groups="madkting.madkting_api_group"/>
+                <field name="channel_order_id" groups="madkting.madkting_api_group"/> 
+                <field name="yuju_pack_id" />
+                <field name="channel_order_reference" />                
+                <field name="yuju_seller_id" attrs="{'readonly':[(1,'=',1)]}"/>
+                <field name="yuju_update_date_order" attrs="{'readonly':[(1,'=',1)]}"/>
+                <field name="yuju_payment_date_order" attrs="{'readonly':[(1,'=',1)]}"/>
+                
+                               
+              </group>
+              <group>
+                <separator string="Others"/>
+                <field name="yuju_marketplace_fee" attrs="{'readonly':[(1,'=',1)]}"/>
+                <field name="yuju_carrier_tracking_ref" attrs="{'readonly':[(1,'=',1)]}"/>
+                <field name="yuju_seller_shipping_cost" attrs="{'readonly':[(1,'=',1)]}"/>
+                <field name="yuju_shipping_id" attrs="{'readonly':[(1,'=',1)]}" groups="madkting.madkting_api_group"/>
+                <field name="payment_id" attrs="{'readonly':[(1,'=',1)]}" groups="madkting.madkting_api_group"/>
+                <field name="yuju_url_label" attrs="{'invisible': [(1, '=', 1)]}"/>
+                <separator string="Acciones"/>
+                <button name="download_label" string="Descargar Guia" type="object" class="oe_highlight" attrs="{'invisible': [('yuju_url_label', '=', '')]}"/>
+                <button name="test_print_invoice" string="Generar Invoice PDF" type="object" class="oe_highlight" />
+              </group>
+            </group>
+          </page>
+        </xpath>
+        <xpath expr="//button[@name='action_cancel']" position="after">
+          <button name="tiene_stock" string="Validar stock" type="object" class="oe_highlight" groups="madkting.madkting_api_group"/>
+          <button name="test_get_invoice_xml" type="object" string="Test Get invoice Data" class="oe_highlight" groups="madkting.madkting_api_group"/>
+          <button name="test_send_invoice_xml" type="object" string="Webhook Invoice" class="oe_highlight" groups="madkting.madkting_api_group"/>
+          <button name="test_send_shipping" type="object" string="Webhook Shipping" class="oe_highlight" groups="madkting.madkting_api_group"/>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="view_warehouse_yuju_form" model="ir.ui.view">
+      <field name="name">View Warehouse Yuju Form</field>
+      <field name="model">stock.warehouse</field>
+      <field name="inherit_id" ref="stock.view_warehouse"/>
+      <field name="arch" type="xml">
+        <field name="lot_stock_id" position="after">
+          <field name="dropship_enabled"/>
+        </field>
+      </field>
+    </record>
+
+    <record id="view_product_yuju_form" model="ir.ui.view">
+      <field name="name">View Product Yuju Form</field>
+      <field name="model">product.product</field>
+      <field name="inherit_id" ref="product.product_normal_form_view"/>
+      <field name="arch" type="xml">
+        <field name="categ_id" position="after">
+          <separator string="Yuju"/>
+          <field name="id_product_madkting" groups="madkting.madkting_api_group"/>
+          <field name="tipo_producto_yuju"/>
+          <button name="send_webhook" string="Enviar Webhook" type="object" class="oe_highlight" groups="madkting.madkting_api_group"/>
+        </field>
+      </field>
+    </record>
+
+    
+    
+  </data>
+</odoo>

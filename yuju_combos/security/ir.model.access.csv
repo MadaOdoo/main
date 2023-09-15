@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+yuju_mrp_bom,yuju mrp.bom,mrp.model_mrp_bom,madkting.madkting_api_group,1,1,1,1
+yuju_mrp_bom_line,yuju mrp.bom.line,mrp.model_mrp_bom_line,madkting.madkting_api_group,1,1,1,1

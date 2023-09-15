@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+
+        <record id="view_product_yuju_combo_form" model="ir.ui.view">
+            <field name="name">View Product Yuju Combo Form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="madkting.view_product_yuju_form"/>
+            <field name="arch" type="xml">
+                <field name="id_product_madkting" position="after">            
+                    <field name="yuju_kit" groups="base.group_no_one"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>
