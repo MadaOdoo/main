@@ -4,9 +4,10 @@
     'version': '0.0.2',
     'category': 'sale',
     'description': """
-    Mara Product Import
+    Mada Product Import
     """,
     'author': 'gsisa.asilva@gmail.com',
+    'license': "LGPL-3",
     'depends': [
         'sale',
         'stock',
