@@ -7,3 +7,8 @@
 	path = xmarts/xma-distributor
 	url = git@github.com:xmarts/xma-distributor.git
 	branch = 16.0
+
+[submodule "xmarts/l10n-mx-pos-global-invoice"]
+	path = xmarts/l10n-mx-pos-global-invoice
+	url = git@github.com:xmarts/l10n-mx-pos-global-invoice.git
+	branch = 16.0-mada
