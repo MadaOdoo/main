@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Mada Product Import',
-    'version': '0.2',
+    'version': '0.0.2',
     'category': 'sale',
     'description': """
     Mada Product Import
