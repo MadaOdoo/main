@@ -1,0 +1,4 @@
+[submodule "xmarts/xma-pos-voucher-redemption"]
+	path = xmarts/xma-pos-voucher-redemption
+	url = git@github.com:xmarts/xma-pos-voucher-redemption.git
+	branch = 16.0
