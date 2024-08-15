@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="voucher_report_view_tree" model="ir.ui.view">
+            <field name="name">voucher.report.view.tree</field>
+            <field name="model">voucher.report</field>
+            <field name="arch" type="xml">
+                <tree string="Reporte de Vales" editable="bottom">
+                  <field name="is_vale" invisible="1"/>
+                  <field name="distribuidora_id"/>
+                  <field name="num_vale"/>
+                  <field name="order_id"/>
+                  <field name="cantidad_pagos" sum="total_cantidad_pagos"/>
+                  <field name="monto_seguro" sum="total_monto"/>
+                  <field name="pago_quincenal" sum="total_quincenal"/>
+                  <field name="total_pago" sum="total_pagos"/>
+                  <field name="fecha"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_voucher_report_search" model="ir.ui.view">
+          <field name="name">voucher.report.search</field>
+          <field name="model">voucher.report</field>
+          <field name="arch" type="xml">
+            <search>
+                <field name="distribuidora_id"/>
+                <field name="order_id" string="Pedido"/>
+                <field name="num_vale" string="Número de vale"/>
+                <filter name="fecha" date="fecha"/>
+                <group expand="1">
+                    <filter string="Distribuidora" name="distribuidora" context="{'group_by':'distribuidora_id'}"/>
+                    <filter string="Fecha" name="fecha" context="{'group_by':'fecha'}"/>
+                </group>
+            </search>
+          </field>
+        </record>
+
+        <record id="action_voucher_report" model="ir.actions.act_window">
+          <field name="name">Reporte de Vales</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">voucher.report</field>
+          <field name="view_mode">tree</field>
+          <field name="view_id" ref="voucher_report_view_tree"/>
+          <field name="search_view_id" ref="view_voucher_report_search"/>
+          <!-- <field name="target">main</field>  -->
+        </record>
+
+    </data>
+
+    <menuitem id="voucher_reports_management_menu" 
+              name="Apartado de vales"
+              parent="account.menu_finance_reports" 
+              sequence="5">
+              <menuitem action="action_voucher_report" 
+                        id="menu_voucher_report" 
+                        name="Reporte de vales"
+                        sequence="1"/>
+    </menuitem>
+
+</odoo>

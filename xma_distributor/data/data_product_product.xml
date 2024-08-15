@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="product_billing_service" model="product.product">
+            <field name="name">Servicios de Facturación</field>
+            <field name="default_code">84111506</field>
+            <field name="unspsc_code_id" ref="product_unspsc.unspsc_code_84111506"/>
+        </record>
+    </data>
+</odoo>

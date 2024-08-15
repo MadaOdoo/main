@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_account_move_view_form_distribuitor" model="ir.ui.view">
+            <field name="name">inherit.account.move.view.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                    <field name="pos_order_ids" widget="many2many_tags"/>
+                    <field name="folio_vale" readonly="1"/>
+                    <field name="distribuidora_id"/>
+                    <field name="sent"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_account_move_view_tree_distribuitor" model="ir.ui.view">
+            <field name="name">inherit.account.move.view.tree</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="pos_order_ids" widget="many2many_tags" optional="show"/>
+                    <field name="folio_vale" optional="show"/>
+                    <field name="distribuidora_id" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_account_move_view_tree_move_distribuitor" model="ir.ui.view">
+            <field name="name">inherit.account.move.view.tree.move</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="pos_order_ids" widget="many2many_tags" optional="show"/>
+                    <field name="folio_vale" optional="show"/>
+                    <field name="distribuidora_id" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

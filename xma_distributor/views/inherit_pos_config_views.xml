@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_pos_config_view_form_distribuitor" model="ir.ui.view">
+            <field name="name">inherit.pos.config.view.form</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="l10n_mx_pos_global_invoice.inherit_pos_config_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//div/div/div[2]/div[2]/div" position="attributes">
+                   <attribute name="t-att-style">'display: none;'</attribute>
+                </xpath>
+
+                <xpath expr="//div/div/div[2]/div[2]/div[2]" position="attributes">
+                   <attribute name="t-att-style">'display: none;'</attribute>
+                </xpath>
+           
+                <xpath expr="//field[@name='global_invoice_method']" position="attributes">
+                   <attribute name="attrs">{'required': [('create_global_invoice', '=', False)]}</attribute>
+                   <attribute name="invisible">1</attribute>
+                </xpath>
+
+                 <xpath expr="//field[@name='global_customer_id']" position="attributes">
+                   <attribute name="attrs">{'required': [('create_global_invoice', '=', False)]}</attribute>
+                   <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

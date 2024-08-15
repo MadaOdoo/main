@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="distribuitor_pos_order_inherit" model="ir.ui.view">
+        <field name="name">pos.order.form.inherit.distributor</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="xma_pos_voucher_redemption.account_pos_order_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']" position='after'>
+                <field name="percentage"/>
+                <field name="calculation"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

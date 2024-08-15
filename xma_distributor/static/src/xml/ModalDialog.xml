@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="ModalDialogWarningPopup" owl="1">
+        <div role="dialog" class="modal-dialog">
+            <div class="popup popup-warning">
+                <p class="title">
+                    <t t-esc="props.title" />
+                </p>
+                <p class="body">
+                    <t t-esc="props.body1" /> <strong><t t-esc="props.text1" /></strong> <t t-esc="props.body2" /> <strong><t t-esc="props.text2" /></strong> <t t-esc="props.body3" /> <strong><t t-esc="props.text3" /></strong>
+                </p>
+                <div class="footer">
+                    <div class="button cancel" t-on-click="confirm">
+                        <t t-esc="props.confirmText" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="ModalDialogSuccess" owl="1">
+        <div role="dialog" class="modal-dialog">
+            <div class="popup popup-success">
+                <p class="title">
+                    <t t-esc="props.title" />
+                </p>
+                <main class="body">
+                    <t t-esc="props.body1" /> <strong><t t-esc="props.text1" /></strong> <t t-esc="props.body2" /> <strong><t t-esc="props.text2" /></strong> <t t-esc="props.body3" /> <strong><t t-esc="props.text3" /></strong>
+                    <div class="firma-vale-img">
+                        <img t-att-src="props.imageUrl" />
+                    </div>
+                </main>
+                <div class="footer">
+                    <div class="button cancel" t-on-click="confirm">
+                        <t t-esc="props.confirmText" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

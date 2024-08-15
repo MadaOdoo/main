@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_users_view_form_inherit_connection_abako" model="ir.ui.view">
+        <field name="name">res.users.view.form.inherit.connection.abako</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="auth_totp.view_totp_field"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='auth']" position="inside">
+                <group name="auth_connection_mada" string="Conexión MADA Api">
+                    <field name="password_api"/>
+                </group>
+            </xpath>    
+        </field>
+    </record>
+    
+</odoo>
