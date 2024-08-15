@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="TransactionPopUp" owl="1">
+        <div role="dialog" class="modal-dialog">
+            <div class="popup popup-warning">
+                <p class="title">
+                    Introduzca número de autorizacion que aparece en la terminal si la transacción fue exitosa.
+                </p>
+                <p class="body">
+                    <form>
+                        <div>
+                            <input type="text"
+                            style="width: 220px;"
+                            name="transaction_id"
+                            t-model="this.transaction_id"
+                            placeholder="Ingrese número de autorización"/>
+                        </div>
+                    </form>
+                </p>
+                <div class="footer">
+                    <!-- class="button dynamic-size" -->
+                    <div class="button confirm highlight"
+                        t-on-click="confirm">
+                        Aceptar
+                    </div>
+                    <div class="button cancel" t-on-click="cancel">
+                        Volver
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

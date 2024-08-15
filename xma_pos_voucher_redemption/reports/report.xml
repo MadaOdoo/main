@@ -1,0 +1,90 @@
+<odoo>
+    <template id="report_vales_layout">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+                    <div class="page">
+                        <div style="text-align: center; font-size: 30px;font-weight: bold;">
+                            <h6><strong>REPORTE DE VALES</strong></h6>
+                        </div>
+                        <br/>
+                        <table style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Cliente</th>
+                                    <th>Referencia</th>
+                                    <th>Folio del Vale</th>
+                                    <th>Estado del Vale</th>
+                                    <th>Distribuidora</th>
+                                    <th>Cantidad de pagos</th>
+                                    <th>Monto seguro de pago</th>
+                                    <th>Pago quincenal</th>
+                                    <th>Total de pago</th>
+                                    <th>Fecha inicio de pago</th>
+                                    <th>Monto a liquidar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="monto_total" t-value="0"/>
+                                <tr t-foreach="docs.payment_ids" t-as="line">
+                                    <t t-set="monto_liquidar" t-value="line.pos_vale_order_id.total * line.pos_vale_order_id.cantidad_pagos"/>
+                                    <t t-set="monto_total" t-value="monto_total + monto_liquidar"/>
+                                    <td style="text-align: center;">
+                                        <span t-field="line.date"/>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span t-field="line.partner_id.name"/>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span t-field="line.ref"/>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span t-field="line.folio_vale"/>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span t-field="line.state_vale"/>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span t-field="line.pos_vale_order_id.distribuidora_id.name"/>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span t-field="line.pos_vale_order_id.cantidad_pagos"/>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span t-esc="'{0:,.2f}'.format(line.pos_vale_order_id.monto_seguro)"/>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span t-esc="'{0:,.2f}'.format(line.pos_vale_order_id.pago_quincenal)"/>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span t-esc="'{0:,.2f}'.format(line.pos_vale_order_id.total)"/>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span t-field="line.pos_vale_order_id.fecha"/>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <t t-esc="'{0:,.2f}'.format(float(monto_liquidar))" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="text-align: right; font-size: 11pt; margin-right:10px">
+                            <strong>Total: <t t-esc="'{0:,.2f}'.format(float(monto_total))" /></strong><br/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <record id="action_report_vales" model="ir.actions.report">
+        <field name="name">Reporte de Vales</field>
+        <field name="model">control.vales</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">xma_pos_voucher_redemption.report_vales_layout</field>
+        <field name="report_file">xma_pos_voucher_redemption.report_vales_layout</field>
+        <field name="print_report_name">'Reporte'</field>
+        <field name="binding_model_id" ref="model_control_vales"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

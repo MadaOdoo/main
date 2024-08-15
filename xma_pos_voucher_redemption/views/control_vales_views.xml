@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="control_vales_view_form" model="ir.ui.view">
+            <field name="name">control.vales.view.form</field>
+            <field name="model">control.vales</field>
+            <field name="arch" type="xml">
+                <form string="Control de vales">
+                    <field name="company_id" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <header>
+                        <field name="state" widget="statusbar" />
+                        <button name="action_sent" string="Enviar" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}" data-hotkey="v"/>
+                        <button name="action_draft" string="RESTABLECER A BORRADOR" type="object" class="btn btn-secondary" attrs="{'invisible': [('state', '!=', ('sent'))]}" data-hotkey="w"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" readonly="1"/>
+                                <label for="start_date" string="Fechas"/>
+                                <div class="o_row">
+                                    <field name="start_date" nolabel="1" class="oe_inline" widget="daterange" options="{'related_end_date': 'end_date'}"/>
+                                    <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="To"/>
+                                    <field name="end_date" nolabel="1" class="oe_inline" widget="daterange" options="{'related_start_date': 'start_date'}"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="proveedor" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="amount_total_vales" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Pagos" name="payments_lines">
+                                <field name="payment_ids"
+                                    attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                    force_save="1"
+                                    widget="many2many"
+                                    options="{'no_create': True}"
+                                    domain="[
+                                    ('control_vales_id','=',False),('partner_type','=','customer'),
+                                    ('date','&gt;=',start_date),
+                                    ('date','&lt;=',end_date)
+                                    ]">
+                                    <tree string="Payments" decoration-muted="state == 'draft'" create="false">
+                                        <field name="name"/>
+                                        <field name="date"/>
+                                        <field name="partner_id"/>
+                                        <field name="ref"/>
+                                        <field name="folio_vale"/>
+                                        <field name="state_vale"/>
+                                        <field name="amount_signed" sum="Total" string="Amount"/>
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="state" invisible="1"/>
+                                        <field name="payment_method_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="control_vales_view_tree" model="ir.ui.view">
+            <field name="name">control.vales.view.form</field>
+            <field name="model">control.vales</field>
+            <field name="arch" type="xml">
+                <tree string="Control de vales">
+                    <field name="name"/>
+                    <field name="proveedor"/>
+                    <field name="amount_total_vales"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_control_vales_tree" model="ir.actions.act_window">
+            <field name="name">Control de vales</field>
+            <field name="res_model">control.vales</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="control_vales_view_tree"/>
+        </record>
+        <menuitem
+            id="menu_action_control_vales_tree"
+            parent="account.menu_finance_entries_accounting_miscellaneous"
+            action="action_control_vales_tree"
+            sequence="15"/>
+    </data>
+</odoo>

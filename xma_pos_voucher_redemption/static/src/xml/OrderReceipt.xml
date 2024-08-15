@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('before-footer')]" position="inside">
+            <t t-if="'cantidad_pagos' in receipt and receipt.cantidad_pagos > 0">
+                <div class="pos-receipt-center-align">
+                    <br/><br/>
+                    VOUCHER utilizado: <t t-esc="receipt.folio_de_vale"/><br/>
+                    <t t-esc="receipt.cantidad_pagos"/> pagos de: $<t t-esc="receipt.pago_quincenal"/><br/>
+                    +$<t t-esc="receipt.monto_seguro"/> de cargo<br/>
+                    por servicio<br/>
+                    = $<t t-esc="receipt.total"/><br/>
+                    Quincenales<br/>
+                    Nombre distribuidora: <t t-esc="receipt.nombre_distribuidora"/><br/>
+                    Primer pago: <t t-esc="receipt.fecha"/><br/>
+                    Cliente: <t t-esc="receipt.nombre_cliente"/><br/>
+                    Telefono: <t t-esc="receipt.cliente_telefono"/><br/>
+                    # IFE: <t t-esc="receipt.ife"/><br/><br/><br/>
+                    Firma: ______________________
+                </div>
+            </t>
+            <t t-else="">
+                <div class="pos-receipt-center-align">
+                    <br/><br/><br/>
+                    Recibi a mi entera satisfaccion la
+                    mercancia descrita en el ticket numero
+                    <t t-esc="receipt.uid"/>, por autorizacion, mandato y
+                    en nombre de <t t-esc="receipt.nombre_distribuidora"/>, quien
+                    EN GARANTIA DE LA RENDICION DE CUENTAS
+                    DEL MANDATO, SE SUSCRIBE EL PRESENTE:
+                    <br/><br/>
+                            PAGARE <br/><br/>
+                    DEBO Y PAGARE incondicionalmente a:
+                    <t t-esc="receipt.nombre_distribuidora"/><br/><br/>
+                    La cantidad de: $<t t-esc="receipt.monto_total"/> (<t t-esc="receipt.monto_as_text"/>), el dia
+                    <t t-esc="receipt.fecha"/>, en la ciudad de <t t-esc="receipt.ciudad"/>
+                    o en cualquier otra Ciudad donde
+                    se me requiera de pago de la cantidad
+                    antes referida.<br/><br/>
+                    Si el presente pagare no fuera
+                    cubierto el dia señalado para su pago,
+                    cubrire ademas el importe de este
+                    documento, el ___% mensual de
+                    intereses moratorios, desde el dia que
+                    debio ser pagado hasta el dia que sea
+                    cubierto totalmente el presente pagare.<br/>
+                    Lugar y Fecha de Expedicion:<br/>
+                    <t t-esc="receipt.ciudad"/> a <t t-esc="receipt.today"/> <br/><br/><br/>
+                    Firma: ___________________
+                    <br/><t t-esc="receipt.nombre_cliente"/><br/>
+                </div>
+            </t>
+        </xpath>
+        <xpath expr="//t[@t-foreach='receipt.paymentlines'][1]" position="replace">
+            <t t-foreach="this.env.pos.get_order().paymentlines" t-as="line" t-key="line.cid">
+                <div>
+                    <t t-esc="line.name" />
+                    <span t-esc="env.pos.format_currency_no_symbol(line.amount)" class="pos-receipt-right-align"/>
+                </div>
+                <p style="font-size:0.75em;">Autorizacion:<span t-esc="line.transaction_id"/></p>
+            </t>
+            
+        </xpath>
+    </t>
+</templates>

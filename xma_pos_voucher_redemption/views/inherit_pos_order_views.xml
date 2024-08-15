@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_pos_order_inherit" model="ir.ui.view">
+        <field name="name">pos.order.form.inherit</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='extra']" position='after'>
+                <page name="inf_vale" string="Informacion de vale">
+                    <group>
+                        <group string="Informacion de vale">
+                            <field name="folio_vale" />
+                            <field name="state_vale" />
+                            <field name="is_vale" />
+                            <field name="distribuidora_id" />
+                        </group>
+                        <group string="Opcion de pago">
+                            <field name="cantidad_pagos" />
+                            <field name="monto_seguro" />
+                            <field name="pago_quincenal" />
+                            <field name="total" />
+                            <field name="fecha" />
+                            <field name="str_fechas_pagare" />
+                            <field name="porcentaje_comision" />
+                            <field name="monto_seguro_por_quincena" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
