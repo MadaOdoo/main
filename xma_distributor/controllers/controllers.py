@@ -58,6 +58,7 @@ class EndpointsConnection(http.Controller):
                             #'ref': str(num) + " " + vale.folio_vale,
                             'partner_id': 928,
                             'amount': rec.get('monto'),
+                            'l10n_mx_edi_payment_method_id': 3
                             #'pos_order_ids': vale,
                             #'payment_method_line_id': 6
                         })._create_payments()

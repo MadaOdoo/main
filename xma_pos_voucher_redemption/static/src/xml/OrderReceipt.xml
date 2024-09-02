@@ -57,7 +57,7 @@
                     <t t-esc="line.name" />
                     <span t-esc="env.pos.format_currency_no_symbol(line.amount)" class="pos-receipt-right-align"/>
                 </div>
-                <p style="font-size:0.75em;">Autorizacion:<span t-esc="line.transaction_id"/></p>
+                <p style="font-size:0.75em;" t-if="line.transaction_id">Autorizacion:<span t-esc="line.transaction_id"/></p>
             </t>
             
         </xpath>
