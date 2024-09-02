@@ -79,7 +79,7 @@ class InheritPosOrder(models.Model):
         obj = {}
         try:
             afiliadoId = 2
-            url = 'https://api-dev-dot-mada-dev.ue.r.appspot.com/api/creditosAfiliado/consultarPorFolio/?folio=%s&afiliadoId=%s&access_token=%s' % (folio,afiliadoId,token)
+            url = 'https://api-dev.prestavale.mx/api/creditosAfiliado/consultarPorFolio/?folio=%s&afiliadoId=%s&access_token=%s' % (folio,afiliadoId,token)
             response = requests.get(url)
             status_code = response.status_code
             res = response.json()
@@ -159,7 +159,7 @@ class InheritPosOrder(models.Model):
     @api.model
     def get_opciones_de_pago(self, distribuidora_id, monto):
         obj = {}
-        url = 'https://api-dev-dot-mada-dev.ue.r.appspot.com/api/creditosAfiliado/consultaConfiguracion'
+        url = 'https://api-dev.prestavale.mx/api/creditosAfiliado/consultaConfiguracion'
         dato = {
             "distribuidoraId": distribuidora_id,
             "afiliado": "MADA",
@@ -224,7 +224,7 @@ class InheritPosOrder(models.Model):
     @api.model
     def validar_canje_credito(self, dato, token):
         obj = {}
-        url = 'https://api-dev-dot-mada-dev.ue.r.appspot.com/api/creditosAfiliado/canje-credito-mada?access_token=%s' % (token)
+        url = 'https://api-dev.prestavale.mx/api/creditosAfiliado/canje-credito-mada?access_token=%s' % (token)
         self.nombre_cliente = f"{'nombres' in dato and dato['nombres'] or 'nombres'} {'primerApellido' in dato and dato['primerApellido'] or ''} {'segundoApellido' in dato and dato['segundoApellido'] or ''}"
         self.nombre_distribuidora = self.distribuidora_id.name
         try:
