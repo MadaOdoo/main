@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+    <div t-name='sale_order_patron_pedido.matrix' t-inherit="product_matrix.matrix" t-inherit-mode="extension" owl="1" primary="1">
+
+        <xpath expr="//table" position="before">
+        
+            <div t-if="record_patron" class="row">
+        
+                <div class="col-sm-6">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <img alt="Producto" class="o_image_128_max"  t-att-src="product_img"/>
+                    </div>
+                </div>
+        
+                <div class="col-sm-4">
+                    <label>Seleccione una opción:</label>
+                    <select class="o_input js_select_patron">
+                        <option t-foreach="record_patron" t-as="l" t-att-value="l.id" t-key="l.id">
+                            <t t-esc="l.name"/>
+                        </option>
+                    </select>
+
+                    <br/>
+                    <br/>
+                    <span>Total de Pares:</span><span class="js_total_pares">0</span>
+                </div>
+
+                <!-- ############################################## -->
+                <!--<div class="col-sm-4" style="margin-top: 15px;">
+                    <span>Total de Pares:</span><span class="js_total_pares">0</span>
+                </div>-->
+                <!-- ############################################## -->
+
+                <div class="col-sm-2"/>
+            </div>
+        </xpath>
+    </div>
+</template>

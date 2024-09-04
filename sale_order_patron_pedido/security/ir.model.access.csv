@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_patron_pedido_line,modelo patron_pedido_line,model_patron_pedido_line,,1,1,1,1
+access_sale_order_line_talla,modelo sale_order_line_talla,model_sale_order_line_talla,,1,1,1,1

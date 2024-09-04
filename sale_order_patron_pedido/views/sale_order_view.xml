@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_order_patron_pedido_form" model="ir.ui.view">
+            <field name="name">wiev.order.patron.pedido.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+              
+              <xpath expr="//form/header" position="inside">
+                <button name="calculate_order_line_talla_ids" type="object" string="Calcular Resumen"/>
+              </xpath>
+
+              <xpath expr="//form/sheet/notebook/page[@name='order_lines']" position="after">
+
+                <page name="sale_order_line_talla" string="Resumen de Pedido por Tallas">
+
+                  <field name="has_talla_21_5" invisible="1"/>
+                  <field name="has_talla_22_5" invisible="1"/>
+                  <field name="has_talla_23_5" invisible="1"/>
+                  <field name="has_talla_24_5" invisible="1"/>
+                  <field name="has_talla_25_5" invisible="1"/>
+                  <field name="has_talla_26_5" invisible="1"/>
+                  <field name="has_talla_27_5" invisible="1"/>
+                  <field name="show_tallas_enteras" invisible="1"/>
+
+                  <field name='order_line_talla_ids' readonly="1">
+
+                    <tree editable="false">
+
+                        <field name="has_uom_par" invisible="1"/>
+
+                        <!-- ####################################################### -->
+                        <field name="order_line_id" readonly="1"/>
+                        <field name="product_template_id" readonly="1"/>
+                        <field name="product_id" readonly="1"/>
+                        <field name="product_uom_qty" readonly="1"/>
+                        <field name="product_uom" readonly="1"/>
+
+                        <field name="talla_21" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_21_5" attrs="{'column_invisible':['|',('parent.has_talla_21_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_22" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_22_5" attrs="{'column_invisible':['|',('parent.has_talla_22_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_23" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_23_5" attrs="{'column_invisible':['|',('parent.has_talla_23_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_24" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_24_5" attrs="{'column_invisible':['|',('parent.has_talla_24_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_25" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_25_5" attrs="{'column_invisible':['|',('parent.has_talla_25_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_26" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_26_5" attrs="{'column_invisible':['|',('parent.has_talla_26_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_27" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_27_5" attrs="{'column_invisible':['|',('parent.has_talla_27_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_28" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+
+                        <field name="price_unit" readonly="1"/>
+                        <field name="tax_id" widget="many2many_tags" options="{'no_create': True}" readonly="1"/>
+                        <field name="discount" readonly="1"/>
+                        <field name="price_subtotal" readonly="1"/>
+                        <field name="price_total" readonly="1"/>
+
+                    </tree>
+                  </field>
+                </page>
+
+              </xpath>
+
+
+              <!--<xpath expr="//form/sheet/notebook/page[@name='order_lines']/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+
+                  <field name="has_uom_par" invisible="1"/>
+                  <field name="order_partner_id" invisible="1"/>
+
+
+                  <field name="patron_pedido_line_id" options="{'no_create': True}" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}" force_save="1" domain="[('partner_id', '=', order_partner_id)]"/>
+              </xpath>-->
+
+              <xpath expr="//form/sheet/notebook/page[@name='order_lines']/group[@name='note_group']" position="before">
+
+                <group>
+                  <group>
+
+                      <field name="contador_items_totales"/>
+                      <field name="contador_numero_total_productos"/>
+
+                  </group>
+                </group>
+
+              </xpath>
+
+            
+
+
+              <div class='oe_chatter' position="replace">
+              
+              </div>
+
+              <xpath expr="//form/sheet/notebook" position="after">
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+              </xpath>
+
+            </field>
+
+        </record>
+
+   </data>
+</odoo>
