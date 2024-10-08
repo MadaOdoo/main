@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cfdi4_global_invoice" inherit_id="l10n_mx_edi_40.cfdiv40">
+        <xpath expr="//*[local-name()='Comprobante']/*[local-name()='Emisor']" position="before" t-if="record.is_global_invoice">
+            <cfdi:InformacionGlobal
+                    t-debug='debugger'
+                    t-if="record.is_global_invoice"
+                    xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
+                    t-att-Periodicidad="record.periodicidad"
+                    t-att-Meses="str(((record.date.month+1)//2)+12 if record.periodicidad == '05' else record.date.month).zfill(2)"
+                    t-att-Año="record.date.year"/>
+        </xpath>
+    </template>
+</odoo>

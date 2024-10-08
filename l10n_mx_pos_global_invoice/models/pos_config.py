@@ -16,7 +16,7 @@ class PosConfig(models.Model):
         string="Method",
         selection=[
             ('manual', 'Manual'),
-            ('automatic', 'Automatico'),
+            #('automatic', 'Automatico'),
         ],
     )
     global_journal_id = fields.Many2one(
