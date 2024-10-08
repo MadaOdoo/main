@@ -42,7 +42,7 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                                 const vale_api = await this.rpc({
                                     model: 'pos.order',
                                     method: 'validar_vale',
-                                    args: [code],
+                                    args: [code, this.currentOrder.pos_session_id, this.currentOrder.partner.id, this.env.pos.config.token],
                                 })
                                 if(vale_api.id != undefined) {
                                     var monto_con_symbol = this.env.pos.format_currency(vale_api.monto);
@@ -161,21 +161,6 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                                     body: this.env._t('Prueba tu conexion de internet.'),
                                 });
                                 return false;
-                                // if (error.code == 700 || error.code == 701)
-                                //     this.error = true;
-
-                                // if ('code' in error) {
-                                //     console.log(1)
-                                // } else {
-                                //     if (isConnectionError(error)) {
-                                //         this.showPopup('OfflineErrorPopup', {
-                                //             title: this.env._t('Error de conexión'),
-                                //             body: this.env._t('Comprueba tu conexión a Internet '+error),
-                                //         });
-                                //     } else {
-                                //         throw error;
-                                //     }
-                                // }
                             }
                         }
                     }

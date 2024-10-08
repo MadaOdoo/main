@@ -16,7 +16,6 @@
         'data/data_ir_cron.xml',
         'security/ir.model.access.csv',
         'views/inherit_res_config_settings_views.xml',
-        'views/inherit_pos_config_views.xml',
         'views/inherit_res_users_views.xml',
         'views/inherit_account_move_views.xml',
         'views/inherit_account_payment_views.xml',
