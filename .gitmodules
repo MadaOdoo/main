@@ -1,19 +1,1 @@
-[submodule "xmarts/xma-pos-voucher-redemption"]
-	path = xmarts/xma-pos-voucher-redemption
-	url = git@github.com:xmarts/xma-pos-voucher-redemption.git
-	branch = 16.0
 
-[submodule "xmarts/xma-distributor"]
-	path = xmarts/xma-distributor
-	url = git@github.com:xmarts/xma-distributor.git
-	branch = 16.0
-
-[submodule "xmarts/l10n-mx-pos-global-invoice"]
-	path = xmarts/l10n-mx-pos-global-invoice
-	url = git@github.com:xmarts/l10n-mx-pos-global-invoice.git
-	branch = 16.0-mada
-
-[submodule "xmarts/account-multi-pay"]
-	path = xmarts/account-multi-pay
-	url = git@github.com:xmarts/account-multi-pay.git
-	branch = 16.0
