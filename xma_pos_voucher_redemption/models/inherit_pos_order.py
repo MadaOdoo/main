@@ -59,6 +59,7 @@ class InheritPosOrder(models.Model):
     )
     nombre_cliente = fields.Char(
         string='Nombre del cliente',
+        related='partner_id.name',
         readonly=True,
     )
     cliente_telefono = fields.Char(
@@ -71,6 +72,7 @@ class InheritPosOrder(models.Model):
     )
     nombre_distribuidora = fields.Char(
         string='Nombre de la distribuidora',
+        related='distribuidora_id.name',
         readonly=True,
     )
 
@@ -94,6 +96,7 @@ class InheritPosOrder(models.Model):
             #              'firma': 'https://storage.googleapis.com/dev-prestavale-protected/b298b4d6cbe89-FD4.JPG?GoogleAccessId=storage-prestavale%40mada-dev.iam.gserviceaccount.com&Expires=1686946659&Signature=Dk0Sk6sFYEXHlNWJNVg0e46yNJK2pEp5I9CnmTeXcAsXja8CtgCEG9XvYyvqa%2BuStGzrPzzxE9vD4cwA6PR63mhB0HAs0YRCLCWivMZjAFBON8LdLjVwWLSE%2FdejK6OwE7gVFR6ja5%2F32AW3rMqnDDfXapGpwninbZUdgv6FnHXW%2BXpdPD1xlG0TxovvPd27C3E8acq1790H6tihHHkB72wZM6IoB5k2e%2FgLcImEl%2BQ7cGn3AiwYigwTTmBUo7JY3Mgw33bZ95ZPFwfCkTxDGz8kbSBJ7vm%2B%2B5kklZuzT5PO2LCuHYDlrtXriNjWOLRMb9kk6egNkBRYSYH%2Faa4jcQ%3D%3D'}
             if status_code == 200:
                 if res.get('id'):
+                    obj['estado_respuesta'] = True
                     id_ = res.get('id') or 0
                     monto = res.get('monto') or 0
                     distribuidoraId = res.get('distribuidoraId') or 0
@@ -134,10 +137,18 @@ class InheritPosOrder(models.Model):
                             if model_cajeo_vales:
                                 obj = {'nombreDistribuidora': nombreDistribuidora, 'folio': folio,
                                        'estatus': 'canjeado'}
+                else:
+                    obj['estado_respuesta'] = False
+                    obj['tipo_error'] = 'desconocido'
+                    obj['error'] = 'Error desconocido'
             else:
-                obj = res.get('error','')
+                obj['estado_respuesta'] = False
+                obj['tipo_error'] = 'api'
+                obj['error'] = res.get('error','')
         except Exception as e:
-            obj = 'error: ' + str(e)
+            obj['estado_respuesta'] = False
+            obj['tipo_error'] = 'desconocido'
+            obj['error'] = 'Exception: '+str(e)
         return obj
 
     @api.model
@@ -197,7 +208,7 @@ class InheritPosOrder(models.Model):
         order_fields['total'] = ui_order.get('total',0)
         order_fields['fecha'] = ui_order.get('fecha','')
         order_fields['str_fechas_pagare'] = ui_order.get('str_fechas','')
-        order_fields['cliente_telefono'] = ui_order.get('cliente_telefono','')
+        # order_fields['cliente_telefono'] = ui_order.get('cliente_telefono','')
         order_fields['porcentaje_comision'] = ui_order.get('porcentaje_comision','')
         order_fields['monto_seguro_por_quincena'] = ui_order.get('monto_seguro_por_quincena','')
 
@@ -210,23 +221,32 @@ class InheritPosOrder(models.Model):
 
     def _export_for_ui(self, order):
         result = super()._export_for_ui(order)
-        result.update({
-            'cantidad_pagos': order.cantidad_pagos,
-            'pago_quincenal': order.pago_quincenal,
-            'monto_seguro': order.monto_seguro,
-            'total': order.total,
-            'nombre_cliente': order.nombre_cliente,
-            'cliente_telefono': order.cliente_telefono,
-            'ife': order.ife,
-        })
+        if order.is_vale:
+            amount_tota_vale = sum(order.payment_ids.filtered(lambda pay: pay.payment_method_id.journal_id.is_vale == True).mapped('amount'))
+            monto_as_text = order.currency_id.amount_to_text(amount_tota_vale)
+            result.update({
+                'is_vale': order.is_vale,
+                'folio_de_vale': order.folio_vale,
+                'cantidad_pagos': order.cantidad_pagos,
+                'monto_seguro': order.monto_seguro,
+                'total': order.total,
+                'pago_quincenal': order.pago_quincenal,
+                'nombre_distribuidora': order.distribuidora_id.name,
+                'fecha': order.fecha,
+                'monto_total': amount_tota_vale,
+                'monto_as_text': monto_as_text,
+                # 'nombre_cliente': order.nombre_cliente,
+                # 'cliente_telefono': order.cliente_telefono,
+                # 'ife': order.ife,
+            })
         return result
 
     @api.model
     def validar_canje_credito(self, dato, token):
         obj = {}
         url = 'https://api-dev.prestavale.mx/api/creditosAfiliado/canje-credito-mada?access_token=%s' % (token)
-        self.nombre_cliente = f"{'nombres' in dato and dato['nombres'] or 'nombres'} {'primerApellido' in dato and dato['primerApellido'] or ''} {'segundoApellido' in dato and dato['segundoApellido'] or ''}"
-        self.nombre_distribuidora = self.distribuidora_id.name
+        # self.nombre_cliente = f"{'nombres' in dato and dato['nombres'] or 'nombres'} {'primerApellido' in dato and dato['primerApellido'] or ''} {'segundoApellido' in dato and dato['segundoApellido'] or ''}"
+        # self.nombre_distribuidora = self.distribuidora_id.name
         try:
             response = requests.post(url, json=dato)
             status_code = response.status_code
@@ -247,9 +267,9 @@ class InheritPosOrder(models.Model):
                 obj['monto_seguro_por_quincena'] = res.get('montoSeguroPorQuincena', 0)
             else:
                 obj['status_code'] = status_code
-                obj['message'] = res.get('message','')
+                obj['error'] = res.get('message','')
         except Exception as e:
-            obj = 'error: ' + str(e)
+            obj['error'] = 'Error: ' + str(e)
         return obj
 
 # x: Usado

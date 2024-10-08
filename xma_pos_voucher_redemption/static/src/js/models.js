@@ -116,13 +116,14 @@ odoo.define('xma_pos_voucher_redemption.pos', function (require) {
             var json = super.export_for_printing(...arguments);
 
             var to_return = _.extend(json, {
+                is_vale: this.is_vale,
                 cantidad_pagos: this.cantidad_pagos,
                 pago_quincenal: this.pago_quincenal,
                 monto_seguro: this.monto_seguro,
                 total: this.total,
-                nombre_cliente: this.nombre_cliente,
-                cliente_telefono: this.cliente_telefono,
-                ife: this.ife,
+                // nombre_cliente: this.nombre_cliente,
+                // cliente_telefono: this.cliente_telefono,
+                // ife: this.ife,
                 folio_de_vale: this.folio_de_vale,
                 nombre_distribuidora: this.nombre_distribuidora,
                 fecha: this.fecha,

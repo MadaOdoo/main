@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
-
+    <t t-name="TextInputPopup" t-inherit="point_of_sale.TextInputPopup" t-inherit-mode="extension" owl="1">
+        <xpath expr="//input" position="attributes">
+            <attribute name="autocomplete">off</attribute>
+        </xpath>
+    </t>
     <t t-name="ModalDialogWarningPopup" owl="1">
         <div role="dialog" class="modal-dialog">
             <div class="popup popup-warning">
@@ -18,7 +22,6 @@
             </div>
         </div>
     </t>
-
     <t t-name="ModalDialogSuccess" owl="1">
         <div role="dialog" class="modal-dialog">
             <div class="popup popup-success">
