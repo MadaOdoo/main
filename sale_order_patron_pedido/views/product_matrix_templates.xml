@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="matrix_with_new_field">
+        <table class="table table-sm table-hover o_matrix_table">
+            <thead>
+                <tr>
+                    <!-- Añadir el encabezado para el nuevo campo many2one -->
+                    <th>New Field</th>
+                    <t t-foreach="header" t-as="column_header">
+                        <th t-esc="column_header['name']"/>
+                        <t t-call="product_matrix.extra_price">
+                            <t t-set="price" t-value="column_header.get('price', False)"/>
+                        </t>
+                    </t>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="rows" t-as="row">
+                    <tr>
+                        <!-- Añadir el campo many2one en la primera columna -->
+                        <td>
+                            <select class="form-control" name="patron_pedido_line_id">
+                                <t t-foreach="patron_pedido_line_id" t-as="field">
+                                    <option t-att-value="field.id" t-esc="field.name"/>
+                                </t>
+                            </select>
+                        </td>
+                        <t t-foreach="row" t-as="cell">
+                            <td t-att-data-ptav_ids="cell.ptav_ids">
+                                <input type="number" class="form-control o_matrix_input" t-att-value="cell.value" t-att-ptav_ids="cell.ptav_ids"/>
+                            </td>
+                        </t>
+
+                        <!--<td t-att-data-ptav_ids="cell.ptav_ids">
+                            <input type="number" class="form-control o_matrix_input" t-att-value="cell.value" t-att-ptav_ids="cell.ptav_ids"/>
+                        </td>-->
+
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </template>
+</odoo>
