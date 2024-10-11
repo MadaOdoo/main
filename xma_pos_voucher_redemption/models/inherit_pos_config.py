@@ -11,6 +11,7 @@ class InheritPosConfig(models.Model):
         string='Token API',
         readonly=True
     )
+    apply_voucher = fields.Boolean(related="company_id.apply_voucher")
 
 
 class InheritResConfigSettings(models.TransientModel):
@@ -19,6 +20,13 @@ class InheritResConfigSettings(models.TransientModel):
     token = fields.Char(
         related='pos_config_id.token',
         readonly=True
+    )
+
+    apply_voucher = fields.Boolean(
+        string="Aplica vales",
+        related='company_id.apply_voucher',
+        store=True,
+        readonly=False
     )
 
     def generateToken(self):

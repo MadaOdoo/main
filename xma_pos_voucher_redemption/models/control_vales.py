@@ -60,6 +60,8 @@ class ControlVales(models.Model):
     start_date = fields.Date(required=True)
     end_date = fields.Date(required=True)
 
+    apply_voucher = fields.Boolean(related="company_id.apply_voucher")
+
     def action_sent(self):
         ir_actions_report_sudo = self.env['ir.actions.report'].sudo()
         statement_report_action = self.env.ref('xma_pos_voucher_redemption.action_report_vales')

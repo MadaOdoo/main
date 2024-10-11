@@ -75,6 +75,7 @@ class InheritPosOrder(models.Model):
         related='distribuidora_id.name',
         readonly=True,
     )
+    apply_voucher = fields.Boolean(related="company_id.apply_voucher")
 
     @api.model
     def validar_vale(self, folio, pos_session_id, client_id, token):

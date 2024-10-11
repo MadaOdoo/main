@@ -9,6 +9,7 @@ class InheritResPartner(models.Model):
     curp = fields.Char(
         string='INE',
     )
+    apply_voucher = fields.Boolean(related="company_id.apply_voucher")
 
     @api.model
     def validar_curp(self, l10n_mx_edi_curp, partner_id):

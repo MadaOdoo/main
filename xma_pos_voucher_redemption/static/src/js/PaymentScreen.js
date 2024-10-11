@@ -384,7 +384,7 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                             if(!partner.name.length || !partner.l10n_mx_edi_curp.length || !partner.mobile.length){
                                 await this.showPopup('ModalDialogWarningPopup', {
                                     title: this.env._t('¡ADVERTENCIA!'),
-                                    body1: this.env._t('Es necesario tener lleno los campos de nombre, curp y telefono en contacto.'),
+                                    body1: this.env._t('Es necesario tener lleno los campos de nombre, curp y celular en contacto.'),
                                 })
                                 return false;
                             }

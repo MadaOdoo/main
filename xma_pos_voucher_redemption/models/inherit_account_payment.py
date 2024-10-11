@@ -28,3 +28,4 @@ class InheritAccountPayment(models.Model):
         'pos.order',
         string="Orden de vale de PdV",
     )
+    apply_voucher = fields.Boolean(related="company_id.apply_voucher")
