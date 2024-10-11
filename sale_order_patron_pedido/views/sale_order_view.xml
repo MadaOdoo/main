@@ -84,6 +84,16 @@
 
                     </tree>
                   </field>
+
+                  <group>
+                    <group>
+
+                        <field name="contador_items_totales"/>
+                        <field name="contador_numero_total_productos"/>
+
+                    </group>
+                  </group>
+
                 </page>
 
               </xpath>
