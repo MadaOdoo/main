@@ -26,6 +26,7 @@ class InheritAccountMove(models.Model):
     )
     
     sent = fields.Boolean(default=False)
+    apply_voucher = fields.Boolean(related="company_id.apply_voucher")
     
     @api.model
     def _search_global_invoice(self):

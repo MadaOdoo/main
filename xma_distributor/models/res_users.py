@@ -9,3 +9,5 @@ class ResUsers(models.Model):
         readonly=False,
         string="Key API"
     )
+
+    apply_voucher = fields.Boolean(related="company_id.apply_voucher")

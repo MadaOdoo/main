@@ -13,3 +13,4 @@ class InheritPosOrder(models.Model):
         related="pos_order_id.distribuidora_id",
         store=True
     )
+    apply_voucher = fields.Boolean(related="company_id.apply_voucher")

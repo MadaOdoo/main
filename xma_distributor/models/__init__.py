@@ -11,3 +11,4 @@ from . import inherit_pos_order
 from . import voucher_report
 from . import inherit_pos_payment
 from . import inherit_account_payment_register
+from . import ir_ui_menu
