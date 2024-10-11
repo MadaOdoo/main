@@ -32,3 +32,4 @@ class PosConfig(models.Model):
             ('05', 'Bimestral'),
         ]
     )
+    apply_global_invoice = fields.Boolean(related="company_id.apply_global_invoice")

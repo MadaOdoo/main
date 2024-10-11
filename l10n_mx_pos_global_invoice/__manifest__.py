@@ -21,6 +21,7 @@
         'views/account_move.xml',
         'views/account_move_line.xml',
         'views/cfdi4_global.xml',
+        'views/res_config_settings_view.xml',
     ],
     'demo': [],
     'installable': True,

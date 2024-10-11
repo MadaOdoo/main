@@ -28,6 +28,7 @@ class PosSession(models.Model):
     has_global_invoice = fields.Boolean(
         string="Global invoiced",
     )
+    apply_global_invoice = fields.Boolean(related="company_id.apply_global_invoice")
 
     def _check_session_can_be_invoiced(self, records):
         pos_journal = False
