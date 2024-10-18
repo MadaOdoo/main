@@ -345,7 +345,7 @@
                                     <td name="td_name"><span t-field="line.move_line_id.name"/></td>
 
                                     <td t-if="is_cfdi_signed" name="l10n_mx_edi_product_code_cell">
-                                        <span t-field="line.move_line_id.product_id and line.move_line_id.product_id.unspsc_code_id.code or ''"/>
+                                        <span t-field="line.move_line_id.product_id.unspsc_code_id.code"/>
                                     </td>
 
                                     <td name="td_quantity" class="text-end">
