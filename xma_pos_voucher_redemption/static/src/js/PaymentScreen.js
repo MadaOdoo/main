@@ -78,14 +78,13 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                                     var obj = {};
                                     let monto_total = 0;
                                     let monto_as_text = '';
-                                    if(vale_api.limiteDistribuidora > 0){
-                                        monto_con_symbol = this.env.pos.format_currency(vale_api.limiteDistribuidora);
+                                    if(vale_api.montoLimite > 0){
                                         const { confirmed, payload } = await this.showPopup('NumberPopup', {
-                                            title: this.env._t('Limite de vale: '+monto_con_symbol),
+                                            title: this.env._t(vale_api.etiqueta),
                                         });
                                         if(confirmed) {
                                             if(payload > 0){
-                                                if(payload <= vale_api.limiteDistribuidora){
+                                                if(payload <= vale_api.montoLimite){
                                                     if(payload <= monto_a_pagar){
                                                         monto_sin_symbol = this.env.pos.format_currency_no_symbol(payload);
                                                         monto_con_symbol = this.env.pos.format_currency(payload);

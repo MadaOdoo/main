@@ -103,7 +103,7 @@ class InheritPosOrder(models.Model):
                     distribuidoraId = res.get('distribuidoraId') or 0
                     nombreDistribuidora = res.get('nombreDistribuidora') or 'Sin nombre de distribuidora'
                     estatus = res.get('estatus') or ''
-                    limiteDistribuidora = res.get('limiteDistribuidora') or 0
+                    montoLimite = res.get('montoLimite') or 0
                     firma = res.get('firma') or ''
                     nombreCliente = res.get('nombreCliente') or ''
                     ife = res.get('curp') or ''
@@ -111,6 +111,7 @@ class InheritPosOrder(models.Model):
                     ciudad = pos_session.config_id.warehouse_id.company_id.city or ''
                     client = self.env['res.partner'].search([('id', '=', client_id)])
                     telefono = client.phone or client.mobile or ''
+                    etiqueta = res.get('etiqueta') or ''
 
                     obj['id'] = id_
                     obj['folio'] = folio
@@ -118,12 +119,13 @@ class InheritPosOrder(models.Model):
                     obj['distribuidoraId'] = distribuidoraId
                     obj['nombreDistribuidora'] = nombreDistribuidora
                     obj['estatus'] = estatus
-                    obj['limiteDistribuidora'] = limiteDistribuidora
+                    obj['montoLimite'] = montoLimite
                     obj['firma'] = firma
                     obj['nombre_cliente'] = nombreCliente
                     obj['ife'] = ife
                     obj['ciudad'] = ciudad
                     obj['cliente_telefono'] = telefono
+                    obj['etiqueta'] = etiqueta
 
                     pos_order = self.search_count([('folio_vale', '=', str(folio))])
                     if pos_order:
@@ -132,7 +134,7 @@ class InheritPosOrder(models.Model):
                         obj = {'nombreDistribuidora': nombreDistribuidora, 'folio': folio, 'estatus': estatus}
                     else:
                         monto_con_dos_decimales = round(float(monto), 2)
-                        limite_monto_con_dos_decimales = round(float(limiteDistribuidora), 2)
+                        limite_monto_con_dos_decimales = round(float(montoLimite), 2)
                         if monto_con_dos_decimales > 0 or limite_monto_con_dos_decimales > 0:
                             model_cajeo_vales = self.env['cajeo.vales'].search([('name','=',str(folio))],limit=1)
                             if model_cajeo_vales:
