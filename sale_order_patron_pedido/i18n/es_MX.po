@@ -1,0 +1,550 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0-20230908\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-10 00:12+0000\n"
+"PO-Revision-Date: 2024-09-10 00:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: Unknown\n"
+"Language: zxx\n"
+"Plural-Forms: nplurals=2; plural=n!=1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"X-Loco-Source-Locale: en_PE\n"
+"X-Loco-Parser: loco_parse_po\n"
+"X-Generator: Loco https://localise.biz/"
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "# Item"
+msgstr "Item"
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_21
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_21
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "21"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_21_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order__has_talla_21_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__has_talla_21_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_21_5
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "21.5"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_22
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_22
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "22"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_22_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order__has_talla_22_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__has_talla_22_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_22_5
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "22.5"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_23
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_23
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "23"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_23_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order__has_talla_23_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__has_talla_23_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_23_5
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "23.5"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_24
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_24
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "24"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_24_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order__has_talla_24_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__has_talla_24_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_24_5
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "24.5"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_25
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_25
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "25"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_25_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order__has_talla_25_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__has_talla_25_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_25_5
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "25.5"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_26
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_26
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "26"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_26_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order__has_talla_26_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__has_talla_26_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_26_5
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "26.5"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_27
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_27
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "27"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_27_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order__has_talla_27_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__has_talla_27_5
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_27_5
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "27.5"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__talla_28
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__talla_28
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "28"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid ""
+"<span groups=\"account.group_show_line_subtotals_tax_excluded\">Amount</span>"
+"\n"
+"                                <span groups=\"account."
+"group_show_line_subtotals_tax_included\">Total Price</span>"
+msgstr "Precio Total"
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "<span>Disc.%</span>"
+msgstr "% Desc"
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "<strong class=\"mr16\">Subtotal</strong>"
+msgstr "Subtotal"
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "<strong>Expiration:</strong>"
+msgstr "Expiración:"
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "<strong>Fiscal Position Remark:</strong>"
+msgstr "Posición Fiscal:"
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "<strong>Salesperson:</strong>"
+msgstr "Vendedor:"
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "<strong>Signature</strong>"
+msgstr "Firma"
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "<strong>Your Reference:</strong>"
+msgstr "Su Referencia:"
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.view_order_patron_pedido_form
+msgid "Calcular Resumen"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__product_uom_qty
+msgid "Cantidad"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order__contador_items_totales
+msgid "Cantidad Items"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "Cantidad Items:"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#. odoo-javascript
+#: code:addons/sale_order_patron_pedido/static/src/js/sale_product_field.js:0
+#, python-format
+msgid "Choose Product Variants"
+msgstr "Elija variantes de producto"
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__partner_id
+msgid "Cliente"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#. odoo-javascript
+#: code:addons/sale_order_patron_pedido/static/src/js/sale_product_field.js:0
+#, python-format
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: sale_order_patron_pedido
+#. odoo-javascript
+#: code:addons/sale_order_patron_pedido/static/src/js/sale_product_field.js:0
+#, python-format
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: sale_order_patron_pedido
+#: model:ir.model,name:sale_order_patron_pedido.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: sale_order_patron_pedido
+#. odoo-javascript
+#: code:addons/sale_order_patron_pedido/static/src/xml/product_matrix.xml:0
+#, python-format
+msgid "Corrida:"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__create_uid
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__create_date
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order__order_line_talla_ids
+msgid "Cuadro de tallas"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__discount
+msgid "Desc.%"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_res_partner__descripcion
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_res_users__descripcion
+msgid "Descripción General"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "Description"
+msgstr "Descripción"
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__display_name
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__display_name
+msgid "Display Name"
+msgstr "Nombre a Mostrar"
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__id
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__id
+msgid "ID"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line__product_template_image
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__product_template_image
+#:  
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "Imagen"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__tax_id
+msgid "Impuestos"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line____last_update
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__write_uid
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__write_date
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__order_line_id
+msgid "Linea de Orden de Venta"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model,name:sale_order_patron_pedido.model_patron_pedido_line 
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_res_partner__patron_pedido_line_ids
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_res_users__patron_pedido_line_ids
+msgid "Lista de Corridas"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.view_partner_patron_pedido_form
+msgid "Listado de Corridas"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_res_partner__show_tallas_medias
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_res_users__show_tallas_medias
+msgid "Mostrar Tallas Medias"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order__show_tallas_enteras
+msgid "Mostrar Tallas enteras"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.matrix_with_new_field
+msgid "New Field"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__name_corrida
+msgid "Nombre Corrida"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order__contador_numero_total_productos
+msgid "Número Total Productos"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "Número Total Productos:"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__order_id
+msgid "Orden de Venta"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "Order #"
+msgstr "Orden #"
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "Order Date:"
+msgstr "Fecha de pedido:"
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__price_unit
+msgid "Precio Unitario"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "Pro-Forma Invoice #"
+msgstr "Proforma #"
+
+#. module: sale_order_patron_pedido
+#. odoo-javascript
+#: code:addons/sale_order_patron_pedido/static/src/xml/product_matrix.xml:0 
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__product_template_id
+#, python-format
+msgid "Producto"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "Quotation #"
+msgstr "Cotización #"
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "Quotation Date:"
+msgstr "Fecha Cotización:"
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.view_order_patron_pedido_form
+msgid "Resumen de Pedido"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model,name:sale_order_patron_pedido.model_sale_order
+msgid "Sales Order"
+msgstr "Órdenes de venta"
+
+#. module: sale_order_patron_pedido
+#: model:ir.model,name:sale_order_patron_pedido.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de Pedido de Venta"
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__price_subtotal
+msgid "Subtotal"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model,name:sale_order_patron_pedido.model_sale_order_line_talla
+msgid "Tabla de tallas"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "Tax 15%"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "Taxes"
+msgstr "Impuestos"
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line__has_uom_par
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__has_uom_par
+msgid "Tiene unidad de medida par"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__display_type
+msgid "Tipo de Pantalla"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_patron_pedido_line__total_pares
+#:  
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__price_total
+msgid "Total"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#. odoo-javascript
+#: code:addons/sale_order_patron_pedido/static/src/xml/product_matrix.xml:0
+#, python-format
+msgid "Total de Pares:"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__product_uom
+msgid "UdM"
+msgstr ""
+
+#. module: sale_order_patron_pedido
+#: model_terms:ir.ui.view,arch_db:sale_order_patron_pedido.report_saleorder_document
+msgid "Unit Price"
+msgstr "Precio Unitario"
+
+#. module: sale_order_patron_pedido
+#: model:ir.model.fields,field_description:sale_order_patron_pedido.field_sale_order_line_talla__product_id
+msgid "Variante"
+msgstr ""

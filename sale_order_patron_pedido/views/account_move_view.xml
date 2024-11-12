@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_move_patron_pedido_form" model="ir.ui.view">
+            <field name="name">wiev.move.patron.pedido.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+              
+              <xpath expr="//form/header" position="inside">
+                <button name="calculate_move_line_talla_ids" type="object" string="Calcular Resumen"/>
+              </xpath>
+
+              <xpath expr="//form/sheet/notebook/page[@name='invoice_tab']" position="after">
+
+                <page name="account_move_line_talla" string="Resumen de Pedido">
+
+                  <field name="has_talla_21_5" invisible="1"/>
+                  <field name="has_talla_22_5" invisible="1"/>
+                  <field name="has_talla_23_5" invisible="1"/>
+                  <field name="has_talla_24_5" invisible="1"/>
+                  <field name="has_talla_25_5" invisible="1"/>
+                  <field name="has_talla_26_5" invisible="1"/>
+                  <field name="has_talla_27_5" invisible="1"/>
+                  <field name="show_tallas_enteras" invisible="1"/>
+
+                  <field name='move_line_talla_ids' readonly="1">
+
+                    <tree editable="false">
+
+                        <field name="has_uom_par" invisible="1"/>
+
+                        <!-- ####################################################### -->
+                        
+                      
+                        <!--<field name="product_template_image" widget="image" options="{'preview_image': 'product_template_image'}" style="width: 15px;"/>-->
+
+                        <!--<t t-jquery="th[data-name='product_template_image']" t-operation="attributes">
+                            <attribute name="style">text-align: left;</attribute>
+                        </t>-->
+                        
+                        <field name="product_template_id" readonly="1"/>
+                        <field name="product_id" readonly="1" optional="hide"/>
+                        <field name="product_uom_qty" readonly="1"/>
+                        <field name="product_uom" readonly="1"/>
+
+                        <field name="talla_21" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_21_5" attrs="{'column_invisible':['|',('parent.has_talla_21_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_22" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_22_5" attrs="{'column_invisible':['|',('parent.has_talla_22_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_23" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_23_5" attrs="{'column_invisible':['|',('parent.has_talla_23_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_24" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_24_5" attrs="{'column_invisible':['|',('parent.has_talla_24_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_25" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_25_5" attrs="{'column_invisible':['|',('parent.has_talla_25_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_26" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_26_5" attrs="{'column_invisible':['|',('parent.has_talla_26_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_27" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+                        <field name="talla_27_5" attrs="{'column_invisible':['|',('parent.has_talla_27_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        
+                        <field name="talla_28" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+
+
+                        <field name="price_unit" readonly="1"/>
+                        <field name="tax_id" widget="many2many_tags" options="{'no_create': True}" readonly="1"/>
+                        <field name="discount" readonly="1"/>
+                        <field name="price_subtotal" readonly="1"/>
+                        <field name="price_total" readonly="1"/>
+
+                    </tree>
+                  </field>
+                </page>
+
+              </xpath>
+
+            </field>
+
+        </record>
+
+   </data>
+</odoo>
