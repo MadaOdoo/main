@@ -1,6 +1,6 @@
 {
     'name': 'Mexican POS global invoice',
-    'version': '16.0.0.0.0',
+    'version': '16.0.0.0',
     'price': 69.99,
     'currency': 'USD',
     'summary': 'Make global invoice on point of sale',
@@ -10,10 +10,8 @@
     'license': 'OPL-1',
     "images": ["images/gif-GLOBAL.gif"],
     'depends': [
-        'base',
         'point_of_sale',
-        # 'l10n_mx_edi',
-        # 'l10n_mx_edi_extended',
+        'l10n_mx_edi_40',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -22,6 +20,8 @@
         'views/pos_order.xml',
         'views/account_move.xml',
         'views/account_move_line.xml',
+        'views/cfdi4_global.xml',
+        'views/res_config_settings_view.xml',
     ],
     'demo': [],
     'installable': True,

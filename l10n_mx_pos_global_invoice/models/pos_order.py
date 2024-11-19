@@ -6,7 +6,7 @@ class PosOrder(models.Model):
     _inherit = "pos.order"
 
     refund_field = fields.Boolean()
-
+    apply_global_invoice = fields.Boolean(related="company_id.apply_global_invoice")
     global_periodicity_field = fields.Selection(
         string="Periodicidad",
         selection=[

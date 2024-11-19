@@ -1,12 +1,11 @@
 from datetime import date
 
-from odoo import models, fields, _, Command
+from odoo import models, fields, _
 from collections import defaultdict
 
-from odoo.exceptions import UserError, AccessError
-from odoo.tools import float_is_zero, float_compare
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools import float_is_zero
 import logging
-import pprint
 
 _logger = logging.getLogger(__name__)
 
@@ -29,6 +28,7 @@ class PosSession(models.Model):
     has_global_invoice = fields.Boolean(
         string="Global invoiced",
     )
+    apply_global_invoice = fields.Boolean(related="company_id.apply_global_invoice")
 
     def _check_session_can_be_invoiced(self, records):
         pos_journal = False
@@ -55,46 +55,14 @@ class PosSession(models.Model):
                     )
                     + ' this session or remove it from the invoicing list'
                 ))
+            global_customer = record.config_id.global_customer_id
             if not pos_journal:
                 pos_journal = record.config_id.journal_id
-            # if not global_customer:
-            #     if not record.config_id.global_customer_id:
-            #         raise UserError(
-            #             _('Global customer not detected on point of sale %s, please '
-            #               'configure global customer') % (record.config_id.name))
-            #     global_customer = record.config_id.global_customer_id
             if pos_journal.id != record.config_id.journal_id.id:
                 raise UserError(
                     _('All point of sales need to have the same journal to be invoiced '
                       'together, please set the same jornals for all point of sales'))
-            # if global_customer.id != record.config_id.global_customer_id.id:
-            #     raise UserError(
-            #         _('All point of sales need to have the same customer global to be '
-            #           'invoiced together, please set the same customer global for all '
-            #           'point of sales'))
         return pos_journal, global_customer
-    #
-    # def _create_move_lines(self, session, invoice_id):
-    #     product_count = {}
-    #     payment_lines = []
-    #     for order in session.order_ids:
-    #         if order.is_invoiced:
-    #             pass
-    #         for payment in order.payment_ids:
-    #             payment_lines.append(payment)
-    #         for line in order.lines:
-    #
-    #             if line.product_id in product_count.keys():
-    #                 product_count[line.product_id] += line.qty
-    #             else:
-    #                 product_count[line.product_id] = line.qty
-    #     for product_id in product_count.keys():
-    #         fiscal_position = self.move_id.fiscal_position_id
-    #         accounts = product_id.product_tmpl_id.get_product_accounts(fiscal_pos=fiscal_position)
-    #         self.env['account.move.line'].create()
-    #     session.has_global_invoice = True
-    #     session.global_invoice_id = invoice_id
-    #     return payment_lines
 
     def _accumulate_amounts_global_invoice(self, data):
         # Accumulate the amounts for each accounting lines group
@@ -102,7 +70,6 @@ class PosSession(models.Model):
         # E.g. `combine_receivables_bank` is derived from pos.payment records
         # in the self.order_ids with group key of the `payment_method_id`
         # field of the pos.payment record.
-
         amounts = lambda : {'amount': 0.0, 'amount_converted': 0.0}
         tax_amounts = lambda: {
             'amount': 0.0,
@@ -142,7 +109,7 @@ class PosSession(models.Model):
         total_paid_orders = 0
         global_invoice_line = self.get_line_global(self.order_ids, "invoice")
         global_refund_line = self.get_line_global(self.order_ids, "refund")
-
+        
         for order in self.order_ids:
             order_is_invoiced = order.is_invoiced
             for payment in order.payment_ids:
@@ -303,6 +270,7 @@ class PosSession(models.Model):
                             move.picking_id.date,
                             force_company_currency=True
                         )
+        
         MoveLine = self.env['account.move.line'].with_context(
             check_move_validity=False,
             skip_invoice_sync=True
@@ -336,40 +304,26 @@ class PosSession(models.Model):
         return data
 
     def get_line_global(self, order_ids, move_type):
-        product_dict = {}
-        global_customer_id = self.config_id.global_customer_id
-        for order in order_ids.filtered(lambda x: not x.partner_id or x.partner_id == global_customer_id):
+        list_invoice_line_ids = []
+        for order in order_ids.filtered(lambda x: not x.account_move):
             if move_type == "refund":
                 order_line = order.lines.filtered(lambda self: self.qty < 0)
             else:
                 order_line = order.lines.filtered(lambda self: self.qty > 0)
             for line in order_line:
-                prd_id_str = str(line.product_id.id)
-                if product_dict.get(prd_id_str, False):
-                    product_dict[prd_id_str]["qty"] += line.qty
-                    product_dict[prd_id_str][
-                        "price_unit"
-                    ] += line.price_unit
-                else:
-                    product_dict[prd_id_str] = {
-                        "name": (
-                            'Ticket: '
-                            + order.pos_reference
-                            + " "
-                            + line.full_product_name
-                        ),
-                        "qty": line.qty,
-                        "price_unit": line.price_unit,
-                        "tax_ids": line.tax_ids_after_fiscal_position.ids
-                    }
-            list_invoice_line_ids = []
-            for product, values in product_dict.items():
                 list_invoice_line_ids.append({
-                    "name": values["name"],
-                    "product_id": int(product),
-                    "quantity": abs(values["qty"]),
-                    "price_unit": values["price_unit"],
-                    "tax_ids": values["tax_ids"]
+                    "name": (
+                        'Ticket: '
+                        + order.pos_reference
+                        + " "
+                        + line.full_product_name
+                    ),
+                    "product_id": line.product_id.id,
+                    "quantity": abs(line.qty),
+                    "discount": abs(line.discount),
+                    "account_id": line.product_id.product_tmpl_id.get_product_accounts()['income'].id,
+                    "price_unit": line.price_unit,
+                    "tax_ids": line.tax_ids_after_fiscal_position.ids,
                 })
         return list_invoice_line_ids
 
@@ -400,6 +354,13 @@ class PosSession(models.Model):
             'date': fields.Date.context_today(self),
             'ref': self.name
         })
+        
+        if not self.config_id.invoice_journal_id:
+            raise ValidationError("No esta configurado el diario para facturacion en este PdV")
+        if not self.config_id.global_customer_id:
+            raise ValidationError("No esta configurado el cliente publico general para facturacion global en este PdV")
+        if not self.config_id.global_periodicity:
+            raise ValidationError("No esta configurada la periodicidad para facturacion global en este PdV")
 
         global_invoice = self.env['account.move'].with_context(
             default_journal_id=self.config_id.invoice_journal_id.id
@@ -413,12 +374,17 @@ class PosSession(models.Model):
             'periodicidad': self.config_id.global_periodicity
         })  
 
-        self._set_references_global_invoice(self, global_invoice, account_move, global_invoice_payment_move)
+        self._set_references_global_invoice(
+            self,
+            global_invoice,
+            account_move
+        )
         self.create_values_in_data(
             global_invoice,
+            account_move,
             self,
             bank_payment_method_diffs,
-            account_move,
+            
         )
 
         if global_invoice.line_ids:
@@ -441,6 +407,23 @@ class PosSession(models.Model):
             'type': 'ir.actions.act_window',
             'res_id': global_invoice.id,
         }
+    
+    def dict_payments_data(self, order_ids):
+        totales_dict = {}
+        for rec in order_ids:
+            payment = self.env['pos.payment'].search([
+                ('pos_order_id', '=', rec.id)
+            ])
+            for pay in payment:
+                if pay.payment_method_id.name in totales_dict:
+                    totales_dict[pay.payment_method_id.name][0] += pay.amount
+                else:
+                    totales_dict[pay.payment_method_id.name] = [
+                        pay.amount,
+                        pay.payment_method_id.journal_id,
+                        pay.payment_method_id.id
+                    ]
+        return totales_dict
 
     def create_values_in_data(
         self,
@@ -450,26 +433,17 @@ class PosSession(models.Model):
         bank_payment_method_diffs,
     ):
         data = {'bank_payment_method_diffs': bank_payment_method_diffs or {}}
+        
         data = pos_session._accumulate_amounts_global_invoice(data)
 
-        global_invoice_lines = {}
+        global_invoice_lines = data.get('invoice_lines')
         refund_product_lines = {}
-        for line in data.get('invoice_lines'):
-            if line.get('product_id') in global_invoice_lines:
-                global_invoice_lines[line.get('product_id')]['qty'] += line.get('quantity')
-            else:
-                product_id = self.env['product.product'].browse(line.get('product_id'))
-                global_invoice_lines[line.get('product_id')] = {
-                    'product_id': line.get('product_id'),
-                    'name': product_id.name,
-                    'qty': line.get('quantity'),
-                    'price_unit': line.get('price_unit'),
-                    'tax_ids': line.get('tax_ids')
-                }
 
         for line in data.get('refund_lines'):
-            if line.get('product_id') in global_invoice_lines:
-                global_invoice_lines[line.get('product_id')]['qty'] -= line.get('quantity')
+            for gline in global_invoice_lines:
+                if gline.get('product_id') == line.get('product_id') and gline.get('price_unit') == line.get('price_unit'):
+                    gline['quantity'] -= line.get('quantity', 0)
+                    break
 
             product_id = self.env['product.product'].browse(line.get('product_id'))
             income_account_id = product_id.categ_id.property_account_income_categ_id.id
@@ -478,32 +452,32 @@ class PosSession(models.Model):
             else:
                 refund_product_lines[income_account_id] = line.get('quantity') * line.get('price_unit')
 
-        global_invoice_lines = [{
-            'name': line.get('name'),
-            'product_id': line.get('product_id'),
-            'quantity': line.get('qty'),
-            'price_unit': line.get('price_unit'),
-            'tax_ids': line.get('tax_ids')
-        } for line in global_invoice_lines.values() if line.get('qty') > 0 ]
-
+        global_invoice_lines = list(filter(lambda x: x.get('quantity') > 0, global_invoice_lines))
         global_invoice.write({'invoice_line_ids': [(
             0, None, invoice_line
         ) for invoice_line in global_invoice_lines]})
+        dict_total = self.dict_payments_data(pos_session.order_ids.filtered(lambda x: not x.account_move))
+        invoice_payment_lines = [] 
 
-        invoice_payment_lines = [
-                (0, 0, {
-                    'name': f"Global Invoice payment - {global_invoice.ref}",
-                    'account_id': pos_session.company_id.account_default_pos_receivable_account_id.id,  # Clientes nacionales POS
-                    'debit': global_invoice.amount_total,
-                    'credit': 0,
-                }),
-                (0, 0, {
-                    'name': f"Global Invoice payment - {global_invoice.ref}",
-                    'account_id': pos_session.config_id.global_customer_id.property_account_receivable_id.id,  # Clientes nacionales
-                    'debit': 0,
-                    'credit': global_invoice.amount_total,
-                }),
-            ]
+        for method, method_amount in dict_total.items():
+            if method != "Prestavale":
+                invoice_payment_lines.extend([
+                        (0, 0, {
+                            'name': f"Global Invoice payment - {global_invoice.ref} - {method}",
+                            'account_id': pos_session.company_id.account_default_pos_receivable_account_id.id,  # Clientes nacionales POS
+                            'debit': method_amount[0],
+                            'partner_id':pos_session.config_id.global_customer_id.id,
+                            'credit': 0,
+                        }),
+                        (0, 0, {
+                            'name': f"Global Invoice payment - {global_invoice.ref} - {method}",
+                            'account_id': pos_session.config_id.global_customer_id.property_account_receivable_id.id,  # Clientes nacionales
+                            'debit': 0,
+                            'credit': method_amount[0],
+                            'partner_id':pos_session.config_id.global_customer_id.id,
+                        }),
+                    ]
+                )
 
         for account_id, amount in refund_product_lines.items():
             invoice_payment_lines.append((0, 0, {
@@ -511,20 +485,20 @@ class PosSession(models.Model):
                 'account_id': account_id,
                 'debit': amount,
                 'credit': 0,
+                'partner_id':pos_session.config_id.global_customer_id.id,
             }))
             invoice_payment_lines.append((0, 0, {
                 'name': f'Sales - {account_id}',
                 'account_id': account_id,
                 'debit': 0,
                 'credit': amount,
+                'partner_id':pos_session.config_id.global_customer_id.id,
             }))
 
         global_invoice_payment_move.write({
             'line_ids': invoice_payment_lines,
         })
-
         global_invoice_payment_move._post()
-
         return data
 
     def _set_references_global_invoice(
@@ -550,21 +524,30 @@ class PosSession(models.Model):
     def create_manual_global_invoice(self, records_multi):
         for records in records_multi:
             # Check if all pos config have the same configuration
-            global_customer = self._check_session_can_be_invoiced(
+            self._check_session_can_be_invoiced(
                 records
             )
             global_journal = records.config_id.global_journal_id
+            
+            if not global_journal:
+                raise ValidationError("No esta configurado el diario para facturacion global en este PdV '%s'" % records.config_id.name)
+            if not records.config_id.global_customer_id:
+                raise ValidationError("No esta configurado el cliente global para facturacion global en este PdV '%s'" % records.config_id.name)
+            if not records.config_id.global_periodicity:
+                raise ValidationError("No esta configurada la periodicidad para facturacion global en este PdV '%s'" % records.config_id.name)
 
             global_invoice = self.env['account.move'].with_context(
                 default_journal_id=global_journal.id
             ).create({
                 'journal_id': global_journal.id,
                 'date': fields.Date.context_today(self),
+                'invoice_payment_term_id': self.env.ref("account.account_payment_term_45days").id,
                 'ref': '',
-                'partner_id': global_customer.id,
+                'partner_id': records.config_id.global_customer_id.id,
                 'move_type': 'out_invoice',
                 'is_global_invoice': True,
                 'periodicidad': records.config_id.global_periodicity,
+                'l10n_mx_edi_usage': 'S01'
             })
 
             global_invoice_payment_move = self.env['account.move'].create({
@@ -599,28 +582,16 @@ class PosSession(models.Model):
 
             if global_invoice.line_ids:
                 global_invoice._post()
-
-                # Apply payment to global invoice
-
-                if (global_invoice.line_ids and global_invoice.state == 'posted'):
-                    customer_id = records.config_id.global_customer_id
-
+                if global_invoice.line_ids and global_invoice.state == 'posted':
+                    global_customer = records.config_id.global_customer_id
                     move_lines = self.env['account.move.line'].search([
-                        ('move_id', 'in', [global_invoice.id]),
-                        ('account_id', '=', customer_id.property_account_receivable_id.id),
-                        ('name', '!=', 'From invoiced orders'),
-                        ('reconciled', '=', False)
+                        ('move_id', 'in', (global_invoice.id, global_invoice_payment_move.id)),
+                        ('account_id', '=', global_customer.property_account_receivable_id.id),
+                        ('name','!=', f'Global Invoice payment - {global_invoice.ref} - Prestavale')
                     ])
-
                     move_lines.reconcile()
-
-                    #  Apply payment to global invoice
-                    global_invoice_payment_move = records.mapped("global_invoice_payment_move_id")
-                    (global_invoice | global_invoice_payment_move).line_ids.filtered(
-                        lambda x: x.account_id == global_customer.property_account_receivable_id).reconcile()
-                    (records.statement_line_ids.mapped('move_id') | global_invoice_payment_move).line_ids.filtered(
-                        lambda x: x.account_id == records.company_id.account_default_pos_receivable_account_id).reconcile()
-
+            else:
+                raise ValidationError(_("No hay lineas para la factura global es posible que la sesion '%s' no tenga ordenes sin facturar" % records.name))
             records.write({'has_global_invoice': True})
 
     def _reconcile_account_move_lines_stock(self, data):

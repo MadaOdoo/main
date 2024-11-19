@@ -7,6 +7,7 @@ class AccountMove(models.Model):
 
     is_global_invoice = fields.Boolean("Es factura global", default=False)
     periodicidad = fields.Char("Periodicidad")
+    apply_global_invoice = fields.Boolean(related="company_id.apply_global_invoice")
 
     def unlink(self):
         for account_move in self:

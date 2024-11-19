@@ -16,7 +16,7 @@ class PosConfig(models.Model):
         string="Method",
         selection=[
             ('manual', 'Manual'),
-            ('automatic', 'Automatico'),
+            #('automatic', 'Automatico'),
         ],
     )
     global_journal_id = fields.Many2one(
@@ -32,3 +32,4 @@ class PosConfig(models.Model):
             ('05', 'Bimestral'),
         ]
     )
+    apply_global_invoice = fields.Boolean(related="company_id.apply_global_invoice")
