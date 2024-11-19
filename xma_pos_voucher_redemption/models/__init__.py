@@ -9,3 +9,5 @@ from . import inherit_pos_session
 from . import inherit_res_partner
 from . import pos_payment_method
 from . import pos_payment
+from . import ir_ui_menu
+from . import res_company

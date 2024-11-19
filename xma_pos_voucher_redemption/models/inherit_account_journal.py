@@ -10,4 +10,5 @@ class InheritAccountJournal(models.Model):
         'res.partner',
         string='Cliente',
     )
+    apply_voucher = fields.Boolean(related="company_id.apply_voucher")
 

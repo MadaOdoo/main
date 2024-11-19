@@ -7,16 +7,17 @@ class InheritResPartner(models.Model):
     _inherit = 'res.partner'
 
     curp = fields.Char(
-        string='Curp',
+        string='INE',
     )
+    apply_voucher = fields.Boolean(related="company_id.apply_voucher")
 
     @api.model
-    def validar_curp(self, curp, partner_id):
+    def validar_curp(self, l10n_mx_edi_curp, partner_id):
         count_partners = 0
         if partner_id:
             count_partners = self.search_count(
                 [
-                    ('curp','=',curp),
+                    ('l10n_mx_edi_curp','=',l10n_mx_edi_curp),
                     ('id','!=',partner_id),
                 ],
                 limit=1
@@ -24,7 +25,7 @@ class InheritResPartner(models.Model):
         else:
             count_partners = self.search_count(
                 [
-                    ('curp','=',curp),
+                    ('l10n_mx_edi_curp','=',l10n_mx_edi_curp),
                 ],
                 limit=1
             )
@@ -32,3 +33,15 @@ class InheritResPartner(models.Model):
             return True
         else:
             return False
+
+    @api.model
+    def create_from_ui(self, partner):
+        company_id = False
+        if 'id' in partner and partner['id'] == False:
+            company_id = self.env.company.id
+        partner_id = super().create_from_ui(partner)
+        if company_id:
+            self.browse(partner_id).write({
+                'company_id': company_id
+            })
+        return partner_id

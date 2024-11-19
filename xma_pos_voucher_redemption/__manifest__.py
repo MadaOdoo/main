@@ -10,7 +10,7 @@
     'website': "http://www.xmarts.com",
     'category': 'Point Of Sale',
     'version': '16.0.1.0.0',
-    'depends': ['base','point_of_sale', 'account'],
+    'depends': ['base','point_of_sale', 'account', 'l10n_mx_edi_extended'],
     'data': [
         'data/sequence.xml',
         'security/ir.model.access.csv',

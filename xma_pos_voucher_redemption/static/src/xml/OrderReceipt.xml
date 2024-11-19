@@ -13,13 +13,13 @@
                     Quincenales<br/>
                     Nombre distribuidora: <t t-esc="receipt.nombre_distribuidora"/><br/>
                     Primer pago: <t t-esc="receipt.fecha"/><br/>
-                    Cliente: <t t-esc="receipt.nombre_cliente"/><br/>
-                    Telefono: <t t-esc="receipt.cliente_telefono"/><br/>
-                    # IFE: <t t-esc="receipt.ife"/><br/><br/><br/>
+                    Cliente: <t t-esc="receipt.partner.name || ''"/><br/>
+                    Telefono: <t t-esc="receipt.partner.mobile || ''"/><br/>
+                    # CURP: <t t-esc="receipt.partner.l10n_mx_edi_curp || ''"/><br/><br/><br/>
                     Firma: ______________________
                 </div>
             </t>
-            <t t-else="">
+            <t t-if="receipt.is_vale">
                 <div class="pos-receipt-center-align">
                     <br/><br/><br/>
                     Recibi a mi entera satisfaccion la
@@ -47,7 +47,7 @@
                     Lugar y Fecha de Expedicion:<br/>
                     <t t-esc="receipt.ciudad"/> a <t t-esc="receipt.today"/> <br/><br/><br/>
                     Firma: ___________________
-                    <br/><t t-esc="receipt.nombre_cliente"/><br/>
+                    <br/><t t-esc="receipt.partner.name || ''"/><br/>
                 </div>
             </t>
         </xpath>

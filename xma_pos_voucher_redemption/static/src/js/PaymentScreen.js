@@ -30,7 +30,8 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                         })
                         return false;
                     }
-                    if (!this.currentOrder.get_partner()) {
+                    let partner = this.currentOrder.get_partner();
+                    if (!partner) {
                         const { confirmed } = await this.showPopup('ConfirmPopup', {
                             title: this.env._t('Por favor, seleccione el cliente'),
                             body: this.env._t(
@@ -40,6 +41,13 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                         if (confirmed) {
                             this.selectPartner();
                         }
+                        return false;
+                    }
+                    if(!partner.name.length || !partner.l10n_mx_edi_curp.length || !partner.mobile.length){
+                        await this.showPopup('ModalDialogWarningPopup', {
+                            title: this.env._t('¡ADVERTENCIA!'),
+                            body1: this.env._t('Es necesario tener lleno los campos de nombre, curp y celular en contacto.'),
+                        })
                         return false;
                     }
                     const line = this.paymentLines.find((line) => line.folio_de_vale != '' && line.folio_de_vale != null);
@@ -52,7 +60,7 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                     }
                     let { confirmed, payload: code } = await this.showPopup('TextInputPopup', {
                         title: this.env._t('Introduzca el número de vale'),
-                        startingValue: 'A-00004-0001',
+                        startingValue: '',
                         placeholder: this.env._t('Ingrese el número de vale'),
                     });
                     if(confirmed){
@@ -63,21 +71,20 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                                     method: 'validar_vale',
                                     args: [code, this.currentOrder.pos_session_id, this.currentOrder.partner.id, this.env.pos.config.token],
                                 })
-                                if(vale_api.id != undefined) {
-                                    var monto_con_symbol = this.env.pos.format_currency(vale_api.monto);
-                                    var monto_sin_symbol = this.env.pos.format_currency_no_symbol(vale_api.monto);
+                                if(vale_api.estado_respuesta && vale_api.id != undefined) {
+                                    var monto_con_symbol = this.env.pos.format_currency(vale_api.montoLimite);
+                                    var monto_sin_symbol = this.env.pos.format_currency_no_symbol(vale_api.montoLimite);
                                     var monto_a_pagar = this.currentOrder.get_due() > 0 ? this.currentOrder.get_due() : 0
                                     var obj = {};
                                     let monto_total = 0;
                                     let monto_as_text = '';
-                                    if(vale_api.limiteDistribuidora > 0){
-                                        monto_con_symbol = this.env.pos.format_currency(vale_api.limiteDistribuidora);
+                                    if(vale_api.montoLimite > 0){
                                         const { confirmed, payload } = await this.showPopup('NumberPopup', {
-                                            title: this.env._t('Limite de vale: '+monto_con_symbol),
+                                            title: this.env._t(vale_api.etiqueta),
                                         });
                                         if(confirmed) {
                                             if(payload > 0){
-                                                if(payload <= vale_api.limiteDistribuidora){
+                                                if(payload <= vale_api.montoLimite){
                                                     if(payload <= monto_a_pagar){
                                                         monto_sin_symbol = this.env.pos.format_currency_no_symbol(payload);
                                                         monto_con_symbol = this.env.pos.format_currency(payload);
@@ -232,10 +239,15 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                                         text2: this.env._t(vale_api.estatus+'.'),
                                     })
                                     return false;
+                                } else if(!vale_api.estado_respuesta && vale_api.tipo_error === 'api'){
+                                    await this.showPopup('ErrorPopup', {
+                                        title: this.env._t('¡'+vale_api.error.name+' '+vale_api.error.statusCode+'!'),
+                                        body: this.env._t(vale_api.error.message+'.'),
+                                    });
                                 } else {
                                     await this.showPopup('ErrorPopup', {
-                                        title: this.env._t('¡'+vale_api.name+' '+vale_api.statusCode+'!'),
-                                        body: this.env._t(vale_api.message+'.'),
+                                        title: this.env._t('¡ERROR!'),
+                                        body: this.env._t(vale_api.error+'.'),
                                     });
                                 }
                             } catch (error) {
@@ -293,7 +305,7 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                                         NumberBuffer.reset();
                                         self.render(true);
                                     });
-                                } catch(err) {
+                                } catch (error) {
                                     return this.showPopup('ErrorPopup', {
                                         title: this.env._t('¡ERROR!'),
                                         body: this.env._t('Prueba tu conexion de internet.'),
@@ -345,7 +357,7 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                                     NumberBuffer.reset();
                                     self.render(true);
                                 });
-                            } catch(err) {
+                            } catch (error) {
                                 return this.showPopup('ErrorPopup', {
                                     title: this.env._t('¡ERROR!'),
                                     body: this.env._t('Prueba tu conexion de internet.'),
@@ -367,6 +379,14 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                 if(this.currentOrder.is_vale){
                     if(this.currentOrder.get_partner()) {
                         try {
+                            let partner = this.currentOrder.get_partner();
+                            if(!partner.name.length || !partner.l10n_mx_edi_curp.length || !partner.mobile.length){
+                                await this.showPopup('ModalDialogWarningPopup', {
+                                    title: this.env._t('¡ADVERTENCIA!'),
+                                    body1: this.env._t('Es necesario tener lleno los campos de nombre, curp y celular en contacto.'),
+                                })
+                                return false;
+                            }
                             var datos = {
                                 "montoCredito": this.currentOrder.cantidad_pagos * this.currentOrder.pago_quincenal,
                                 "configId": this.currentOrder.config_id,
@@ -374,12 +394,10 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                                 "afiliado":"MADA",
                                 "usuarioId": '',
                                 "cliente":{
-                                    "nombres":"",
-                                    "primerApellido":"",
-                                    "segundoApellido":"",
-                                    "curp":"",
-                                    "celular":"" 
-                                },
+                                    "nombreCompleto":partner.name,
+                                    "curp":partner.l10n_mx_edi_curp,
+                                    "celular":partner.mobile 
+                                },                            
                                 // "pagare":"00033"
                             }
                             let result = await this.rpc({
@@ -418,14 +436,20 @@ odoo.define('xma_pos_voucher_redemption.PaymentScreen', function(require) {
                                     });
                                     return false;
                                 }
-                            } else if (result.status_code == 404){
+                            } else if (result.status_code){
                                 await this.showPopup('ModalDialogWarningPopup', {
                                     title: this.env._t('¡ADVERTENCIA!'),
-                                    body1: this.env._t(result.message+'.'),
+                                    body1: this.env._t(result.error+'.'),
+                                })
+                                return false;
+                            } else {
+                                await this.showPopup('ModalDialogWarningPopup', {
+                                    title: this.env._t('¡ADVERTENCIA!'),
+                                    body1: this.env._t(result.error+'.'),
                                 })
                                 return false;
                             }
-                        } catch (_e) {
+                        } catch (error) {
                             await this.showPopup('ErrorPopup', {
                                 title: this.env._t('¡ERROR!'),
                                 body: this.env._t('Prueba tu conexion de internet.'),

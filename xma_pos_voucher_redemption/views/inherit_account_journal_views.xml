@@ -6,10 +6,11 @@
         <field name="inherit_id" ref="account.view_account_journal_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='country_code']" position='after'>
-                <field name="is_vale" />
+                <field name="apply_voucher" invisible="1"/>
+                <field name="is_vale" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
                 <field name="partner"
                     attrs="{
-                        'invisible':[('is_vale','=', False)],
+                        'invisible':['|', ('is_vale','=', False), ('apply_voucher','=',False)],
                         'required':[('is_vale','=', True)]
                     }" 
                 />

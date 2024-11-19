@@ -5,6 +5,25 @@ from odoo import models
 class InheritPosSession(models.Model):
     _inherit = 'pos.session'
 
+    def get_validate_customer_data(self):
+        partnes = self.order_ids.filtered(
+            lambda order: 
+            not order.partner_id.name or not
+            order.partner_id.l10n_mx_edi_curp or not
+            order.partner_id.mobile
+        ).mapped('partner_id.name')
+        if len(partnes):
+            return {
+                'respuesta': True,
+                'partners_count': len(partnes),
+                'partners_name': ", ".join(partnes)
+            }
+        return {
+            'respuesta': False,
+            'partners_count': 0,
+            'partners_name': ""
+        }
+
     def _pos_data_process(self, loaded_data):
         super()._pos_data_process(loaded_data)
         loaded_data['journal_by_id'] = {journal['id']: journal for journal in loaded_data['account.journal']}
@@ -30,7 +49,7 @@ class InheritPosSession(models.Model):
 
     def _loader_params_res_partner(self):
         result = super()._loader_params_res_partner()
-        result['search_params']['fields'].append('curp')
+        result['search_params']['fields'].append('l10n_mx_edi_curp')
         return result
 
     def _create_split_account_payment(self, payment, amounts):

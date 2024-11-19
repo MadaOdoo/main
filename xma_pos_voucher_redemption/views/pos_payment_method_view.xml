@@ -6,7 +6,8 @@
         <field name="inherit_id" ref="point_of_sale.pos_payment_method_view_form"/>
         <field name="arch" type="xml">
             <field name="journal_id" position='after'>
-                <field name="is_bank_terminal" />
+                <field name="apply_voucher" invisible="1"/>
+                <field name="is_bank_terminal" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
             </field>
         </field>
     </record>

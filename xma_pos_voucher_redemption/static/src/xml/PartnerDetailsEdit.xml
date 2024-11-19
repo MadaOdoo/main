@@ -4,8 +4,9 @@
         <xpath expr="//div[hasclass('partner-details-right')]" position="inside">
             <div class="partner-detail">
                 <span class="label">Curp</span>
-                <input class="detail" name="curp"
-                    t-on-change="captureChange" t-att-value="props.partner.curp || ''"
+                <input class="detail" name="l10n_mx_edi_curp"
+                    t-model="changes.l10n_mx_edi_curp"
+                    t-on-change="captureChange"
                     placeholder="Curp" />
             </div>
         </xpath>

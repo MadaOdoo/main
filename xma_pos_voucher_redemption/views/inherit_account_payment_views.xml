@@ -6,13 +6,13 @@
         <field name="inherit_id" ref="account.view_account_payment_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='destination_journal_id']" position='after'>
-                <!-- <field name="folio_vale" /> -->
+                <field name="apply_voucher" invisible="1"/>
                 <field name="state_pago_vale" 
                     attrs="{
-                        'invisible':[('control_vales_id','=', False)]
+                        'invisible':['|', ('control_vales_id','=', False), ('apply_voucher','=',False)]
                     }" 
                 />
-                <field name="state_vale" />
+                <field name="state_vale" attrs="{'invisible':[('apply_voucher','=',False)]}" />
                 <field name="control_vales_id" invisible="1"/>
                 <field name="pos_vale_order_id" invisible="1"/>
             </xpath>
