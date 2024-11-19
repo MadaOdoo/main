@@ -30,33 +30,19 @@ class InheritPosOrder(models.Model):
         for rec in vals:
 
             if not rec["str_fechas_pagare"]:
-                print("El valor fecha es Falso")
                 fechas = None
             elif rec["str_fechas_pagare"] == "":
-                print("El valor fecha esta vacío")
                 fechas = None
             else:
                 fechas = rec["str_fechas_pagare"].split(",")
-            
-            #quince = timedelta(0)
-            #print(rec)
-            #if rec.cantidad_pagos > len(fechas):
-            #    raise ValidationError("La cantidad de pagos es mayor al numero de fechas disponibles de pago.")
-            #else:
-            
+
             for num in range(1, rec.cantidad_pagos + 1):
-                print(num)
-                
                 date_pay = None
                 if fechas:
                     if len(fechas) >= num:
                         date_pay =  datetime.strptime(fechas[num - 1], '%d/%m/%Y').date()
                     else:
                         date_pay = None
-                
-                
-                    print(date_pay)
-                
                 val = {
                     'distribuidora_id': rec.distribuidora_id.id,
                     'num_vale': rec.folio_vale, 
@@ -68,12 +54,9 @@ class InheritPosOrder(models.Model):
                     'fecha': date_pay #+ quince
                 }
                 self.env['voucher.report'].create(val)
-                #quince += timedelta(15)
-        #print(reporte)
     
     @api.model
     def create(self, vals):
-        print("---------", vals)
         rec = super(InheritPosOrder, self).create(vals)
         self.crear_reporte_vales(rec)
         return rec

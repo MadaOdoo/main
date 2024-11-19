@@ -7,10 +7,11 @@
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">
-                    <field name="pos_order_ids" widget="many2many_tags"/>
-                    <field name="folio_vale" readonly="1"/>
-                    <field name="distribuidora_id"/>
-                    <field name="sent"/>
+                    <field name="apply_voucher" invisible="1"/>
+                    <field name="pos_order_ids" widget="many2many_tags" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
+                    <field name="folio_vale" readonly="1" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
+                    <field name="distribuidora_id" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
+                    <field name="sent" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
                 </xpath>
             </field>
         </record>

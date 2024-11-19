@@ -10,6 +10,11 @@ class PosConfig(models.Model):
             ('manual', 'Manual')
         ],
         default='manual',
-        #readonly=True,
         required=False
+    )
+    global_customer_id = fields.Many2one(
+        comodel_name="res.partner",
+        string="Cliente global",
+        required=False,
+        default=928
     )

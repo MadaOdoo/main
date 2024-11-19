@@ -6,8 +6,8 @@
         <field name="inherit_id" ref="xma_pos_voucher_redemption.account_pos_order_inherit"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='date_order']" position='after'>
-                <field name="percentage"/>
-                <field name="calculation"/>
+                <field name="percentage" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
+                <field name="calculation" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
             </xpath>
         </field>
     </record>
