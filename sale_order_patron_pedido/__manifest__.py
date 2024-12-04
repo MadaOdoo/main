@@ -14,7 +14,8 @@
         'contacts',
         'product_matrix',
         'sale_product_matrix',
-        'l10n_mx_edi'],
+        'l10n_mx_edi',
+        'l10n_mx_edi_extended',],
     'data': [
         'security/ir.model.access.csv',
         'views/res_partner_view.xml',
