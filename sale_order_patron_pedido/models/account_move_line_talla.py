@@ -21,8 +21,8 @@ class AccountMoveLineTalla(models.Model):
     product_id = fields.Many2one('product.product',string="Variante")
 
     unspsc_code_id = fields.Many2one('product.unspsc.code',string="Código Producto")
-
-
+    l10n_mx_edi_customs_number = fields.Char(string="Número de Pedimento")
+    
     product_uom_qty = fields.Float(string="Cantidad")
     product_uom = fields.Many2one('uom.uom',string="UdM")
     price_unit = fields.Float(string="Precio Unitario")
@@ -61,6 +61,15 @@ class AccountMoveLineTalla(models.Model):
 
     #############################################################
     has_uom_par = fields.Boolean(string="Tiene unidad de medida par", compute="compute_campo_has_uom_par")
+    ###########################################################
+
+    def _l10n_mx_edi_get_custom_numbers(self):
+        self.ensure_one()
+        if self.l10n_mx_edi_customs_number:
+            return [num.strip() for num in self.l10n_mx_edi_customs_number.split(',')]
+        else:
+            return []
+
 
     @api.depends('product_template_id')
     def compute_campo_has_uom_par(self):
