@@ -52,6 +52,7 @@ class InheritPosSession(models.Model):
                     }
                     debit = {
                         "account_id": 25068,
+                        "partner_id": 989,
                         "debit": monto_prestavale,
                     }
                     lineas.append([0, 0, credit])
