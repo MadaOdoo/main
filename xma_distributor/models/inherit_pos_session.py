@@ -47,7 +47,7 @@ class InheritPosSession(models.Model):
                 if total_div.get('Prestavale'):
                     lineas = []
                     credit = {
-                        "account_id": 4,
+                        "account_id": 25049,
                         "credit": monto_prestavale,
                     }
                     debit = {
