@@ -41,6 +41,7 @@
                         </t>-->
                         
                         <field name="product_template_id" readonly="1"/>
+                        <field name="l10n_mx_edi_customs_number" readonly="1"/>
                         <field name="product_id" readonly="1" optional="hide"/>
                         <field name="product_uom_qty" readonly="1"/>
                         <field name="product_uom" readonly="1"/>

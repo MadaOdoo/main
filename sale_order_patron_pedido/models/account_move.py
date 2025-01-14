@@ -123,6 +123,7 @@ class AccountMove(models.Model):
                             array_template[line.product_template_id.id]['move_line_id'] = False
                             array_template[line.product_template_id.id]['product_id'] = False
                             array_template[line.product_template_id.id]['product_template_id'] = line.product_template_id.id
+                            array_template[line.product_template_id.id]['l10n_mx_edi_customs_number'] = line.l10n_mx_edi_customs_number or ''
                             array_template[line.product_template_id.id]['price_unit'] = line.price_unit or 0.00
                             array_template[line.product_template_id.id]['tax_id'] = line.tax_ids.ids or False
                             array_template[line.product_template_id.id]['unspsc_code_id'] = line.product_id.unspsc_code_id and line.product_id.unspsc_code_id.id or False
@@ -136,6 +137,7 @@ class AccountMove(models.Model):
                         'product_id':line.product_id.id,
                         'unspsc_code_id':line.product_id.unspsc_code_id and line.product_id.unspsc_code_id.id or False,
                         'product_template_id':line.product_template_id.id,
+                        'l10n_mx_edi_customs_number':line.l10n_mx_edi_customs_number or '',
                         'product_uom':line.product_uom_id and line.product_uom_id.id or False,
                         'product_uom_qty':line.quantity or 0.00,
                         'price_unit':line.price_unit or 0.00,

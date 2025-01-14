@@ -220,6 +220,15 @@
 
                                     <td t-if="is_cfdi_signed" name="l10n_mx_edi_product_code_cell">
                                         <span t-field="line.unspsc_code_id.code"/>
+                                        <t t-set="custom_numbers" t-value="line._l10n_mx_edi_get_custom_numbers()"/>
+                                        <t t-if="custom_numbers">
+                                            <br/>Número de pedimento:
+                                            <ul>
+                                                <t t-foreach="custom_numbers" t-as="custom_number">
+                                                    <li><span t-esc="custom_number"/></li>
+                                                </t>
+                                            </ul>
+                                        </t>
                                     </td>
 
                                     <td name="td_quantity" class="text-end">
@@ -346,6 +355,15 @@
 
                                     <td t-if="is_cfdi_signed" name="l10n_mx_edi_product_code_cell">
                                         <span t-field="line.move_line_id.product_id.unspsc_code_id.code"/>
+                                        <t t-set="custom_numbers" t-value="line.move_line_id._l10n_mx_edi_get_custom_numbers()"/>
+                                        <t t-if="custom_numbers">
+                                            <br/>Número de pedimento:
+                                            <ul>
+                                                <t t-foreach="custom_numbers" t-as="custom_number">
+                                                    <li><span t-esc="custom_number"/></li>
+                                                </t>
+                                            </ul>
+                                        </t>
                                     </td>
 
                                     <td name="td_quantity" class="text-end">
@@ -501,6 +519,15 @@
 
                                         <td t-if="is_cfdi_signed" name="l10n_mx_edi_product_code_cell">
                                             <span t-field="line.product_id.unspsc_code_id.code"/>
+                                            <t t-set="custom_numbers" t-value="line._l10n_mx_edi_get_custom_numbers()"/>
+                                            <t t-if="custom_numbers">
+                                                <br/>Número de pedimento:
+                                                <ul>
+                                                    <t t-foreach="custom_numbers" t-as="custom_number">
+                                                        <li><span t-esc="custom_number"/></li>
+                                                    </t>
+                                                </ul>
+                                            </t>
                                         </td>
 
                                         <td name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
@@ -512,7 +539,9 @@
                                             <span class="text-nowrap" t-field="line.price_unit"/>
                                         </td>
 
-                                        <td t-if="is_cfdi_signed" name="l10n_mx_edi_product_code_cell"><span t-field="line.product_id.unspsc_code_id.code"/></td>
+                                        <td t-if="is_cfdi_signed" name="l10n_mx_edi_product_code_cell">
+                                            <span t-field="line.product_uom_id.unspsc_code_id.code"/>
+                                        </td>
 
                                         <td t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                             <span class="text-nowrap" t-field="line.discount"/>
