@@ -2,7 +2,7 @@
 
 {
     'name': 'Multiple Invoice Payment',
-    'version': '12.0.1.3',
+    'version': '18.0.1.0',
     'category': 'account',
     'sequence': 50,
     'author': 'ERP Labz',

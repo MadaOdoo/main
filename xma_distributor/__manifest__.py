@@ -9,7 +9,7 @@
     'contributors': "daniela.roche@xmarts.com",
     'website': "http://www.xmarts.com",
     'category': 'Point Of Sale',
-    'version': '16.0.1.0.0',
+    'version': '18.0.1.0',
     'depends': ['base', 'auth_totp', 'xma_pos_voucher_redemption', 'l10n_mx_pos_global_invoice', 'product_unspsc'],
     'data': [
         'data/data_product_product.xml',

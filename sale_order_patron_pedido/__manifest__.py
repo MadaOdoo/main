@@ -1,6 +1,6 @@
 {
     'name': 'Flujo de Patrones de Pedido para Ventas',
-    'version': '16.0.0.1',
+    'version': '18.0.1.0',
     'category': '',
     'license': 'AGPL-3',
     'summary': "Flujo de Patrones de Pedido para Ventas",

@@ -2,7 +2,7 @@
 
 {
     'name':         'Administrador de documentos Digitales',
-    'version': '16.01',
+    'version': '18.0.1.0',
     'description':  ''' 
                     Descarga los CFDI del portal del SAT a la base de datos de 
                     Odoo para su procesamiento y administracion, se necesita de la libreria de python
