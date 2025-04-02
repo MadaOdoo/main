@@ -26,17 +26,16 @@
                     <button name="action_view_invoice"
                             type="object"
                             class="oe_stat_button"
-                            icon="fa-pencil-square-o"
+                            icon="fa-edit"
                             invisible="invoice_count == 0">
-                            <field name="invoice_count" widget="statinfo" string="Facturas"/>
+                            <field name="invoice_count" widget="stat_info" string="Facturas"/>
                         </button>
                     <button name="action_view_payments"
                         type="object"
                         class="oe_stat_button"
-                        icon="fa-pencil-square-o"
-
+                        icon="fa-edit"
                         invisible="payment_count == 0">
-                        <field name="payment_count" widget="statinfo" string="Pagos"/>
+                        <field name="payment_count" widget="stat_info" string="Pagos"/>
                     </button>
                 </div>
             </xpath>
@@ -70,10 +69,10 @@
         <field name="context">{'is_fiel_attachment': True, 'from_sat_sync': True}</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
-                Click here to create new documents.
+                Crear nuevo documento
             </p>
             <p>
-                Also you will find here all the related documents and download it by clicking on any individual document.
+                Aquí encontrarás todos los documentos relacionados y podrás descargarlos haciendo clic en cualquier documento individual.
             </p>
         </field>
     </record>
@@ -93,7 +92,7 @@
     </record>
 
     <menuitem id="main_manu_attachment_cfdi_invoices"
-              parent="account_accountant.menu_accounting"
+              parent="account.menu_finance"
               sequence="5"
               name="ADD"
     />
