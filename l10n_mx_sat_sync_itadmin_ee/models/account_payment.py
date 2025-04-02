@@ -14,8 +14,13 @@ class AccountPayment(models.Model):
     @api.depends('edi_document_ids')
     def _compute_cfdi_uuid(self):
         for payment in self:
-            attachment_id = payment.move_id._get_l10n_mx_edi_signed_edi_document()
-            if not attachment_id:
+            # Buscar el documento EDI firmado
+            signed_edi = payment.edi_document_ids.filtered(lambda d: d.edi_format_id.code == 'cfdi_3_3' and d.state == 'sent')
+            if signed_edi and signed_edi.attachment_id:
+                cfdi_infos = payment.move_id._l10n_mx_edi_decode_cfdi()
+                payment.l10n_mx_edi_cfdi_uuid_cusom = cfdi_infos.get('UUID')
+            else:
+                # Buscar en los attachments existentes
                 attachments = payment.attachment_ids
                 results = []
                 results += [rec for rec in attachments if rec.name.endswith('.xml')]
@@ -27,8 +32,5 @@ class AccountPayment(models.Model):
                     attachment = payment.env['ir.attachment'].search(domain, limit=1)
                     for edi in payment.edi_document_ids:
                         if not edi.attachment_id:
-                            vals=({'attachment_id':attachment.id,'move_id':payment.move_id.id})
+                            vals = {'attachment_id': attachment.id, 'move_id': payment.move_id.id}
                             edi.write(vals)
-            else:
-                cfdi_infos = payment.move_id._l10n_mx_edi_decode_cfdi()
-                payment.l10n_mx_edi_cfdi_uuid_cusom = cfdi_infos.get('UUID')
