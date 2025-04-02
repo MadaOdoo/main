@@ -3,7 +3,7 @@ import os
 from base64 import b64decode
 
 from odoo import models, fields, api, _
-from odoo.exceptions import UserError, Warning
+from odoo.exceptions import UserError
 
 try:
     import xlrd

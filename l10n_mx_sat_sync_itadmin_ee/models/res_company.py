@@ -408,10 +408,10 @@ class ResCompany(models.Model):
         session.get('https://cfdiau.sat.gob.mx/')
 
         if not esignature:
-            raise Warning("Archivos incorrectos no son una FIEL.")
+            raise UserError("Archivos incorrectos no son una FIEL.")
 
         if not esignature.content or not esignature.key or not esignature.password:
-            raise Warning("Seleccine los archivos FIEL .cer o FIEL .pem.")
+            raise UserError("Seleccine los archivos FIEL .cer o FIEL .pem.")
 
         fiel_cert_data = base64.b64decode(esignature.content)
         fiel_pem_data = convert_key_cer_to_pem(base64.decodebytes(esignature.key), esignature.password.encode('UTF-8'))
