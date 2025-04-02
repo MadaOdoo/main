@@ -11,11 +11,14 @@ class AccountPayment(models.Model):
     attachment_id = fields.Many2one("ir.attachment", 'Attachment')
     l10n_mx_edi_cfdi_uuid_cusom = fields.Char(string='Fiscal Folio UUID', copy=False, readonly=True, compute="_compute_cfdi_uuid", store=True)
     
-    @api.depends('edi_document_ids')
+    @api.depends('move_id.edi_document_ids')
     def _compute_cfdi_uuid(self):
         for payment in self:
+            if not payment.move_id:
+                continue
+                
             # Buscar el documento EDI firmado
-            signed_edi = payment.edi_document_ids.filtered(lambda d: d.edi_format_id.code == 'cfdi_3_3' and d.state == 'sent')
+            signed_edi = payment.move_id.edi_document_ids.filtered(lambda d: d.edi_format_id.code == 'cfdi_3_3' and d.state == 'sent')
             if signed_edi and signed_edi.attachment_id:
                 cfdi_infos = payment.move_id._l10n_mx_edi_decode_cfdi()
                 payment.l10n_mx_edi_cfdi_uuid_cusom = cfdi_infos.get('UUID')
@@ -30,7 +33,7 @@ class AccountPayment(models.Model):
                               ('name', '=', results[0].name)]
 
                     attachment = payment.env['ir.attachment'].search(domain, limit=1)
-                    for edi in payment.edi_document_ids:
+                    for edi in payment.move_id.edi_document_ids:
                         if not edi.attachment_id:
                             vals = {'attachment_id': attachment.id, 'move_id': payment.move_id.id}
                             edi.write(vals)
