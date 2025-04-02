@@ -27,14 +27,14 @@
                             type="object"
                             class="oe_stat_button"
                             icon="fa-pencil-square-o"
-                            attrs="{'invisible': [('invoice_count', '=', 0)]}">
+                            invisible="invoice_count == 0">
                             <field name="invoice_count" widget="statinfo" string="Facturas"/>
                         </button>
                     <button name="action_view_payments"
                         type="object"
                         class="oe_stat_button"
                         icon="fa-pencil-square-o"
-                        attrs="{'invisible': [('payment_count', '=', 0)]}">
+                        invisible="payment_count == 0">
                         <field name="payment_count" widget="statinfo" string="Pagos"/>
                     </button>
                 </div>

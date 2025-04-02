@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="point_of_sale.view_pos_payment_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='pos_order_id']" position='after'>
-                <field name="distribuidora_id" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
+                <field name="distribuidora_id" invisible="not apply_voucher"/>
                 <field name="apply_voucher" invisible="1"/>
             </xpath>
         </field>

@@ -9,7 +9,7 @@
 				<field name="hide_message" invisible="1"/>
 			</xpath>
 			<xpath expr="//div[hasclass('alert-info')]" position="attributes">
-				<attribute name="attrs">{'invisible': ['|','|', ('edi_web_services_to_process', 'in', ['', False]), ('state', '=', 'draft'), ('hide_message','=',True)]}</attribute>
+				<attribute name="invisible">edi_web_services_to_process in ['', False] or state == 'draft' or hide_message == True</attribute>
 			</xpath>
 		</field>
 	</record>

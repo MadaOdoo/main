@@ -7,12 +7,10 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='country_code']" position='after'>
                 <field name="apply_voucher" invisible="1"/>
-                <field name="is_vale" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
+                <field name="is_vale" invisible="not apply_voucher"/>
                 <field name="partner"
-                    attrs="{
-                        'invisible':['|', ('is_vale','=', False), ('apply_voucher','=',False)],
-                        'required':[('is_vale','=', True)]
-                    }" 
+                    invisible="not is_vale or not apply_voucher"
+                    required="is_vale"
                 />
             </xpath>
         </field>

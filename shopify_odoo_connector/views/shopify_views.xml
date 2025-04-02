@@ -13,7 +13,7 @@
                 <field name="state"/>
                 <button type="object" name="sync_shopify_all"
                         class="oe_highlight" string="Sync All"
-                        attrs="{'invisible': [('state', '=', 'new')]}"/>
+                        invisible="state == 'new'"/>
             </tree>
         </field>
     </record>
@@ -26,7 +26,7 @@
                 <header>
                     <button type="object" name="sync_shopify"
                             class="oe_highlight" string="Connect"
-                            attrs="{'invisible': [('state', '=', 'sync')]}"/>
+                            invisible="state == 'sync'"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -262,7 +262,7 @@
                                     <button type="object"
                                             name="sync_shopify_all"
                                             class="oe_highlight"
-                                            attrs="{'invisible': [('state', '=', 'new')]}"
+                                            invisible="state == 'new'"
                                             style="width: 70px; height: 30px; border-radius: 5px; background-color: #71639e; color: white;">
                                         Sync All
                                     </button>

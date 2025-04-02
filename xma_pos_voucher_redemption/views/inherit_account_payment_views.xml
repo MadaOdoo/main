@@ -8,11 +8,9 @@
             <xpath expr="//field[@name='destination_journal_id']" position='after'>
                 <field name="apply_voucher" invisible="1"/>
                 <field name="state_pago_vale" 
-                    attrs="{
-                        'invisible':['|', ('control_vales_id','=', False), ('apply_voucher','=',False)]
-                    }" 
+                    invisible="not control_vales_id or not apply_voucher"
                 />
-                <field name="state_vale" attrs="{'invisible':[('apply_voucher','=',False)]}" />
+                <field name="state_vale" invisible="not apply_voucher" />
                 <field name="control_vales_id" invisible="1"/>
                 <field name="pos_vale_order_id" invisible="1"/>
             </xpath>

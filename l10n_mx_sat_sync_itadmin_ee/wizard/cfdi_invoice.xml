@@ -11,7 +11,7 @@
                 		<field name="supplier_journal_id" context="{'default_type': 'purchase'}" required="not context.get('create_so_po')" invisible="context.get('create_so_po')" domain="[('company_id','=',company_id),('type','=','purchase')]"/>
                 		<field name="credit_journal_id" context="{'default_type': 'sale'}" required="not context.get('create_so_po')" invisible="context.get('create_so_po')" domain="[('company_id','=',company_id),('type','=','sale')]"/>
                 		<field name="credit_supplier_journal_id" context="{'default_type': 'purchase'}" required="not context.get('create_so_po')" invisible="context.get('create_so_po')" domain="[('company_id','=',company_id),('type','=','purchase')]"/>
-                		<field name="product_id" attrs="{'invisible':[('si_producto_no_tiene_codigo', '=', 'Crear automatico')], 'required':[('si_producto_no_tiene_codigo', '=', 'Buscar manual')]}"/>
+                        <field name="product_id" invisible="si_producto_no_tiene_codigo == 'Crear automatico'" required="si_producto_no_tiene_codigo == 'Buscar manual'"/>
                 		<field name="si_producto_no_tiene_codigo" invisible="1"/>
                 		<field name="company_id" invisible="1"/>
                 	</group>

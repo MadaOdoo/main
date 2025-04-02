@@ -8,10 +8,10 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">
                     <field name="apply_voucher" invisible="1"/>
-                    <field name="pos_order_ids" widget="many2many_tags" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
-                    <field name="folio_vale" readonly="1" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
-                    <field name="distribuidora_id" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
-                    <field name="sent" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
+                    <field name="pos_order_ids" widget="many2many_tags" invisible="not apply_voucher"/>
+                    <field name="folio_vale" readonly="1" invisible="not apply_voucher"/>
+                    <field name="distribuidora_id" invisible="not apply_voucher"/>
+                    <field name="sent" invisible="not apply_voucher"/>
                 </xpath>
             </field>
         </record>

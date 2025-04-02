@@ -1,4 +1,5 @@
-<openerp>
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
 	<data> 
 		<!--supplier/customer payment-->
     	<record model="ir.ui.view" id="account_payment_form_inherit_imp">
@@ -8,17 +9,17 @@
             <field name="arch" type="xml">
 				 <xpath expr="//group" position="after">
 					<group>
-						<field name="skip_reconcile" attrs="{'readonly':[('state', '!=', 'draft')],'invisible':[('invoice_lines', '=', False)]}"/> 
-						<field name="is_all_reconcile" attrs="{'invisible':[('skip_reconcile', '=', False)]}" readonly="1"/> 
+						<field name="skip_reconcile" readonly="state != 'draft'" invisible="not invoice_lines"/> 
+						<field name="is_all_reconcile" invisible="skip_reconcile" readonly="1"/> 
 					</group>
 					<notebook > 
-						<page string="Líneas de factura" attrs="{'invisible':[('is_internal_transfer', '=', True)]}">
+						<page string="Líneas de factura" invisible="is_internal_transfer">
 							<group>
-                                <button name="update_invoice_lines" string="Actualizar facturas" type="object" class="oe_link" attrs="{'invisible':[('state', '=', 'posted')]}"/> 
-                                <button name="clean_lines_invoices" string="Remove lines" type="object" class="oe_link" attrs="{'invisible':[('state', '=', 'posted')]}" invisible="1"/> 
+                                <button name="update_invoice_lines" string="Actualizar facturas" type="object" class="oe_link" invisible="state == 'posted'"/> 
+                                <button name="clean_lines_invoices" string="Remove lines" type="object" class="oe_link" invisible="state == 'posted'" invisible="1"/> 
                             </group>
 							<field name="multipagos" invisible="1"/> 
-							<field name="invoice_lines" attrs="{'readonly':[('state', '!=', 'draft')]}">  <!-- attrs="{'readonly':[('state', '!=', 'draft')]}" -->
+							<field name="invoice_lines" readonly="state != 'draft'">  <!-- attrs="{'readonly':[('state', '!=', 'draft')]}" -->
 								<tree create="false" editable="bottom">	
 									<field name="check_line" nolabel="1" invisible="1"/>	
 									<field name="invoice_id"/>
@@ -88,4 +89,4 @@
         </record>
 
 	</data>
-</openerp>
+</odoo>

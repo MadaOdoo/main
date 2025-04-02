@@ -9,7 +9,7 @@
                 <xpath expr="//div[1]" position="after">
                     <field name="apply_global_invoice" invisible="1"/>
                     <div class="row mt16 o_settings_container" invisible="context.get('pos_config_create_mode', False)">
-                        <div attrs="{'invisible':[('apply_global_invoice','=',False)]}">
+                        <div invisible="apply_global_invoice == False">
                             <div class="col-12 col-lg-6 o_setting_box">
                                 <div class="o_setting_left_pane">
                                     <field name="create_global_invoice"/>
@@ -19,22 +19,23 @@
                                     <div class="text-muted" id="invoice_journal">
                                     Puede crear factura global
                                     </div>
-                                    <div class="content-group mt16" attrs="{'invisible': [('create_global_invoice', '=', False)]}">
+                                    <div class="content-group mt16" invisible="create_global_invoice == False">
                                         <div class="row mt16">
                                             <label string="General public" for="global_customer_id" class="col-lg-3 o_light_label"/>
-                                            <field name="global_customer_id" attrs="{'required': [('create_global_invoice', '=', True)]}"/>
+                                            <field name="global_customer_id" required="create_global_invoice == True"/>
                                         </div>
                                         <div class="row mt16">
                                             <label string="Method" for="global_invoice_method" class="col-lg-3 o_light_label"/>
-                                            <field name="global_invoice_method" attrs="{'required': [('create_global_invoice', '=', True)]}"/>
+                                                <field name="global_invoice_method" required="create_global_invoice == True"/>
                                         </div>
                                         <div class="row mt16">
                                             <label string="Diario" for="global_journal_id" class="col-lg-3 o_light_label"/>
-                                            <field name="global_journal_id" attrs="{'required': [('create_global_invoice', '=', True)]}"/>
+                                            <field name="global_journal_id" required="create_global_invoice == True"/>
                                         </div>
                                         <div class="row mt16">
                                             <label string="Periodicidad" for="global_periodicity" class="col-lg-3 o_light_label"/>
-                                            <field name="global_periodicity" attrs="{'required': [('create_global_invoice', '=', True)]}"/>
+                                            <field name="global_periodicity" required="create_global_invoice == True"/>
+                                            <field name="global_periodicity" 
                                         </div>
                                     </div>
                                 </div>

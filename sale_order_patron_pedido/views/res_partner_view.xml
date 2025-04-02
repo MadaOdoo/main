@@ -15,37 +15,27 @@
                             </group>
                         </group>
                         <field name='patron_pedido_line_ids'>
-                            
                             <tree editable="bottom">
-                            
                                 <field name="sequence" widget="handle"/>
                                 <field name="name_corrida" required="1"/>
                                 
                                 <field name="talla_21"/>
-                                <field name="talla_21_5"
-                                       attrs="{'column_invisible':[('parent.show_tallas_medias','!=',True)]}"/>
+                                <field name="talla_21_5" column_invisible="not parent.show_tallas_medias"/>
                                 <field name="talla_22"/>
-                                <field name="talla_22_5"
-                                       attrs="{'column_invisible':[('parent.show_tallas_medias','!=',True)]}"/>
+                                <field name="talla_22_5" column_invisible="not parent.show_tallas_medias"/>
                                 <field name="talla_23"/>
-                                <field name="talla_23_5"
-                                       attrs="{'column_invisible':[('parent.show_tallas_medias','!=',True)]}"/>
+                                <field name="talla_23_5" column_invisible="not parent.show_tallas_medias"/>
                                 <field name="talla_24"/>
-                                <field name="talla_24_5"
-                                       attrs="{'column_invisible':[('parent.show_tallas_medias','!=',True)]}"/>
+                                <field name="talla_24_5" column_invisible="not parent.show_tallas_medias"/>
                                 <field name="talla_25"/>
-                                <field name="talla_25_5"
-                                       attrs="{'column_invisible':[('parent.show_tallas_medias','!=',True)]}"/>
+                                <field name="talla_25_5" column_invisible="not parent.show_tallas_medias"/>
                                 <field name="talla_26"/>
-                                <field name="talla_26_5"
-                                       attrs="{'column_invisible':[('parent.show_tallas_medias','!=',True)]}"/>
+                                <field name="talla_26_5" column_invisible="not parent.show_tallas_medias"/>
                                 <field name="talla_27"/>
-                                <field name="talla_27_5"
-                                       attrs="{'column_invisible':[('parent.show_tallas_medias','!=',True)]}"/>
+                                <field name="talla_27_5" column_invisible="not parent.show_tallas_medias"/>
                                 <field name="talla_28"/>
                                 
                                 <field name="total_pares"/>
-
                             </tree>
                         </field>
                     </page>

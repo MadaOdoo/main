@@ -8,7 +8,7 @@
       <field name="arch" type="xml">
         <form string="Mara Product Import">
           <header>
-            <button name="product_import" string="Importar Productos" type="object" class="btn-primary" attrs="{'invisible': ['|',('import_log', '!=', False),('file', '=', False)]}"/>
+            <button name="product_import" string="Importar Productos" type="object" class="btn-primary" invisible="['|',('import_log', '!=', False),('file', '=', False)]"/>
           </header>
           <group>
             <field name="file" filename="filename"/>

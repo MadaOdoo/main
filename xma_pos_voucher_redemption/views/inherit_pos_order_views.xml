@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='extra']" position='after'>
-                <page name="inf_vale" string="Informacion de vale" attrs="{'invisible':[('apply_voucher','=',False)]}">
+                <page name="inf_vale" string="Informacion de vale" invisible="not apply_voucher">
                     <group>
                         <group string="Informacion de vale">
                             <field name="apply_voucher" invisible="1"/>

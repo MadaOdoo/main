@@ -7,7 +7,7 @@
             <form string="Sync orders">
                 <group>
                     <field name="import_orders"/>
-                    <field name="type_order" attrs="{'invisible':[('import_orders', '!=', 'odoo')]}"/>
+                    <field name="type_order" invisible="import_orders != 'odoo'"/>
                     <field name="draft" invisible="1"/>
                     <field name="shopify_instance_id"/>
                 </group>

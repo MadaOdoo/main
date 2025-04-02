@@ -15,7 +15,7 @@
                     <field name="client_name" readonly="1"/>
                     <field name="amount" readonly="1"/>
                     <field name="reconcilled" invisible="1"/>
-                    <button name="action_reconcile" attrs="{'invisible' : [('reconcilled','=', True)]}" string="Conciliar" type="object" class="oe_highlight"/> 
+                    <button name="action_reconcile" invisible="reconcilled == True" string="Conciliar" type="object" class="oe_highlight"/> 
                </tree>
             </field>
         </record>
@@ -41,7 +41,7 @@
                     <field name="client_name" readonly="1"/>
                     <field name="amount" readonly="1"/>
                     <field name="reconcilled" invisible="1"/>
-                    <button name="action_reconcile" attrs="{'invisible' : [('reconcilled','=', True)]}" string="Conciliar" type="object" class="oe_highlight"/> 
+                    <button name="action_reconcile" invisible="reconcilled == True" string="Conciliar" type="object" class="oe_highlight"/> 
                </tree>
             </field>
         </record>

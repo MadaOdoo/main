@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="apply_global_invoice" invisible="1"/>
-                <field name="to_invoice" readonly="1" attrs="{'invisible':[('apply_global_invoice','=',False)]}"/>
+                <field name="to_invoice" readonly="1" invisible="apply_global_invoice == False"/>
             </xpath>
         </field>
     </record>
@@ -19,7 +19,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='date_order']" position="after">
                 <field name="apply_global_invoice" invisible="1"/>
-                <field name="refund_field" attrs="{'invisible':[('apply_global_invoice','=',False)]}"/>
+                <field name="refund_field" invisible="apply_global_invoice == False"/>
             </xpath>
         </field>
     </record>

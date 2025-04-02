@@ -46,35 +46,35 @@
                         <field name="product_uom_qty" readonly="1"/>
                         <field name="product_uom" readonly="1"/>
 
-                        <field name="talla_21" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_21" column_invisible="not parent.show_tallas_enteras" readonly="not has_uom_par"/>
 
-                        <field name="talla_21_5" attrs="{'column_invisible':['|',('parent.has_talla_21_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_21_5" column_invisible="not parent.has_talla_21_5 or not parent.show_tallas_enteras" readonly="not has_uom_par"/>
                         
-                        <field name="talla_22" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_22" column_invisible="not parent.show_tallas_enteras" readonly="not has_uom_par"/>
 
-                        <field name="talla_22_5" attrs="{'column_invisible':['|',('parent.has_talla_22_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_22_5" column_invisible="not parent.has_talla_22_5 or not parent.show_tallas_enteras" readonly="not has_uom_par"/>
                         
-                        <field name="talla_23" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_23" column_invisible="not parent.show_tallas_enteras" readonly="not has_uom_par"/>
 
-                        <field name="talla_23_5" attrs="{'column_invisible':['|',('parent.has_talla_23_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_23_5" column_invisible="not parent.has_talla_23_5 or not parent.show_tallas_enteras" readonly="not has_uom_par"/>
                         
-                        <field name="talla_24" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_24" column_invisible="not parent.show_tallas_enteras" readonly="not has_uom_par"/>
 
-                        <field name="talla_24_5" attrs="{'column_invisible':['|',('parent.has_talla_24_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_24_5" column_invisible="not parent.has_talla_24_5 or not parent.show_tallas_enteras" readonly="not has_uom_par"/>
                         
-                        <field name="talla_25" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_25" column_invisible="not parent.show_tallas_enteras" readonly="not has_uom_par"/>
 
-                        <field name="talla_25_5" attrs="{'column_invisible':['|',('parent.has_talla_25_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_25_5" column_invisible="not parent.has_talla_25_5 or not parent.show_tallas_enteras" readonly="not has_uom_par"/>
                         
-                        <field name="talla_26" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_26" column_invisible="not parent.show_tallas_enteras" readonly="not has_uom_par"/>
 
-                        <field name="talla_26_5" attrs="{'column_invisible':['|',('parent.has_talla_26_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_26_5" column_invisible="not parent.has_talla_26_5 or not parent.show_tallas_enteras" readonly="not has_uom_par"/>
                         
-                        <field name="talla_27" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_27" column_invisible="not parent.show_tallas_enteras" readonly="not has_uom_par"/>
 
-                        <field name="talla_27_5" attrs="{'column_invisible':['|',('parent.has_talla_27_5','!=',True),('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_27_5" column_invisible="not parent.has_talla_27_5 or not parent.show_tallas_enteras" readonly="not has_uom_par"/>
                         
-                        <field name="talla_28" attrs="{'column_invisible':[('parent.show_tallas_enteras','!=',True)],'readonly':[('has_uom_par','!=',True)]}"/>
+                        <field name="talla_28" column_invisible="not parent.show_tallas_enteras" readonly="not has_uom_par"/>
 
 
                         <field name="price_unit" readonly="1"/>

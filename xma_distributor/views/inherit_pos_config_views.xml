@@ -16,12 +16,12 @@
                 </xpath>
            
                 <xpath expr="//field[@name='global_invoice_method']" position="attributes">
-                   <attribute name="attrs">{'required': [('create_global_invoice', '=', False)]}</attribute>
+                   <attribute name="required">not create_global_invoice</attribute>
                    <attribute name="invisible">1</attribute>
                 </xpath>
 
                  <xpath expr="//field[@name='global_customer_id']" position="attributes">
-                   <attribute name="attrs">{'required': [('create_global_invoice', '=', False)]}</attribute>
+                   <attribute name="required">not create_global_invoice</attribute>
                    <attribute name="invisible">1</attribute>
                 </xpath>
             </field>

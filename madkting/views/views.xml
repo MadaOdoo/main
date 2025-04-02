@@ -115,18 +115,18 @@
               <group>
                 <group>                  
                   <field name="invoice_webhook_enabled"/>
-                  <field name="invoice_doc_type" attrs="{'required' : [('invoice_webhook_enabled', '=', True)], 'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
-                  <field name="invoice_prefix_file" attrs="{'required' : [('invoice_webhook_enabled', '=', True)], 'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
-                  <field name="invoice_add_pdf_file" attrs="{'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
-                  <field name="invoice_prefix_pdf_file" attrs="{'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
-                  <field name="invoice_save_pdf_attachment" attrs="{'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
+                  <field name="invoice_doc_type" required="invoice_webhook_enabled" invisible="not invoice_webhook_enabled"/>
+                  <field name="invoice_prefix_file" required="invoice_webhook_enabled" invisible="not invoice_webhook_enabled"/>
+                  <field name="invoice_add_pdf_file" invisible="not invoice_webhook_enabled"/>
+                  <field name="invoice_prefix_pdf_file" invisible="not invoice_webhook_enabled"/>
+                  <field name="invoice_save_pdf_attachment" invisible="not invoice_webhook_enabled"/>
                 </group>
                 <group>
-                  <field name="invoice_country" attrs="{'required' : [('invoice_webhook_enabled', '=', True)], 'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
-                  <field name="invoice_currency" attrs="{'required' : [('invoice_webhook_enabled', '=', True)], 'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
-                  <field name="invoice_separator" attrs="{'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
-                  <field name="invoice_serie" attrs="{'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
-                  <field name="invoice_partner_vat" attrs="{'invisible' : [('invoice_webhook_enabled', '=', False)]}"/>
+                  <field name="invoice_country" required="invoice_webhook_enabled" invisible="not invoice_webhook_enabled"/>
+                  <field name="invoice_currency" required="invoice_webhook_enabled" invisible="not invoice_webhook_enabled"/>
+                  <field name="invoice_separator" invisible="not invoice_webhook_enabled"/>
+                  <field name="invoice_serie" invisible="not invoice_webhook_enabled"/>
+                  <field name="invoice_partner_vat" invisible="not invoice_webhook_enabled"/>
                 </group>
               </group>
             </page>
@@ -134,11 +134,11 @@
               <group>
                 <group>                  
                   <field name="dropship_enabled"/>
-                  <field name="dropship_picking_type" attrs="{'required' : [('dropship_enabled', '=', True)], 'invisible' : [('dropship_enabled', '=', False)]}"/>
-                  <field name="dropship_webhook_enabled" attrs="{'required' : [('dropship_enabled', '=', True)], 'invisible' : [('dropship_enabled', '=', False)]}"/>
-                  <field name="dropship_default_route_id" attrs="{'required' : [('dropship_enabled', '=', True)], 'invisible' : [('dropship_enabled', '=', False)]}"/>
-                  <field name="dropship_route_id" attrs="{'required' : [('dropship_enabled', '=', True)], 'invisible' : [('dropship_enabled', '=', False)]}"/>
-                  <field name="dropship_mto_route_id" attrs="{'required' : [('dropship_enabled', '=', True)], 'invisible' : [('dropship_enabled', '=', False)]}"/>
+                  <field name="dropship_picking_type" required="dropship_enabled" invisible="not dropship_enabled"/>
+                  <field name="dropship_webhook_enabled" required="dropship_enabled" invisible="not dropship_enabled"/>
+                  <field name="dropship_default_route_id" required="dropship_enabled" invisible="not dropship_enabled"/>
+                  <field name="dropship_route_id" required="dropship_enabled" invisible="not dropship_enabled"/>
+                  <field name="dropship_mto_route_id" required="dropship_enabled" invisible="not dropship_enabled"/>
                 </group>
                 <group>
                   
@@ -285,7 +285,7 @@
             <group>
               <field name="model"/>          
               <field name="fieldtype"/>    
-              <field name="model_relation" attrs="{'invisible' : [('fieldtype', '!=', 'relation')]}"/>         
+              <field name="model_relation" invisible="fieldtype != 'relation'"/>         
             </group>
           </group>
           <notebook>
@@ -473,29 +473,27 @@
             <group>
               <group>
                 <separator string="Order Info"/>
-                <field name="channel" attrs="{'readonly':[(1,'=',1)]}"/>
-                <field name="fulfillment" attrs="{'readonly':[(1,'=',1)]}"/>
-                <field name="channel_id" attrs="{'readonly':[(1,'=',1)]}" groups="madkting.madkting_api_group"/>
-                <field name="yuju_shop_id" attrs="{'readonly':[(1,'=',1)]}" groups="madkting.madkting_api_group"/>
+                <field name="channel" readonly="1"/>
+                <field name="fulfillment" readonly="1"/>
+                <field name="channel_id" readonly="1" groups="madkting.madkting_api_group"/>
+                <field name="yuju_shop_id" readonly="1" groups="madkting.madkting_api_group"/>
                 <field name="channel_order_id" groups="madkting.madkting_api_group"/> 
                 <field name="yuju_pack_id" />
                 <field name="channel_order_reference" />                
-                <field name="yuju_seller_id" attrs="{'readonly':[(1,'=',1)]}"/>
-                <field name="yuju_update_date_order" attrs="{'readonly':[(1,'=',1)]}"/>
-                <field name="yuju_payment_date_order" attrs="{'readonly':[(1,'=',1)]}"/>
-                
-                               
+                <field name="yuju_seller_id" readonly="1"/>
+                <field name="yuju_update_date_order" readonly="1"/>
+                <field name="yuju_payment_date_order" readonly="1"/>
               </group>
               <group>
                 <separator string="Others"/>
-                <field name="yuju_marketplace_fee" attrs="{'readonly':[(1,'=',1)]}"/>
-                <field name="yuju_carrier_tracking_ref" attrs="{'readonly':[(1,'=',1)]}"/>
-                <field name="yuju_seller_shipping_cost" attrs="{'readonly':[(1,'=',1)]}"/>
-                <field name="yuju_shipping_id" attrs="{'readonly':[(1,'=',1)]}" groups="madkting.madkting_api_group"/>
-                <field name="payment_id" attrs="{'readonly':[(1,'=',1)]}" groups="madkting.madkting_api_group"/>
-                <field name="yuju_url_label" attrs="{'invisible': [(1, '=', 1)]}"/>
+                <field name="yuju_marketplace_fee" readonly="1"/>
+                <field name="yuju_carrier_tracking_ref" readonly="1"/>
+                <field name="yuju_seller_shipping_cost" readonly="1"/>
+                <field name="yuju_shipping_id" readonly="1" groups="madkting.madkting_api_group"/>
+                <field name="payment_id" readonly="1" groups="madkting.madkting_api_group"/>
+                <field name="yuju_url_label" invisible="1"/>
                 <separator string="Acciones"/>
-                <button name="download_label" string="Descargar Guia" type="object" class="oe_highlight" attrs="{'invisible': [('yuju_url_label', '=', '')]}"/>
+                <button name="download_label" string="Descargar Guia" type="object" class="oe_highlight" invisible="yuju_url_label == ''"/>
                 <button name="test_print_invoice" string="Generar Invoice PDF" type="object" class="oe_highlight" />
               </group>
             </group>

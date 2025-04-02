@@ -8,8 +8,8 @@
 
             <xpath expr="//field[@name='move_id']" position="before">
                 <field name="apply_global_invoice" invisible="1"/>
-                <field name="global_invoice_id" readonly="1" groups="account.group_account_user" attrs="{'invisible':[('apply_global_invoice','=',False)]}"/>
-                <field name="global_invoice_payment_move_id" readonly="1" groups="account.group_account_user" attrs="{'invisible':[('apply_global_invoice','=',False)]}"/>
+                <field name="global_invoice_id" readonly="1" groups="account.group_account_user" invisible="apply_global_invoice == False"/>
+                <field name="global_invoice_payment_move_id" readonly="1" groups="account.group_account_user" invisible="apply_global_invoice == False"/>
             </xpath>
 
         </field>
@@ -23,7 +23,7 @@
 
             <xpath expr="//field[@name='state']" position="before">
                 <field name="apply_global_invoice" invisible="1"/>
-                <field name="has_global_invoice" attrs="{'invisible':[('apply_global_invoice','=',False)]}"/>
+                <field name="has_global_invoice" invisible="apply_global_invoice == False"/>
             </xpath>
 
         </field>

@@ -9,7 +9,7 @@
             <xpath expr="//group[@name='auth']" position="inside">
                 <group name="auth_connection_mada" string="Conexión MADA Api">
                     <field name="apply_voucher" invisible="1"/>
-                    <field name="password_api" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
+                    <field name="password_api" invisible="not apply_voucher"/>
                 </group>
             </xpath>    
         </field>

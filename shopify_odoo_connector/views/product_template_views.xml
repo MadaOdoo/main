@@ -12,7 +12,7 @@
                 <header>
                     <button type="object" name="sync_shopify_product"
                             class="oe_highlight" string="Sync "
-                            attrs="{'invisible': [('shopify_instance_id', '=', False)]}"/>
+                            invisible="shopify_instance_id == False"/>
                 </header>
             </xpath>
             <xpath expr="//page[@name='sales']" position="after">

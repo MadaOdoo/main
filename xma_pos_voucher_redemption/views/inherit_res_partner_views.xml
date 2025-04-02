@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='vat']" position='after'>
                 <field name="apply_voucher" invisible="1"/>
-                <field name="curp" attrs="{'invisible':[('apply_voucher','=',False)]}"/>
+                <field name="curp" invisible="not apply_voucher"/>
             </xpath>
         </field>
     </record>
