@@ -3,7 +3,7 @@
     <data>
 
         <!--<template id="report_invoice_document" inherit_id="account.report_invoice_document">-->
-        <template id="report_invoice_document_mx" inherit_id="l10n_mx_edi.report_invoice_document_mx">
+        <template id="report_invoice_document_mx" inherit_id="account.report_invoice_document">
             
             <xpath expr="//table[@name='invoice_line_table']/thead" position="replace">
 

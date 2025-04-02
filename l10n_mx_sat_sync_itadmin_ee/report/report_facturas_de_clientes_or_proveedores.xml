@@ -83,40 +83,40 @@
                     </div>
                     -->
                     <t t-if="xml.Receptor.get('UsoCFDI', False)">
-	                    <t t-set="usage" t-value="xml.Receptor.get('UsoCFDI')"/>
-	                    <div name="usage" t-att-class="o_grid_layout">
-	                        <strong>Uso:</strong>
-	                        <p><span t-esc="usage"/> <!-- - <span t-field="o.l10n_mx_edi_usage"/> --></p>
-	                    </div>
-	                </t>
-	                <!-- <t t-if="o.l10n_mx_edi_payment_method_id">
-	                    <div t-att-class="o_grid_layout">
-	                        <strong>Payment Way:</strong>
-	                        <p t-esc="' - '.join([o.l10n_mx_edi_payment_method_id.code, o.l10n_mx_edi_payment_method_id.name])"/>
-	                    </div>
-	                </t> -->
-	                <div t-att-class="o_grid_layout">
-	                    <strong>Método de pago:</strong>
-	                    <p t-esc="xml.get('formaDePago', xml.get('MetodoPago'))"/>
-	                </div>
-	                <div t-att-class="o_grid_layout">
-	                    <strong>Forma de pago:</strong>
-	                    <p t-esc="xml.get('formaDePago', xml.get('FormaPago'))"/>
-	                </div>
-			<div t-att-class="o_grid_layout">
-			    <strong>Tipo de comprobante:</strong>
-			    <p t-esc="xml.get('TipoDeComprobante')"/>
-			</div>
-			<div t-att-class="o_grid_layout">
-			    <strong>Moneda:</strong>
-			    <p t-esc="xml.get('Moneda')"/>
-			</div>
+                        <t t-set="usage" t-value="xml.Receptor.get('UsoCFDI')"/>
+                        <div name="usage" t-att-class="o_grid_layout">
+                            <strong>Uso:</strong>
+                            <p><span t-esc="usage"/></p>
+                        </div>
+                    </t>
+                    <!-- <t t-if="o.l10n_mx_edi_payment_method_id">
+                        <div t-att-class="o_grid_layout">
+                            <strong>Payment Way:</strong>
+                            <p t-esc="' - '.join([o.l10n_mx_edi_payment_method_id.code, o.l10n_mx_edi_payment_method_id.name])"/>
+                        </div>
+                    </t> -->
+                    <div t-att-class="o_grid_layout">
+                        <strong>Método de pago:</strong>
+                        <p t-esc="xml.get('formaDePago', xml.get('MetodoPago'))"/>
+                    </div>
+                    <div t-att-class="o_grid_layout">
+                        <strong>Forma de pago:</strong>
+                        <p t-esc="xml.get('formaDePago', xml.get('FormaPago'))"/>
+                    </div>
+                    <div t-att-class="o_grid_layout">
+                        <strong>Tipo de comprobante:</strong>
+                        <p t-esc="xml.get('TipoDeComprobante')"/>
+                    </div>
+                    <div t-att-class="o_grid_layout">
+                        <strong>Moneda:</strong>
+                        <p t-esc="xml.get('Moneda')"/>
+                    </div>
 
 
-	                <div t-att-class="o_grid_layout" t-if="xml.get('NumCtaPago')">
-	                    <strong>Bank Account:</strong>
-	                    <p t-esc="xml.get('NumCtaPago')"/>
-	                </div>
+                    <div t-att-class="o_grid_layout" t-if="xml.get('NumCtaPago')">
+                        <strong>Bank Account:</strong>
+                        <p t-esc="xml.get('NumCtaPago')"/>
+                    </div>
                 </div>
 
                 <!-- <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/> -->

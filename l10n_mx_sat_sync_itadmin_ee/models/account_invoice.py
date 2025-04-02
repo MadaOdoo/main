@@ -13,8 +13,13 @@ class AccountInvoice(models.Model):
     @api.depends('edi_document_ids')
     def _compute_cfdi_uuid(self):
         for inv in self:
-            attachment_id = inv._get_l10n_mx_edi_signed_edi_document()
-            if not attachment_id:
+            # Buscar el documento EDI firmado
+            signed_edi = inv.edi_document_ids.filtered(lambda d: d.edi_format_id.code == 'cfdi_3_3' and d.state == 'sent')
+            if signed_edi and signed_edi.attachment_id:
+                cfdi_infos = inv._l10n_mx_edi_decode_cfdi()
+                inv.l10n_mx_edi_cfdi_uuid_cusom = cfdi_infos.get('UUID')
+            else:
+                # Buscar en los attachments existentes
                 attachments = inv.attachment_ids
                 results = []
                 results += [rec for rec in attachments if rec.name.endswith('.xml')]
@@ -34,13 +39,6 @@ class AccountInvoice(models.Model):
                     if not inv.edi_document_ids:
                         vals=({'state':'sent', 'attachment_id':attachment.id, 'move_id':inv.id, 'edi_format_id': inv.env.ref('l10n_mx_edi.edi_cfdi_3_3').id })
                         inv.env['account.edi.document'].create(vals)
-
-            else:
-                cfdi_infos = inv._l10n_mx_edi_decode_cfdi()
-                inv.l10n_mx_edi_cfdi_uuid_cusom = cfdi_infos.get('UUID')
-                for edi in inv.edi_document_ids:
-                    if edi.state == 'to_send':
-                        edi.state = 'sent'
 
     def run_cfdi_uuid(self):
         for inv in self:
