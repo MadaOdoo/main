@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="voucher_report_view_tree" model="ir.ui.view">
-            <field name="name">voucher.report.view.tree</field>
+        <record id="voucher_report_view_list" model="ir.ui.view">
+            <field name="name">voucher.report.view.list</field>
             <field name="model">voucher.report</field>
             <field name="arch" type="xml">
-                <tree string="Reporte de Vales" editable="bottom">
+                <list string="Reporte de Vales" editable="bottom">
                   <field name="is_vale" invisible="1"/>
                   <field name="distribuidora_id"/>
                   <field name="num_vale"/>
@@ -15,7 +15,7 @@
                   <field name="pago_quincenal" sum="total_quincenal"/>
                   <field name="total_pago" sum="total_pagos"/>
                   <field name="fecha"/>
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -40,8 +40,8 @@
           <field name="name">Reporte de Vales</field>
           <field name="type">ir.actions.act_window</field>
           <field name="res_model">voucher.report</field>
-          <field name="view_mode">tree</field>
-          <field name="view_id" ref="voucher_report_view_tree"/>
+          <field name="view_mode">list</field>
+          <field name="view_id" ref="voucher_report_view_list"/>
           <field name="search_view_id" ref="view_voucher_report_search"/>
           <!-- <field name="target">main</field>  -->
         </record>

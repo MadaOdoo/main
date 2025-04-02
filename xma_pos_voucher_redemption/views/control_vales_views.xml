@@ -41,7 +41,7 @@
                                     ('date','&gt;=',start_date),
                                     ('date','&lt;=',end_date)
                                     ]">
-                                    <tree string="Payments" decoration-muted="state == 'draft'" create="false">
+                                    string="Payments" decoration-muted="state == 'draft'" create="false">
                                         <field name="name"/>
                                         <field name="date"/>
                                         <field name="partner_id"/>
@@ -69,7 +69,7 @@
             <field name="name">control.vales.view.form</field>
             <field name="model">control.vales</field>
             <field name="arch" type="xml">
-                <tree string="Control de vales">
+                string="Control de vales">
                     <field name="name"/>
                     <field name="proveedor"/>
                     <field name="amount_total_vales"/>

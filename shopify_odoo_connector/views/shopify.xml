@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
-        <record model="ir.ui.view" id="tree_view_shopify">
+        <record model="ir.ui.view" id="list_view_shopify">
             <field name="name">Shopify Configuration List</field>
             <field name="model">shopify.configuration</field>
             <field name="arch" type="xml">
-                <tree>
+                <list>
                     <field name="name"/>
                     <field name="shop_name"/>
                     <field name="version"/>
@@ -14,7 +14,7 @@
                     <button type="object" name="sync_shopify_all"
                             class="oe_highlight" string="Sync All"
                             invisible="state == 'new'"/>
-                </tree>
+                </list>
             </field>
         </record>
         <record model="ir.ui.view" id="form_view_shopify">
@@ -216,7 +216,7 @@
                 id="action_shopify_configuration">
             <field name="name">Shopify</field>
             <field name="res_model">shopify.configuration</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,list,form</field>
         </record>
         <record model="ir.actions.client"
                 id="action_open_shopify_instance_dashboard_main">

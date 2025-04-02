@@ -19,11 +19,10 @@
                                 <button name="clean_lines_invoices" string="Remove lines" type="object" class="oe_link" invisible="state == 'posted'" invisible="1"/> 
                             </group>
 							<field name="multipagos" invisible="1"/> 
-							<field name="invoice_lines" readonly="state != 'draft'">  <!-- attrs="{'readonly':[('state', '!=', 'draft')]}" -->
-								<tree create="false" editable="bottom">	
+							<field name="invoice_lines" readonly="state != 'draft'">
+								<list create="false" editable="bottom">	
 									<field name="check_line" nolabel="1" invisible="1"/>	
 									<field name="invoice_id"/>
-									<!-- <field name="account_id" invisible="1"/> -->
 									<field name="invoice" invisible="1"/> 
 									<field name="invoice_line_id" invisible="0"/>
 									<field name="date" readonly="True" optional="show"/> 
@@ -32,7 +31,7 @@
 									<field name="open_amount" readonly="True" sum="Due Amount"/> 
 									<field name="allocation" sum="Allocated Amount"/>
 									<field name="account_move_line_id" invisible="1"/>
-								</tree>
+								</list>
 								<form string="Invoice" create="false">
 									<group>
 										<field name="invoice_id"/>
@@ -43,11 +42,9 @@
 										<field name="total_amount" readonly="True"/> 
 										<field name="open_amount" readonly="True"/> 
 										<field name="allocation" />
-
 									</group>
 								</form>
 							</field>
-							 	
 						</page> 
 					</notebook> 
 				</xpath> 
@@ -71,7 +68,7 @@
                 <xpath expr="//field[@name='partner_bank_id']" position="after">
                 	<field name="pago"/>
                 </xpath>
-                <xpath expr="//field[@name='line_ids']/tree/field[@name='name']" position="after">					
+                <xpath expr="//field[@name='line_ids']/list/field[@name='name']" position="after">					
 				 <field name="invoice_id"/>										
 				</xpath>
             </field>

@@ -7,35 +7,22 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="priority">10</field>
         <field name="arch" type="xml">
-            <xpath expr="//header" position="inside">
-                <button type="object" name="sync_shopify_order"
-                        class="oe_highlight" string="Sync"
-                        invisible="shopify_order_id == False"/>
-                <field name="shopify_order_id" invisible="1"/>
-                <field name="domain_bool" invisible="1"/>
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button type="object" name="sync_shopify_order"
+                            class="oe_highlight" string="Sync"
+                            invisible="shopify_instance_id == False"/>
+                </header>
             </xpath>
-            <xpath expr="//notebook/page[@name='other_information']"
-                   position="after">
-                <page string="Shopify Info" name="shopify_details">
-                    <group>
-                        <field name="shopify_instance_id"/>
-                    </group>
-                    <group>
-                        <field name="shopify_sync_ids" nolabel="1" readonly="1"
-                               invisible="shopify_order_id == False">
-                            <tree>
-                                <field name="instance_id"/>
-                                <field name="shopify_order_id"/>
-                                <field name="synced_order" optional="hide"/>
-                                <field name="shopify_order_name"/>
-                                <field name="shopify_order_number"/>
-                                <field name="order_status" optional="hide"/>
-                                <field name="last_order_id" optional="hide"/>
-                                <field name="payment_status" optional="hide"/>
-                                <field name="fulfillment_status" optional="hide"/>
-                            </tree>
-                        </field>
-                    </group>
+            <xpath expr="//page[@name='other_info']" position="after">
+                <page string="Shopify" name="shopify">
+                    <field name="shopify_instance_id"/>
+                    <field name="shopify_sync_ids" nolabel="1" readonly="1">
+                        <list>
+                            <field name="instance_id"/>
+                            <field name="shopify_order_id"/>
+                        </list>
+                    </field>
                 </page>
             </xpath>
         </field>
@@ -44,14 +31,14 @@
     <record id="shopify_sale_order_action" model="ir.actions.act_window">
         <field name="name">Shopify Orders</field>
         <field name="res_model">sale.order</field>
-        <field name="domain">[('shopify_sync_ids', '!=', False), ('state', '!=', 'draft')]</field>
-        <field name="view_mode">tree,form</field>
+        <field name="domain">[('shopify_sync_ids', '!=', False)]</field>
+        <field name="view_mode">list,form</field>
         <field name="target">current</field>
         <field name="view_id" ref="sale.view_order_tree"/>
         <field name="context">{'create': False}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_empty_folder">
-                No orders found
+                No Orders found
             </p>
         </field>
     </record>
@@ -60,7 +47,7 @@
         <field name="name">Shopify Draft Orders</field>
         <field name="res_model">sale.order</field>
         <field name="domain">[('shopify_sync_ids', '!=', False), ('state', '=', 'draft')]</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="target">current</field>
         <field name="view_id" ref="sale.view_order_tree"/>
         <field name="context">{'create': False}</field>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 <!--    tree view for shopify.configuration-->
-    <record model="ir.ui.view" id="shopify_configuration_view_tree">
-        <field name="name">shopify.configuration.view.tree</field>
+    <record model="ir.ui.view" id="shopify_configuration_view_list">
+        <field name="name">shopify.configuration.view.list</field>
         <field name="model">shopify.configuration</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
                 <field name="shop_name"/>
                 <field name="version"/>
@@ -14,7 +14,7 @@
                 <button type="object" name="sync_shopify_all"
                         class="oe_highlight" string="Sync All"
                         invisible="state == 'new'"/>
-            </tree>
+            </list>
         </field>
     </record>
 <!--    form view for shopify.configuration-->
@@ -33,39 +33,39 @@
                     <div class="oe_button_box" name="button_box">
                         <button name="shopify_customers" type="object"
                                 class="oe_stat_button" icon="fa-user">
-                            <field name="customer_count" widget="statinfo"
+                            <field name="customer_count" widget="stat_info"
                                    string="Customers"/>
                         </button>
                         <button name="shopify_products" type="object"
                                 class="oe_stat_button" icon="fa-star">
-                            <field name="product_count" widget="statinfo"
+                            <field name="product_count" widget="stat_info"
                                    string="Products"/>
                         </button>
                         <button name="shopify_orders" type="object"
                                 class="oe_stat_button"
                                 icon="fa-pencil-square-o">
-                            <field name="order_count" widget="statinfo"
+                            <field name="order_count" widget="stat_info"
                                    string="Orders"/>
                         </button>
                         <button name="shopify_gift_card" type="object"
                                 class="oe_stat_button"
                                 icon="fa-ticket">
                             <field name="gift_card_count"
-                                   widget="statinfo"
+                                   widget="stat_info"
                                    string="Gift Cards"/>
                         </button>
                         <button name="shopify_collection" type="object"
                                 class="oe_stat_button"
                                 icon="fa-list-alt">
                             <field name="collection_count"
-                                   widget="statinfo"
+                                   widget="stat_info"
                                    string="Collections"/>
                         </button>
                         <button name="shopify_log_message" type="object"
                                 class="oe_stat_button"
                                 icon="fa-pencil-square-o">
                             <field name="log_message_count"
-                                   widget="statinfo"
+                                   widget="stat_info"
                                    string="Logs"/>
                         </button>
                     </div>
@@ -298,7 +298,7 @@
     <record model="ir.actions.act_window" id="shopify_configuration_action">
         <field name="name">Shopify</field>
         <field name="res_model">shopify.configuration</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
     </record>
 <!--    client action for shopify dashboard-->
     <record model="ir.actions.client" id="shopify_configuration_dashboard_action">

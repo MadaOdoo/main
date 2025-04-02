@@ -27,7 +27,7 @@
 
                   <field name='move_line_talla_ids' readonly="1">
 
-                    <tree editable="false">
+                    <list editable="false">
 
                         <field name="has_uom_par" invisible="1"/>
 
@@ -83,7 +83,7 @@
                         <field name="price_subtotal" readonly="1"/>
                         <field name="price_total" readonly="1"/>
 
-                    </tree>
+                    </list>
                   </field>
                 </page>
 

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_shopify_instance_form" model="ir.ui.view">
+        <field name="name">shopify.instance.form</field>
+        <field name="model">shopify.instance</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_sync_products" type="object" class="oe_stat_button" icon="fa-refresh">
+                            <field name="product_count" widget="stat_info" string="Products"/>
+                        </button>
+                        <button name="action_sync_orders" type="object" class="oe_stat_button" icon="fa-shopping-cart">
+                            <field name="order_count" widget="stat_info" string="Orders"/>
+                        </button>
+                        <button name="action_sync_customers" type="object" class="oe_stat_button" icon="fa-users">
+                            <field name="customer_count" widget="stat_info" string="Customers"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="shop_url"/>
+                            <field name="api_key"/>
+                            <field name="api_secret" password="True"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                            <field name="last_sync"/>
+                            <field name="sync_interval"/>
+                            <field name="auto_sync"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products" name="products">
+                            <field name="product_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="shopify_product_id"/>
+                                    <field name="shopify_variant_ids"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Orders" name="orders">
+                            <field name="order_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="shopify_order_id"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Customers" name="customers">
+                            <field name="customer_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="shopify_customer_id"/>
+                                    <field name="email"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_shopify_instance_tree" model="ir.ui.view">
+        <field name="name">shopify.instance.tree</field>
+        <field name="model">shopify.instance</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="shop_url"/>
+                <field name="active"/>
+                <field name="last_sync"/>
+                <field name="auto_sync"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_shopify_instance" model="ir.actions.act_window">
+        <field name="name">Shopify Instances</field>
+        <field name="res_model">shopify.instance</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No instances found
+            </p>
+        </field>
+    </record>
+</odoo> 
