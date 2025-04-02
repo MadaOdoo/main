@@ -80,7 +80,7 @@
    
     <record id="action_attachment_cfdi_supplier_invoices_tree_view" model="ir.actions.act_window.view">
         <field eval="1" name="sequence"/>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">list</field>
         <field name="view_id" ref="view_attachment_tree_cfdi_sat_invoices_files"/>
         <field name="act_window_id" ref="action_attachment_cfdi_supplier_invoices"/>
     </record>
