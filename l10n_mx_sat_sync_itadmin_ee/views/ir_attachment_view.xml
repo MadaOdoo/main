@@ -34,6 +34,7 @@
                         type="object"
                         class="oe_stat_button"
                         icon="fa-pencil-square-o"
+
                         invisible="payment_count == 0">
                         <field name="payment_count" widget="statinfo" string="Pagos"/>
                     </button>
@@ -45,7 +46,7 @@
     <record id="view_attachment_tree_cfdi_sat_invoices_files" model="ir.ui.view">
         <field name="model">ir.attachment</field>
         <field name="arch" type="xml">
-            <tree string="Attachments" default_order="date_cfdi desc" js_class="itadmin_tree">
+            <list string="Attachments" default_order="date_cfdi desc" js_class="itadmin_tree">
                 <field name="date_cfdi"/>
                 <field name="cfdi_uuid"/>
                 <field name="serie_folio"/>
@@ -55,7 +56,7 @@
                 <field name="cfdi_total"/>
                 <field name="creado_en_odoo" />
                 <field name="estado" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -63,7 +64,6 @@
         <field name="name">Documentos digitales</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">ir.attachment</field>
-        <field name="view_id" eval="False"/>
         <field name="search_view_id" ref="base.view_attachment_search"/>
         <field name="view_id" ref="view_attachment_tree_cfdi_sat_invoices_files"/>
         <field name="domain">[('cfdi_uuid','!=', False),('company_id','=',company_id)]</field>
